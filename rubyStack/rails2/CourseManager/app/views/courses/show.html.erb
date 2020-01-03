@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+   <title>Title</title>
+   <!-- Required meta tags -->
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+   <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+   <%= @course.name %> <br>
+   <%= link_to "Course Dashboard", courses_index_path %> <br>
+   <%= link_to "Sign Up date ASC ", courses_show_path(id: @course.id, sort: 0) %> |  
+   <%= link_to "Sign Up date DESC", courses_show_path(id: @course.id, sort: 1)  %> 
+   <p>Instructor: <%= @course.instructor%></p>
+   <p>Sign Ups: <%=@course.users_registed.count%> / <%= @course.capacity %> </p>
+   <table class="table">
+      <tr>
+         <th>Student Name</th>
+         <th>Sign Up Date</th>
+         <th>Action</th>
+      </tr>
+      <% @signups.each do |signup| %>
+      <tr>
+         <td><%=signup.user.name%></td>
+         <td><%=signup.created_at%></td>
+         <td>
+            <% if signup.user == @user %>
+               <%= link_to "Remove", signups_destroy_path(id: @course.id), method:"delete" %>
+            <% end %>
+         </td>
+      </tr>
+      <% end %>
+   </table>
+   <%= link_to "Edit",  courses_edit_path(id: @course.id) %>
+   <%= link_to "Delete",  courses_destroy_path(id: @course.id), method:"delete" %>
+
+   <!-- Optionsal JavaScript -->
+   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

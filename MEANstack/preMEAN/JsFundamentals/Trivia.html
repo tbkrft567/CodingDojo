@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+   <title>Title</title>
+   <!-- Required meta tags -->
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   <style>
+      h4 {
+         margin: 20px 0px 0px 20px;
+      }
+
+      input {
+         margin-left: 35px;
+      }
+   </style>
+</head>
+
+<body>
+   <button onclick="displayName_2()">Reset</button>
+   <input type="button" onclick="submitter()" value="Submit">
+   <div id="questionSet">
+
+   </div>
+   <input type="hidden" id="answerKey">
+
+
+
+   <script>
+      function submitter() {
+         score = []
+         for (i = 0; i < 10; i++) {
+            // console.log(document.querySelector("input[name='answer" + i + "']:checked") != null)
+            if(document.querySelector("input[name='answer" + i + "']:checked") != null){
+               selectedAnswer = document.querySelector("input[name='answer" + i + "']:checked").id
+               idNumber = selectedAnswer.charAt(selectedAnswer.length-1)
+               answerKey = document.getElementById("answerKey").textContent
+               answerID = answerKey.charAt(i*2)
+               if(idNumber == answerID){
+                  score.push(1)
+               }
+               else{
+                  score.push(0)
+               }
+            }
+         }
+         console.log(score)
+         sum = 0
+         for(i=0;i<score.length;i++){
+            sum += score[i]
+         }
+         avg = sum/score.length
+         alert(`You score a ${avg*100}%`)
+      }
+
+
+      function displayName_2() {
+         $(document).ready(function () {
+            var name;
+            $.get("https://opentdb.com/api.php?amount=10&type=multiple", function displayName(data) {
+               document.getElementById("questionSet").innerHTML += "\n<form action=''>\n"
+               answerKey = []
+               console.log(data["results"])
+               //******Sort the Categories
+               
+
+               for (i = 0; i < data["results"].length; i++) {
+                  document.getElementById("questionSet").innerHTML += "<h4 class=question>" + data["results"][i]["question"] + "</h4>\n"
+                  randomCorrect = Math.floor(Math.random() * 4 + 1)
+                  correctPlaced = false
+
+                  for (x = 0, position = 1; x < data["results"][i]["incorrect_answers"].length; x++ , position++) {
+                     correctAnswer = data["results"][i]["correct_answer"]
+                     correctAnswer = correctAnswer.split(' ').join('\xa0')
+                     incorrectAnswer = data["results"][i]["incorrect_answers"][x]
+                     incorrectAnswer = incorrectAnswer.split(' ').join('\xa0')
+                     if (randomCorrect == position) {
+                        answerKey.push(position)
+                        document.getElementById("questionSet").innerHTML += "<input type='radio' name='answer" + i + "' class='answers' id='answer"+i+position+"' value=" + correctAnswer + "> " + data["results"][i]["correct_answer"] + "<br>"
+                        position++
+                        correctPlaced = true
+                     }
+                     document.getElementById("questionSet").innerHTML += "<input type='radio' name='answer" + i + "'  class='answers' id='answer"+i+position+"' value=" + incorrectAnswer + "> " + data["results"][i]["incorrect_answers"][x] + "<br>"
+                     if (correctPlaced == false && x + 1 == data["results"][i]["incorrect_answers"].length) {
+                        position++
+                        answerKey.push(position)
+                        document.getElementById("questionSet").innerHTML += "<input type='radio' name='answer" + i + "' class='answers' id='answer"+i+position+"' value=" + correctAnswer + "> " + data["results"][i]["correct_answer"] + "<br>"
+                     }
+                  }
+               }
+               document.getElementById("questionSet").innerHTML += "\n</form>\n"
+               document.getElementById("answerKey").innerHTML += "" + answerKey + ""
+
+            });
+         });
+      }
+   </script>
+   <!-- Optional JavaScript -->
+   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+   <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"></script>
+</body>
+
+</html>

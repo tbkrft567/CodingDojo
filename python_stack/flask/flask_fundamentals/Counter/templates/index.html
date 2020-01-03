@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <p>Counter</p>
+    <div>{{ session['count'] }} times</div>
+
+    <p>Views</p>
+    <div>{{ session['view'] }} times</div>
+
+    <form action="/destroySession">
+        <input type="submit" name="destroy" value="Clear Count">
+    </form>
+
+    <!-- <form action="/plusTwo">
+        <input type="submit" name="plus" value="add Two">
+    </form> -->
+
+    <h1>Current Increment Value: {{ session['increment'] }}</h1>
+    <form action="/incrementPage" method='POST'>
+        <select name="incrementHTML">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        <input type="submit" value="Choose How Much to Increment...">
+    </form>
+
+    <form action="/refresh">
+        <input type="submit" value="Refresh Page">
+    </form>
+</body>
+</html>

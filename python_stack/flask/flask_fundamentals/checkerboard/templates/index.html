@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/stylesheet.css') }}">
+    <title>Document</title>
+</head>
+<body>
+    <table>
+        {% for row in range(rows+1) %}
+        <tr>
+            {% for column in range(columns+1) %}
+                {% if (column+(row%2))%2 == 1 %}
+                    <td class='dark' style="background-color: {{ colorHTML1 }}"></td>
+                {% else %}
+                    <td class='light' style="background-color: {{ colorHTML2 }}"></td>
+                {% endif %}
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

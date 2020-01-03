@@ -1,0 +1,204 @@
+Create Project:
+
+~~Applications:
+  rails new [projectName] --database=postgresql --skip-test-unit
+  cd [projectName]
+  
+~~confirm:
+  gem 'bcrypt', '~> 3.1.7'
+  gem 'hirb'
+  gem 'rails-footnotes', '>=4.0.0', '<5.0'
+
+   group :development, :test do
+      gem 'rspec-rails'
+      gem 'factory_bot_rails'
+      gem 'capybara'
+   end
+
+~~Run next
+  bundle install
+  rake db:create
+
+~~build model
+  rails g model User name:string email:string password:digest
+  rake db:migrate
+
+~~Update Validates
+   EMAIL_REGEX = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]+)\z/i
+   validates :email, uniqueness: { case_sensitive: false }, format: { with: EMAIL_REGEX }
+
+~~Update Relationships
+   has_many comments
+   has_many events_commented, through: :comments, source: :user
+
+~~build controllers [**Spell update correctly]
+   rails g controller Sessions create destroy
+
+~~update Routes
+   [GET]    New, Edit, Show, Index
+   [POST]   Create, 
+   [PATCH]  Update
+   [DELETE] Destroy
+
+~~Transfer Code
+1. Application controller
+2. Sessions controller
+3. Users controller
+4. Users -- new.html.erb
+
+~~start server 
+   rails s -b 0.0.0.0
+
+
+~~config/environments/development.rb
+  cache_classes = false
+  config.eager_load = false
+  config.consider_all_requests_local       = true
+  config.action_controller.perform_caching = false
+  config.action_mailer.raise_delivery_errors = false
+  config.active_support.deprecation = :log
+  config.active_record.migration_error = :page_load
+  config.assets.debug = true
+  config.assets.digest = true
+  config.assets.raise_runtime_errors = true
+
+
+
+
+
+
+*****************************************
+*****************************************
+*****Older Version of Create Project*****
+*****************************************
+*****************************************
+
+  ~~possibly: 
+sudo su postgres -c psql            {this may be necessary to create superUser}
+CREATE ROLE vagrant SUPERUSER LOGIN {creates USER}
+\q                                  {Exit postgres terminal}
+
+Catch-Alls
+  match '*path' => redirect('/users/new'), via: :get
+
+
+~~Applications:
+  rails new [projectName] --database=postgresql --skip-test-unit
+  cd [projectName]
+  
+~~confirm:
+  gem 'pg'
+  gem 'bcrypt', '~> 3.1.7'
+  gem 'hirb'
+  gem 'rails-footnotes', '>=4.0.0', '<5.0'
+
+    group :development, :test do            {**Must be at the end of the file}
+      gem 'rspec-rails'
+      gem 'factory_bot_rails'
+      gem 'capybara'
+    end
+
+
+~~Run next
+  bundle install
+  rails g rails_footnotes:install
+  rake db:create
+  rails g rspec:install
+
+~~add to rails_helper.rb
+    ***require 'factory_bot_rails' {**At top!}
+      RSpec.configure do |config|
+    ***config.include FactoryBot::Syntax::Methods {**Below RSpec.conf...}
+      end
+
+~~build model
+  rails g model User name:string email:string password:digest
+  rake db:migrate
+  rake db:migrate RAILS_ENV=test
+
+~~build controllers
+    ***Update Routes with POST/DELETE/.etc
+   ***rails g controller Users [new, index, etc...] [--no-controller-specs --no-view-specs] {**add to conf/routes}
+      resources :usraiers 
+
+~~Create Capybara Files         
+      mkdir spec/features
+      touch spec/features/[file_name].rb
+
+~~Set up auto-refresh
+config/environments/development.rb
+  cache_classes = false
+  config.eager_load = false
+  config.consider_all_requests_local       = true
+  config.action_controller.perform_caching = false
+  config.action_mailer.raise_delivery_errors = false
+  config.active_support.deprecation = :log
+  config.active_record.migration_error = :page_load
+  config.assets.debug = true
+  config.assets.digest = true
+  config.assets.raise_runtime_errors = true
+
+~~Set up log 
+config/environments/production.rb
+  config.log_level = :debug
+
+~~Set up Helpers (ie. Forms Helper: State Dropdown)
+config/environments/production.rb && config/environments/development.rb
+	Create Helper file: app/helper/states_helper.rb
+	def function (ie. def states [['tx','tx']] end )
+	config.action_controller.include_all_helpers = true
+	<%= form.label 'State' %><br>
+        <%= form.select(:state, options_for_select(states)) %><br>		
+
+**************Testing Models Using FactoriesBot*****************
+
+~~Edit spec/factories:
+  ie users.rb
+
+~~create spec/models logic:
+      example {
+        context "with valid attributes" do 
+          it "should save" do 
+            expect(build(:user)).to be_valid
+          end
+      }
+
+~~create validations for the app/models
+  --:uniqueness => { :case_sensitive => false }
+  --:presence => true
+  --:length => { minimum: 2 } --or-- { is: 5 }
+  --:EMAIL format {
+    EMAIL_REGEX = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]+)\z/i
+    validates :email, uniqueness: { case_sensitive: false }, format: { with: EMAIL_REGEX }
+  }
+  --downcasing {
+    before_save :downcase_fields
+    def downcase_fields
+      self.email.downcase!
+    end
+  }
+  
+~~test rspec/[folderName]/[fileName]:
+  --rspec spec
+  -or-
+  --rspec spec/models/users.rb
+
+
+
+**************Authenticating the User*****************
+rails g controller Sessions new --no-controller-specs --no-view-specs
+
+***Add to sessions_controller.rb {
+  def destroy end
+  def create end
+}
+***Add to application_controller.rb {
+  def current_user
+    User.find(session[:user_id]) if session[:user_id]
+  end
+  helper_method :current_user
+}
+
+rails g controller Users new --no-controller-specs --no-view-specs
+touch spec/features/authentication_spec.rb                          {**This is the testing of functionality}
+

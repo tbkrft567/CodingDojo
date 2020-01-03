@@ -1,0 +1,98 @@
+Crate 5 books:
+ Book.objects.create(title="C Sharp", desc="training")
+<Book: Book object>
+ Book.objects.create(title="Java", desc="training")
+<Book: Book object>
+ Book.objects.create(title="Python", desc="training")
+<Book: Book object>
+ Book.objects.create(title="PHP", desc="training")
+<Book: Book object>
+ Book.objects.create(title="Ruby", desc="training")
+<Book: Book object>
+
+Create 5 different authors:
+ Author.objects.create(first_name="Jane", last_name="Austen")
+<Author: Author object>
+ Author.objects.create(first_name="Emily", last_name="Dickirson")
+<Author: Author object>
+ Author.objects.create(first_name="Fyodor", last_name="Dostoevksy")
+<Author: Author object>
+ Author.objects.create(first_name="William", last_name="Shakespeare")
+<Author: Author object>
+ Author.objects.create(first_name="Lau", last_name="Tzu")
+<Author: Author object>
+
+Change the naem of the C Shar book to C#:
+ newName =Book.objects.get(title = "C Sharp" )
+ newName.title = "C#"
+ newName.save()
+ newName.title
+'C#'
+
+Change the first name of the 4th author to Bill:
+ newName =Author.objects.get(id=4)
+ newName.first_name = "Bill"
+ newName.save()
+ newName.first_name
+'Bill'
+
+Assign the 1st author to the first 2 books:
+ firstAuthor =Author.objects.get(id=1)
+ firstBookr =Book.objects.get(id=1)
+ SecondBookr =Book.objects.get(id=2)
+ firstAuthor.books.add(firstBookr)
+ firstAuthor.books.add(SecondBookr)
+
+Assign the 2nd author to the first 3 books:
+>>> secondAuthor = Author.objects.get(id=2)
+>>> firstBook = Book.objects.get(id=1)
+>>> secondBook= Book.objects.get(id=2)
+>>> thirdBook= Book.objects.get(id=3)
+>>> secondAuthor.books.add(firstBook, secondBook, thirdBook)
+
+Assign the 3rd author to the first 4 books:
+>>> thirdAuthor = Author.objects.get(id=3)
+>>> firstBook = Book.objects.get(id=1)
+>>> secondBook = Book.objects.get(id=2)
+>>> thirdBook = Book.objects.get(id=3)
+>>> fourthBook = Book.objects.get(id=4)
+>>> thirdAuthor.books.add(firstBook, secondBook, thirdBook, fourthBook)
+
+Assign the 4th author to the first 5 books:
+>>> Author = Author.objects.get(id=4)
+>>> book1 = Book.objects.get(id=1)
+>>> book2 = Book.objects.get(id=2)
+>>> book3 = Book.objects.get(id=3)
+>>> book4 = Book.objects.get(id=4)
+>>> book5 = Book.objects.get(id=5)
+>>> Author.books.add(book1, book2, book3, book4, book5)
+
+
+Retrieve all the authors for the 3rd book:
+>>> book3 = Book.objects.get(id=3)
+>>> book3.author.all().values()
+<QuerySet [{'id': 2, 'first_name': 'Emily', 'last_name': 'Dickirson', 'notes': 'new Note', 'created_at': datetime.datetime(2019, 11, 8, 13, 5, 51, 174039, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 11, 8, 13, 5, 51, 174039, tzinfo=<UTC>)}, {'id': 3, 'first_name': 'Fyodor', 'last_name': 'Dostoevksy', 'notes': 'new Note', 'created_at': datetime.datetime(2019, 11, 8, 13, 6, 19, 938038, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 11, 8, 13, 6, 19, 938038, tzinfo=<UTC>)}, {'id': 4, 'first_name': 'Bill', 'last_name': 'Shakespeare', 'notes': 'new Note', 'created_at': datetime.datetime(2019, 11, 8, 13, 6, 40, 988934, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 11, 8, 13, 12, 55, 621584, tzinfo=<UTC>)}]>
+
+Remove the first author of the 3rd book:
+book3 = Book.objects.get(id=3)
+>>> author1 = book3.author.first()
+>>> book3.author.remove(author1)
+>>> book3.author.all().values()
+<QuerySet [{'id': 3, 'first_name': 'Fyodor', 'last_name': 'Dostoevksy', 'notes': 'new Note', 'created_at': datetime.datetime(2019, 11, 8, 13, 6, 19, 938038, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 11, 8, 13, 6, 19, 938038, tzinfo=<UTC>)}, {'id': 4, 'first_name': 'Bill', 'last_name': 'Shakespeare', 'notes': 'new Note', 'created_at': datetime.datetime(2019, 11, 8, 13, 6, 40, 988934, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 11, 8, 13, 12, 55, 621584, tzinfo=<UTC>)}]>
+
+Add the 5th author as one of the authors of the 2nd book:
+>>> book2 = Book.objects.get(id=2)
+>>> author5 = Author.objects.get(id=5)
+>>> book2.author.add(author5)
+>>> book2.author.last().__dict__
+{'_state': <django.db.models.base.ModelState object at 0x0000020FEBDCF550>, 'id': 5, 'first_name': 'Lau', 'last_name': 'Tzu', 'notes': 'new Note', 'created_at': datetime.datetime(2019, 11, 8, 13, 6, 56, 878223, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 11, 8, 13, 6, 56, 878223, tzinfo=<UTC>)}
+
+Find all the books that the 3rd author is part of:
+>>> author3 = Author.objects.get(id=3)
+>>> author3.books.all().values()
+<QuerySet [{'id': 1, 'title': 'C#', 'desc': 'training', 'created_at': datetime.datetime(2019, 11, 8, 13, 3, 10, 317472, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 11, 8, 13, 10, 27, 971870, tzinfo=<UTC>)}, {'id': 2, 'title': 'Java', 'desc': 'training', 'created_at': datetime.datetime(2019, 11, 8, 13, 3, 17, 948763, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 11, 8, 13, 3, 17, 948763, tzinfo=<UTC>)}, {'id': 3, 'title': 'Python', 'desc': 'training', 'created_at': datetime.datetime(2019, 11, 8, 13, 3, 24, 208226, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 11, 8, 13, 3, 24, 208226, tzinfo=<UTC>)}, {'id': 4, 'title': 'PHP', 'desc': 'training', 'created_at': datetime.datetime(2019, 11, 8, 13, 3, 32, 569446, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 11, 8, 13, 3, 32, 569446, tzinfo=<UTC>)}]>
+
+Find all the authors that contributed to the 5th book:
+>>> book5 = Book.objects.get(id=5)
+>>> book5.author.all().values()
+<QuerySet [{'id': 4, 'first_name': 'Bill', 'last_name': 'Shakespeare', 'notes': 'new Note', 'created_at': datetime.datetime(2019, 11, 8, 13, 6, 40, 988934, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 11, 8, 13, 12, 55, 621584, tzinfo=<UTC>)}]>

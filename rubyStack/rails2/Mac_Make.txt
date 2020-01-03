@@ -1,0 +1,488 @@
+***Temporary
+Authorization/Authentication: must login and cannot access anything unless logged in
+Login and Logout features with Password Validations
+When logged in: only able to effect elements created by current user
+Display data from database by specific criteria
+Comments create per Event by some User
+Display Users attending specific events
+
+
+Rails new RubyExam –database=postgresql –skip-test-unit
+cd BeltExam
+gem 'bcrypt', '~> 3.1.7'
+gem 'hirb'
+gem 'rails-footnotes', '>=4.0.0', '<5.0'
+
+group :development, :test do
+   gem 'rspec-rails'
+   gem 'factory_bot_rails'
+   gem 'capybara'
+end
+
+bundle install
+Rake db:create
+
+Models:
+rails g model User first_name:string last_name:string email:string password:digest
+rails g model Group name:string description:text user:references
+rails g model Member user:references group:references
+
+Controllers:
+rails g controller Users create new
+rails g controller Sessions create destroy
+rails g controller Members create destroy
+rails g controller Groups create destroy show index
+
+***routes.rb
+Rails.application.routes.draw do
+  get '/', to: 'users#new'
+
+  post 'members/create/:id', to: 'members#create'
+  post 'members/create'
+  
+
+  delete 'members/destroy'
+
+  post 'groups/create'
+
+  delete 'groups/destroy'
+
+  get 'groups/show'
+
+  get 'groups/index'
+
+  post 'sessions/create'
+
+  delete 'sessions/destroy'
+
+  get 'users/new'
+
+  post 'users/create'
+
+  match '*path' => redirect('/users/new'), via: :get
+  match '*path' => redirect('/sessions/destroy'), via: :post
+  match '*path' => redirect('/sessions/destroy'), via: :delete
+end
+
+~~*****
+rake routes
+
+**************************************************
+Models Valdations and Relationships:
+******
+[User]
+class User < ApplicationRecord
+  has_secure_password
+  EMAIL_REGEX = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]+)\z/i
+  validates :email, uniqueness: { case_sensitive: false }, format: { with: EMAIL_REGEX }
+  validates :first_name, :last_name, :email, presence: true
+
+  has_many :groups
+
+  has_many :members
+  has_many :group_members, through: :members, source: :group
+
+end
+******
+[Member]
+class Member < ApplicationRecord
+  belongs_to :user
+  belongs_to :group
+end
+******
+[Group]
+class Group < ApplicationRecord
+  validates :name, :description, presence: true
+  validates :name, length: { minimum: 6 }
+  validates :description, length: { minimum: 11 }
+  belongs_to :user
+
+  has_many :members, dependent: :destroy
+  has_many :user_members, through: :members, source: :user
+end
+
+
+
+***************************************************************
+~~***Views
+******
+***new.html.erb [Users]
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Register and Login</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+   <% if flash[:alert] %>
+   <h5>Notifications</h5>
+   <ul>
+      <% flash[:alert].each do |error| %>
+      <li>
+      <%= error %>
+      </li>
+      <% end %>
+   </ul>
+   <% end %>
+   <h1>Register</h1>
+   <form action="/users/create" method="POST">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <p>First Name</p>
+      <input type="text" name="user[first_name]">
+      <p>Last Name</p>
+      <input type="text" name="user[last_name]">
+      <p>Email</p>
+      <input type="text" name="user[email]">
+      <p>Password</p>
+      <input type="password" name="user[password">
+      <p>Password Confirmation</p>
+      <input type="password" name="user[password_confirmation]">
+      <%= button_to "Register", users_create_path, method:"post", class: "btn btn-secondary",  data: { disable_with: "Please wait..." } %>
+   </form>
+   
+   <h1>Login</h1>
+   <form action="/sessions/create" method="POST">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <p>Email</p>
+      <input type="text" name="user[email]">
+      <p>Password</p>
+      <input type="password" name="user[password">
+      <%= button_to "Login", sessions_create_path, method:"post", class: "btn btn-secondary"%>
+   </form>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
+
+******
+***show.html.erb [Groups]
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Group <%= @group.name %></title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+      .header h3{
+            display: inline-block;
+            width: 450px;
+         }
+         .main_content{
+            margin: 20px;
+         }
+    </style>
+  </head>
+  <body>
+      <div class="header">
+         <h3><%= @group.name %></h3>
+         <%= link_to "Log Out", sessions_destroy_path, method:"delete" %> | 
+         <%= link_to "Group Dashboard", groups_index_path %>
+      </div>
+      <div class="main_content">
+         <% if flash[:alert] %>
+         <h4>Notifications</h4>
+         <ul>
+            <% flash[:alert].each do |error| %>
+               <li>
+                  <%= error %>
+               </li>
+            <% end %>
+         </ul>
+         <% end %>
+         <% if @members.include?(@user) %>
+            <%= button_to "Leave Group", members_destroy_path, method:"delete", params: {id: @group.id}, class: "btn btn-secondary", data: { disable_with: "Please wait..." } %>
+         <% else %>
+            <%= button_to "Join Group", members_create_path, method:"post", params: {id: @group.id},class: "btn btn-secondary", data: { disable_with: "Please wait..." } %>
+         <% end %>
+         Description: <%= @group.description %>
+   
+         <% if @group.user == @user %>
+            <p>Created By: You</p>
+         <% else %>
+            <p>Created By: <%= @group.user.first_name %> <%= @group.user.last_name %></p>
+         <% end %>
+   
+         <% if @members %>
+         <p>Members:</p>
+         <ul>
+            <% @members.each do |member|%>
+            <li>
+               <%= member.first_name %> <%= member.last_name %>
+            </li>         
+            <% end %>
+         </ul>
+         <% end %>
+      </div>
+      <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
+
+
+******
+****index.html.erb [Groups]
+<!doctype html>
+<html lang="en">
+
+<head>
+   <title>Main Groups Page</title>
+   <!-- Required meta tags -->
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+   <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <style>
+         .header h3{
+            display: inline-block;
+            width: 450px;
+         }
+         .main_content{
+            /* outline: 2px solid fuchsia; */
+            padding: 15px
+         }
+         .allGroup{
+            display: inline-block;
+            margin: 10px;
+            
+         }
+         .newGroup{
+            border: 3px solid gray;
+            padding: 8px;
+            display: inline-block;
+            vertical-align: center;
+            margin: 10px;
+         }
+      </style>
+</head>
+
+<body>
+   <div class="header">
+      <h3>Hi <%= @user.first_name %> <%= @user.last_name %>!</h3>
+      <%= link_to "Log Out", sessions_destroy_path, method:"delete" %>
+   </div>
+   <div class="main_content">
+
+   </div class="main_content">
+   <div class="allGroup">
+      <p>Here are the organizations you may join:</p>
+      <% @groups.each do |group| %>
+         <div class="groupDetails">
+            <hr>
+            <% if group.user == @user %>
+               <%= link_to "Delete", groups_destroy_path(id: group.id), method:"delete", class: "btn btn-secondary" %><br>
+            <% end %>
+            <h5><%= link_to group.name, groups_show_path(id: group.id)%></h5>
+            <p>Members: <%= group.members.count %></p>
+            <p><%= group.description %></p>
+         </div>
+      <% end %>
+   </div>
+
+   <div class="newGroup">
+      <% if flash[:alert] %>
+      <h4>Notifications</h4>
+      <ul>
+         <% flash[:alert].each do |error| %>
+            <li>
+               <%= error %>
+            </li>
+         <% end %>
+      </ul>
+      <% end %>
+      <h4>Create New Group</h4>
+      <form action="/groups/create" method="POST">
+         <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+         <p>Org Name:</p>
+         <input type="text" name="group[name]">
+         <p>Description:</p>
+         <textarea name="group[description]" cols="30" rows="3"></textarea>
+         <%= button_to "Create", groups_create_path, method:"post",  data: { disable_with: "Please wait..." } %>
+      </form>
+   </div>
+
+   <!-- Optional JavaScript -->
+   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"></script>
+</body>
+
+</html>
+
+
+
+*************************************************************
+Controllers
+
+******
+[Users]
+class UsersController < ApplicationController
+  def create
+    @user = User.new(secureUser)
+    if @user.valid?
+      @user.save
+      session[:user_id] = @user.id
+      redirect_to  groups_index_path
+    else
+      flash[:alert] = @user.errors.full_messages
+      redirect_to users_new_path
+      end
+  end
+
+  def new
+    # @logged = logged?
+  end
+end
+
+******
+[Sessions]
+class SessionsController < ApplicationController
+   def create
+      @user = User.find_by_email(secureUser[:email]).try(:authenticate, secureUser[:password])
+      if @user
+         session[:user_id] = @user.id
+         redirect_to groups_index_path
+      else
+         flash[:alert] = ['invalid combination']
+         redirect_to users_new_path
+      end
+   end
+
+   def destroy
+      reset_session
+      redirect_to users_new_path
+   end
+end
+
+******
+[Members]
+class MembersController < ApplicationController
+  before_action :authorize
+
+  def create
+    p params[:id]
+    @group = Group.find_by(id: params[:id])
+    @member = Member.new(user: current_user, group: @group)
+    if @member.valid?
+      @allMembers = Member.where(user: current_user, group: @group).exists?
+      unless @allMembers
+        p "save"
+        @member.save
+      else
+        flash[:alert] = ['You can only be added once']
+      end
+    else
+        flash[:alert] = @member.errors.full_messages
+    end
+    redirect_to groups_show_path(id: params[:id])
+  end
+
+  def destroy
+    group = Group.find_by(id: params[:id])
+    members = Member.where(user: current_user).where(group: group)
+    if members
+        members.destroy_all
+    else
+        flash[:alert] = ['This cannot be removed']
+    end
+    redirect_to groups_show_path(id: params[:id])
+  end
+end
+
+******
+[Groups]
+class GroupsController < ApplicationController
+  def create
+    @group = Group.new(secureGroup)
+    if @group.valid?
+      @group.save
+      @newGroup = Group.last
+      @creator = @newGroup.user
+      @member = Member.new(user: @creator, group: @newGroup)
+      if @member.valid?
+        @member.save
+      else
+        flash[:alert] = @member.errors.full_messages
+      end
+    else
+      flash[:alert] = @group.errors.full_messages
+    end
+    redirect_to groups_index_path
+  end
+  
+  def destroy
+    @group = Group.find_by(id: params[:id])
+    if @group && @group.user == current_user
+      @group.destroy
+    else
+      flash[:alert] = ['This group cannot be deleted']
+    end
+    redirect_to groups_index_path
+  end
+
+  def show
+    @group = Group.find_by(id: params[:id])
+    if @group
+      @user = current_user
+      @members = @group.user_members
+    else
+      redirect_to groups_index_path
+    end
+  end
+
+  def index
+    @user = current_user
+    @groups = Group.all
+  end
+end
+
+******
+[Application]
+class ApplicationController < ActionController::Base
+  protect_from_forgery with: :exception
+  before_action :authorize
+  skip_before_action :authorize, only: [:create, :new]
+
+  private
+      def current_user
+        User.find_by(id: session[:user_id]) if session[:user_id]
+      end
+      def logged?
+        !current_user.nil?
+      end
+      def authorize
+        unless logged?
+        redirect_to users_new_path
+        end
+      end
+      def secureUser
+        params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+      end
+      def secureGroup
+        params.require(:group).permit(:name, :description).merge(user: current_user)
+      end
+end
+

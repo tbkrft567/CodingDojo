@@ -1,0 +1,20 @@
+gem 'rails-footnotes', '>= 4.0.0', '<5'
+   **Place into gemfile
+rails generate rails_footnotes:install
+   **run in terminal after running Bundle Install
+
+
+
+
+Routes >> Controls >> Views
+
+
+Models >> Routes >> Controls >> Views
+
+Dealing with time:
+https://nandovieira.com/working-with-dates-on-ruby-on-rails
+https://apidock.com/ruby/DateTime/strptime/class
+
+Patch and Delete:
+   If you have logic to delete user then use delete
+   If you have logic to udpate user then use patch

@@ -1,0 +1,8 @@
+Query Excercises:
+
+
+User.find(3).Owners find what User3 owns 
+
+User.find(3).Blogs find what the Blog details are
+
+Blog.find(5).Posts

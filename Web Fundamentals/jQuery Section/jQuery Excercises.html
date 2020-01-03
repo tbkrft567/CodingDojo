@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- jQuery Link -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+    
+    <h1>Coding Dojo</h1>
+    <script>
+
+        errorMessages = {
+            alert: "this message is due to not having what you need",
+            error: "this is the worst thing that could have happened"
+        }
+
+        console.log(errorMessages.alert);
+        console.log(errorMessages.error);
+        
+        // $('h1').html('coding dojo');
+        // $('h1').click(function(){$(this).before('cdfsfasgrg dojo')});
+        $('h1').hover(function(){$(this).text('Farts are great')}, function(){$(this).text('Coding dojo')});
+
+        //The trick will be getting better at using CSS to find the tags. jQuery is easy enough to pick up using their methods
+    </script>
+    
+</body>
+</html>

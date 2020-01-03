@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>This Crazy Ride</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <style>
+    h1 {
+      color: red;
+    }
+    .jumbotron-fluid{
+      text-align: center;
+    }
+    input{
+      margin-top: 15px;
+    }
+  </style>
+</head>
+
+<body>
+
+  {% if actionHTML == 'openScene' %}
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h3>
+        This a cold evening and something seems wrong. You went the restroom after a pleasant night at the bar with your
+        wife. When you return, your wife is no where to be seen. Thinking for a moment, you decide to:
+      </h3>
+      <form action='/police' method='post'>
+        <input type='submit' value='Call the Police'>
+      </form>
+      <form action='/search' method='post'>
+        <input type='submit' value='Find her yourself'>
+      </form>
+    </div>
+  </div>
+  {% endif %}
+  {% if actionHTML == 'police' %}
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h3>
+        The captain picks up the phone and asks what is she wearing, in a sly tone. Irking you, you begrundingly answer.
+        She is wearing a flowing pink dress with flip flops and state you last saw her at he bar before you went to the
+        restroom. With an odd tone, the captain say we will alert the police force, but it will take some time… but you
+        decide to do your own.
+      </h3>
+      <form action='/search' method='post'>
+        <input type='submit' value='Find her yourself'>
+      </form>
+    </div>
+  </div>
+  {% endif %}
+
+
+  {% if actionHTML == 'search' %}
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h3>
+        His first thought is to begin looking for clues as to where she has gone. Looking around he decides to:
+      </h3>
+      <form action='/bartender' method='post'>
+        <input type='submit' value='Ask the Bartender'>
+      </form>
+      <form action='/bathroom' method='post'>
+        <input type='submit' value="Check the Women's Bathroom">
+      </form>
+      <form action='/car' method='post'>
+        <input type='submit' value="Check the Car">
+      </form>
+    </div>
+  </div>
+  {% endif %}
+
+
+  {% if actionHTML == 'bartender' %}
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h4>
+        You tell the bartender you’re looking for your wife in the pink dress. The bartender lets you know that your
+        wife was last seen leaving with a tatooed-man, so decide to go to your car.
+      </h4>
+      <form action='/car' method='post'>
+        <input type='submit' value='Check the Car'>
+      </form>
+    </div>
+  </div>
+  {% endif %}
+
+
+  {% if actionHTML == 'bathroom' %}
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h4>
+        Think she may had the same thought you and needed to go the restroom, you decide to check the women’s restroom.
+        Once you step, a woman screams and slaps you pushing you back out. You decide to go ask the bartender
+      </h4>
+      <form action='/bartender' method='post'>
+        <input type='submit' value="Ask the Bartender">
+      </form>
+    </div>
+  </div>
+  {% endif %}
+
+  {% if actionHTML == 'car' %}
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h4>
+        Grab his key venture out the to car and notice a note on car: “I have your wife. Meet us you know where…”
+      </h4>
+      <form action='/house' method='post'>
+        <input type='submit' value='My House'>
+      </form>
+      <form action='/factory' method='post'>
+        <input type='submit' value="Sketchy Factory">
+      </form>
+    </div>
+  </div>
+  {% endif %}
+
+  {% if actionHTML == 'house' %}
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h4>
+        Pulling up the house and notice a flip on the lawn. Cautiously, you make your way to the back and peek in the
+        window but all the lights are out. You check sliding backdoor to see if it is unlock and luckly it is. Turning
+        on the light, a rush of a enthusiasm and all of your friends and family pop out and yell “Surprise!!!! Happy
+        Birthday!!!!”. Oh boy I thought you were in trouble. The End!
+      </h4>
+    </div>
+  </div>
+  {% endif %}
+
+  {% if actionHTML == 'factory' %}
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h4>
+        Pulling up the factory you notice a vehicle with a flashy paint job and a flip flop sitting just outside the
+        vehicle. Suddenly, a man jumps from behind the vehicle with a gun pointed at you demanding that you go inside
+        the factory where you wife awaits. What do you decide to do?
+      </h4>
+      <form action='/gun' method='post'>
+        <input type='submit' value="Take his gun from him">
+      </form>
+      <form action='/instructions' method='post'>
+        <input type='submit' value="Follow his instructions">
+      </form>
+    </div>
+  </div>
+  {% endif %}
+
+  {% if actionHTML == 'gun' %}
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1>
+        You are shot and kill…
+      </h1>
+    </div>
+  </div>
+  {% endif %}
+
+  {% if actionHTML == 'instructions' %}
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h4>
+        Inside the factory you see your wife, strapped the chair a bomb next to her ticking down to zero. The door slams
+        behind you and locks shut. You look your wife in the eyes and say don’t worry we’re going to get out of here.
+      </h4>
+    </div>
+  </div>
+  {% endif %}
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

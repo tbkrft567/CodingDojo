@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Airplane Challenge</title>
+</head>
+<body>
+	<style type="text/css">
+        #ocean{
+            background-image: url("ocean.jpg");
+            width: 900px;
+            height: 700px;
+            filter: grayscale(0.75)
+        }
+        .player{
+            position: absolute;
+            background-image: url("player.png");
+            width: 69px;
+            height: 94px;
+            
+            
+        }
+        .enemy{
+            position: absolute;
+            /*background-image: url("enemy_1.jpg");*/   background-image: url("enemy.png");
+            width: 69px;
+            height: 55px;
+            
+        }
+	</style>
+
+    <div id="ocean">
+        <div id="players"></div>
+        <div id="enemies"></div>
+    </div>
+
+
+
+	<script type="text/javascript">
+	
+        var player = {
+            left: 350,
+            top: 590
+        }
+        
+        var enemies = [
+            {left: 350, top: 200},
+            {left: 430, top: 250},
+            {left: 150, top: 200},
+            {left: 230, top: 250}
+        ]
+        
+        function drawPlayer(){
+            content = "<div class='player' style='left: "+player.left+"px; top: "+player.top+"px'></div>"
+            document.getElementById('players').innerHTML = content
+        }
+        drawPlayer();
+        
+        function drawEnemy(){
+            content="";
+            for(var idx=0; idx<enemies.length; idx++){
+                content += "<div class='enemy' style='left: "+enemies[idx].left+"px; top: "+enemies[idx].top+"px'></div>"
+                document.getElementById('enemies').innerHTML = content    
+            }
+        }
+//        drawEnemy();
+        
+        function moveEnemies(){
+                content="";
+            for(var idx=0; idx<enemies.length; idx++){
+                enemies[idx].top = enemies[idx].top + 5;
+            }
+        }
+//        moveEnemies()
+        
+        
+        document.onkeydown = function(e){
+            if(e.keyCode == 37 && player.left > 10){ //LEFT
+                player.left -= 10;   
+            }
+            else if(e.keyCode == 39 && player.left < 820){ //RIGHT
+                player.left += 10;   
+            }
+            else if(e.keyCode == 38 && player.top > (700-225)){ //UP
+                player.top -= 10;   
+            }
+            else if(e.keyCode == 40 && player.top < 600){ //DOWN
+                player.top += 10;   
+            }
+            drawPlayer();
+            console.log(player.top);
+        }
+        
+        
+        function gameloop(){
+            drawPlayer();
+            moveEnemies();
+            drawEnemy();
+            
+            setTimeout(gameloop,500)
+        }
+//        gameloop();
+        
+	</script>
+</body>
+</html>

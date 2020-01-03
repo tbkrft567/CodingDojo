@@ -1,0 +1,9 @@
+day1:
+    Algorithms Practice Routine
+    HTML: Blog Assignment
+    CSS: Plottng Blocks, JavaScript, Portfolio, Python, & The Internet, 
+    Responsive CSS with Media Query: **Needs Practice
+    BootStrap:
+    LESS: **???What is it?
+    Git: Created Github and started saving to Github
+    PortfolioWebsite:

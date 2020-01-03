@@ -1,0 +1,53 @@
+Create 3 new dojos:
+Dojo.objects.create(name="Sleepy", city="Chicago", state="Illinois")
+Dojo.objects.create(name="Dopey", city="Seattle", state="Washington")
+Dojo.objects.create(name="Crazy", city="Dallas", state="Texas")
+
+
+Delete the 3 dojos you just created:
+ c = Dojo.objects.first()
+ c.delete()
+ c = Dojo.objects.first()
+ c.delete()
+ c = Dojo.objects.first()
+ c.delete()
+
+Create 3 new dojos:
+Dojo.objects.create(name="Sleepy", city="Chicago", state="Illinois")
+Dojo.objects.create(name="Dopey", city="Seattle", state="Washington")
+Dojo.objects.create(name="Crazy", city="Dallas", state="Texas")
+
+Create 9 ninjas with Dojos:
+ ninjas.objects.create(first_name="Zach", last_name="Kraft", dojo=Dojo.objects.get(id=4))
+<ninjas: ninjas object>
+ ninjas.objects.create(first_name="Shelby", last_name="Willis", dojo=Dojo.objects.get(id=5))
+<ninjas: ninjas object>
+ ninjas.objects.create(first_name="James", last_name="Kraft", dojo=Dojo.objects.get(id=6))
+<ninjas: ninjas object>
+ ninjas.objects.create(first_name="Lisa", last_name="Johnson", dojo=Dojo.objects.get(id=4))
+<ninjas: ninjas object>
+ ninjas.objects.create(first_name="Alan", last_name="Johnson", dojo=Dojo.objects.get(id=4))
+<ninjas: ninjas object>
+ ninjas.objects.create(first_name="Brian", last_name="Willis", dojo=Dojo.objects.get(id=5))
+<ninjas: ninjas object>
+ ninjas.objects.create(first_name="Kathy", last_name="Willis", dojo=Dojo.objects.get(id=5))
+<ninjas: ninjas object>
+ ninjas.objects.create(first_name="April", last_name="Kraft", dojo=Dojo.objects.get(id=6))
+<ninjas: ninjas object>
+ ninjas.objects.create(first_name="Faith", last_name="Kraft", dojo=Dojo.objects.get(id=6))
+<ninjas: ninjas object>
+
+Retrieve all the ninjas from the first dojo:
+ ninjas.objects.filter(dojo_id=4)
+
+Retrieve all the ninjas from the Last dojo:
+ ninjas.objects.filter(dojo_id=6)
+
+Retrieve the last ninja's dojo:
+ ninja = ninjas.objects.last()
+ ninja.dojo.__dict__
+{'_state': <django.db.models.base.ModelState object at 0x000001C635AFC048>, 'id': 6, 'name': 'Crazy', 'city': 'Dallas', 'state': 'Texas'}
+
+Create a New Dojo:
+ Dojo.objects.create(name="Sexy", city="Miami", state="Florida")
+<Dojo: Dojo object>

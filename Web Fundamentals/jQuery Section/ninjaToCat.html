@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        div{
+            padding: 200px;
+            margin-left: 500px;
+            background-color: rgb(1, 47, 1);
+            display: inline-block;
+        }
+        div img{
+            width: 300px;
+            height: 75px;
+            display: block;
+            margin-top: 5px;
+        }
+    </style>
+    <title>ninjaToCat</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    
+    <div>
+        <img id="cat" src="images/ninja-cat/cat0.png" data-alt-src="images/ninja-cat/ninja0.png">
+        <img id="cat" src="images/ninja-cat/cat1.png" data-alt-src="images/ninja-cat/ninja1.png">
+        <img id="cat" src="images/ninja-cat/cat2.png" data-alt-src="images/ninja-cat/ninja2.png">
+        <img id="cat" src="images/ninja-cat/cat3.png" data-alt-src="images/ninja-cat/ninja3.png">
+        <img id="cat" src="images/ninja-cat/cat4.png" data-alt-src="images/ninja-cat/ninja4.png">
+    </div>
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<script>
+//***function that works
+    $("img").click(function(){
+        var original = $(this).attr('src');
+        var newImage = $(this).attr('data-alt-src');
+        $(this).attr('src', newImage);
+        $(this).attr('data-alt-src', original);
+        });
+
+
+        
+//     var counter = 0
+// $("img").click(function(){
+//     $(this).data(clicked, true);
+//     console.log(counter);
+// })
+
+
+    // $('#cat1').click(function(){$('#cat1').attr('alt','ninja_1'), $('#cat1').attr('src','images/ninja-cat/ninja0.png'), $('#cat1').attr('id','ninja1')});
+    // $('#cat2').click(function(){$('#cat2').attr('alt','ninja_2'), $('#cat2').attr('src','images/ninja-cat/ninja1.png'), $('#cat2').attr('id','ninja2')});
+    // $('#cat3').click(function(){$('#cat3').attr('alt','ninja_3'), $('#cat3').attr('src','images/ninja-cat/ninja2.png'), $('#cat3').attr('id','ninja3')});
+    // $('#cat4').click(function(){$('#cat4').attr('alt','ninja_4'), $('#cat4').attr('src','images/ninja-cat/ninja3.png'), $('#cat4').attr('id','ninja4')});
+    // $('#cat5').click(function(){$('#cat5').attr('alt','ninja_5'), $('#cat5').attr('src','images/ninja-cat/ninja4.png'), $('#cat5').attr('id','ninja5')});
+    // $('#ninja1').click(function(){$('#ninja1').attr('alt','cat_1'), $('#ninja1').attr('src','images/ninja-cat/cat0.png'), $('#ninja1').attr('id','cat1')});
+    // $('#ninja2').click(function(){$('#ninja2').attr('alt','cat_2'), $('#ninja2').attr('src','images/ninja-cat/cat1.png'), $('#ninja2').attr('id','cat2')});
+    // $('#ninja3').click(function(){$('#ninja3').attr('alt','cat_3'), $('#ninja3').attr('src','images/ninja-cat/cat2.png'), $('#ninja3').attr('id','cat3')});
+    // $('#ninja4').click(function(){$('#ninja4').attr('alt','cat_4'), $('#ninja4').attr('src','images/ninja-cat/car3.png'), $('#ninja4').attr('id','cat4')});
+    // $('#ninja5').click(function(){$('#ninja5').attr('alt','cat_5'), $('#ninja5').attr('src','images/ninja-cat/cat4.png'), $('#ninja5').attr('id','cat5')});
+
+    // var number = 3;
+    // $('img').click(
+    //     function(){ function(){if(number==3){number}}, $(this).attr('src',"images/ninja-cat/ninja"+number+".png")})
+    // $('div').hover(
+    //     function(){
+    //         $('div').css('background-color','purple'),
+    //         $('p').text('background-color')},
+    //     function(){
+    //         $('div').css('background-color','green'),
+    //         $('p').text('')}
+    //             );
+
+</script>
+</body>
+</html>

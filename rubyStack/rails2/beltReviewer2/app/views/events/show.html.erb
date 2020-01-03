@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+   <title>Title</title>
+   <!-- Required meta tags -->
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <style>
+      .header h2 {
+         display: inline-block;
+         margin-right: 350px;
+      }
+      .details_{
+         margin: 15px 0px 0px 15px;
+      }
+      .columns{
+         display: inline-block;
+         width: 150px;
+         vertical-align: top;
+      }
+      .columns p{
+         margin-bottom: 3px;
+      }
+      .title{
+         font-weight: bold;
+      }
+   </style>
+   <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+   <div class="header">
+      <h2><%= @event.name %></h2>
+      <a href="/events/index">Events Dashboard</a>
+   </div>
+   <div class="details_">
+      <div class="columns">
+         <p class="title">Host: </p>
+         <p><%= @event.user.first_name %> <%= @event.user.last_name %></p>
+         <p class="title">Date: </p>
+         <p><%= @event.date %></p>
+      </div>
+      <div class="columns">
+         <p class="title">Location: </p>
+         <p><%= @event.location %>, <%= @event.state %></p>
+         <p class="title">People who are joining the event: </p> 
+         <p><%=@event.users_attending.count %></p> 
+      </div>
+   </div>
+   <% if flash[:alert]%>
+   <h3>Notifications</h3>
+   <ul>
+      <% flash[:alert].each do |error| %>
+      <li>
+         <%= error %>
+      </li>
+      <% end %>
+   </ul>
+   <% end %>
+
+   <table class="table">
+      <tr>
+         <th>Name</th>
+         <th>Location</th>
+         <th>State</th>
+      </tr>
+      <tr>
+         <td>Name</td>
+         <td>Location</td>
+         <td>State</td>
+      </tr>
+      <tr>
+         <td>Name</td>
+         <td>Location</td>
+         <td>State</td>
+      </tr>
+   </table>
+   <div>
+
+      <h6>Discussion about this event:</h6>
+      <div>
+         <% @comments.each do |comment| %>
+         <p><%= comment.user.first_name %> says: <%= comment.comment %></p>
+         <% end %>
+      </div>
+   </div>
+   <h6>Add Comment:</h6>
+   <form action="/comments/<%= @event.id %>/create" method="POST">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <textarea name="comment[comment]" cols="30" rows="3"></textarea>
+      <input type="submit" value="Submit Comments">
+   </form>
+   <!-- Optional JavaScript -->
+   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"></script>
+</body>
+
+</html>

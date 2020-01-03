@@ -1,0 +1,184 @@
+-- Steps --
+1. Review Wireframe
+2. Determine Models
+3. Determine Controllers
+4. Build Project: 
+5. Update Model Relationships
+
+Controller Code:
+
+***Application Controller:
+   protect_from_forgery with: :exception
+   before_action :authorize
+   skip_before_action :authorize, only: [:create, :new]
+
+   private
+      def current_user
+         User.find_by(id: session[:user_id]) if session[:user_id]
+      end
+      def logged?
+         !current_user.nil?
+      end
+      def authorize
+         unless logged?
+         redirect_to users_new_path
+         end
+      end
+      def secureUser
+        params.require(:user).permit(:name, [***etc.])
+      end
+      # def secureCourse
+      #   params.require(:course).permit(:name, :instructor, :capacity)
+      # end
+
+***Session Controller:
+   def create
+      @user = User.find_by_email(secureUser[:email]).try(:authenticate, secureUser[:password])
+      if @user
+         session[:user_id] = @user.id
+         redirect_to [***controller]s_index_path
+      else
+         flash[:alert] = ['invalid combination']
+         redirect_to users_new_path
+      end
+   end
+
+   def destroy
+      reset_session
+      redirect_to users_new_path
+   end
+   
+   
+***Users Controller:
+   def update
+      @user = current_user
+      @user.update(first_name: secureUser[:first_name],last_name: secureUser[:last_name],location: secureUser[:location],email: secureUser[:email], state: secureUser[:state])
+      if @user.valid?
+         redirect_to [***controller]s_index_path
+      else
+         flash[:alert] = @user.errors.full_messages
+         redirect_to users_edit_path(current_user.id)
+      end
+   end
+
+   def create
+      @user = User.new(secureUser)
+      if @user.valid?
+         @user.save
+         session[:user_id] = @user.id
+         redirect_to  [***controller]s_index_path
+      else
+         flash[:alert] = @user.errors.full_messages
+         redirect_to users_new_path
+      end
+   end
+   
+   # def destroy
+   # end
+   
+   # def new
+   #   @logged = logged?
+   # end
+
+   # def edit
+   #   @user = current_user
+   # end
+
+***through Table
+   before_action :authorize
+
+   def create
+      course = Course.find_by(id: params[:id])
+      @signup = Signup.new(user: current_user, course: course)
+      if @signup.valid?
+         # if Signup.where(course: course).length < course.capacity
+         @signup.save
+         # else
+         #   flash[:alert] = ['Capacity for this class has been reached']
+         # end 
+      else
+         flash[:alert] = @signup.errors.full_messages
+      end
+      redirect_to courses_index_path
+   end
+
+   def destroy
+      course = Course.find_by(id: params[:id])
+      signups = Signup.where(user: current_user).where(course: course)
+      if signups
+         signups.destroy_all
+      else
+         flash[:alert] = ['No has been removed']
+      end
+      redirect_to courses_show_path(id: params[:id])
+   end
+
+***flash[:alert]
+   <% if flash[:alert] %>
+      <ul>
+         <% flash[:alert].each do |error| %>
+            <li>
+               <%= error %>
+            </li>
+         <% end %>
+      </ul>
+   <% end %>
+
+***Login Registeration:[HTML: new.html]
+      <% if flash[:alert] %>
+      <ul>
+         <% flash[:alert].each do |error| %>
+         <li>
+         <%= error %>
+         </li>
+         <% end %>
+      </ul>
+      <% end %>
+      <h1>Register</h1>
+      <form action="/users/create" method="POST">
+         <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+         <p>Name</p>
+         <input type="text" name="user[name]">
+         <p>Email</p>
+         <input type="text" name="user[email]">
+         <p>Password</p>
+         <input type="password" name="user[password">
+         <p>Password Confirmation</p>
+         <input type="password" name="user[password_confirmation]">
+         <%= button_to "Register", users_create_path, method:"post", class: "btn btn-secondary" %>
+      </form>
+      
+      <h1>Login</h1>
+      <form action="/sessions/create" method="POST">
+         <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+         <p>Email</p>
+         <input type="text" name="user[email]">
+         <p>Password</p>
+         <input type="password" name="user[password">
+         <%= button_to "Login", sessions_create_path, method:"post", , class: "btn btn-secondary"%>
+      </form>
+
+***Link_to -or- Button_to [links are through url/buttons are through params]
+[GET]   <%= link_to "Sign Up date DESC", courses_show_path(id: @course.id, sort: 1)%> [Pass params through url]  
+[GET]   <%= link_to course.name, courses_show_path(id: course.id)%>
+[POST]  <%= link_to "Add", signups_create_path(id: course.id), method:"POST" %>
+[DELETE]<%= link_to "Log Out", sessions_destroy_path, method:"delete", class: "btn btn-secondary"%>
+[GET]   <%= link_to "Add a Course", courses_new_path%>
+[POST]  <%= button_to "Add", signups_create_path, method:"POST", params: {id: course.id} %>
+[POST]  <%= button_to "Register", users_create_path, method:"POST"%>
+[POST]  <%= button_to "Login", sessions_create_path, method:"POST"%>
+[UPDATE]<%= button_to "Update", courses_update_path, method:"patch", params: {id: @course.id} %>
+
+Controllers:
+new  create  edit  update  show  destroy  index
+
+User Model Validations:
+  EMAIL_REGEX = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]+)\z/i
+  validates :email, uniqueness: { case_sensitive: false }, format: { with: EMAIL_REGEX }
+  validates :name, :email, presence: true
+  before_save :downcase_fields
+   def downcase_fields
+      self.email.downcase!
+   end
+   
+   

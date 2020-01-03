@@ -1,0 +1,28 @@
+***Notes for Routes >> Controllers >> Views
+   ~~The order of your Routes matters
+         !! users/total
+         !! users/(:id)
+      This will check for the word total before accepting the parameter ID
+   ~~Passing parameters from Routers >> Controllers
+         !! users/(:para)
+   ~~Passing parameters from Controllers >> Views
+         !! html must be html.erb
+         !! <% example %><% end %> this notation is for Loops and if statements
+         !! <%= example.id %> this notation is for passing parameters
+
+   ~~For showing validation errors
+      !!PLURALIZE: this makes the word "error" >> "errors" if more than 1 error exists
+      !!Loop through using .each do |msg|
+      !!msg >> messages stored 
+
+<% if @product.errors.any? %>
+    <h2><%= pluralize(@productcopy.errors.count, "error")%>prohibited this post from being saved:</h2>
+    <ul>
+      <% @product.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+<% end %>
+      
+   
+      

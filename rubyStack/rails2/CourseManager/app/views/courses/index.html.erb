@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+   <title>Title</title>
+   <!-- Required meta tags -->
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+   <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   <style>
+      .btn.btn-secondary{
+         color: white;
+         text-decoration: none;
+      }
+   </style>   
+</head>
+<body>
+   <h1>Welcome, <%= @user.name %></h1>
+   <%= link_to "Log Out", sesssions_destroy_path, method:"delete", class: "btn btn-secondary"%>
+   <% if flash[:alert] %>
+   <h5>Notifications</h5>
+   <ul>
+     <% flash[:alert].each do |error| %>
+     <li>
+       <%= error %>
+     </li>
+     <% end %>
+   </ul>
+   <% end %>
+   <h5>Courses</h5>
+   <%= link_to "Low Sign up ", courses_index_path(sort: 0) %> |  
+   <%= link_to "High Sign up ", courses_index_path(sort: 1)  %>   
+   <table class="table">
+      <tr>
+         <th>Course</th>
+         <th>Instructor</th>
+         <th>Signups</th>
+         <th>Action</th>
+      </tr>
+      
+      <% @courses.each do |course| %>
+      <tr>
+         <td> <%= link_to course.name, courses_show_path(id: course.id)%></td> 
+         <td><%=course.instructor%></td>
+         <td><%= course.signups.count %>/<%=course.capacity%></td>
+         <% if course.signups.count >= course.capacity %>
+            <td><p>Full</p></td>
+         <%else%>
+            <% if course.users_registed.include?(@user) %>
+               <td><p>Already Added</p></td>
+            <% else %>
+               <td><%= link_to "Add", signups_create_path(id: course.id), method:"post" %></td>
+            <% end %>
+         <% end %>
+      </tr>
+      <%end %>
+   </table>
+   <%= link_to "Add A Course", courses_new_path %>
+
+   <!-- Optional JavaScript -->
+   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="cssFile/style.css">
+    <title>Football's Best</title>
+</head>
+<!--
+~ HTML
+~ head, title, meta description, 
+~ body, div, a, p, h1, ul, li, table (including thead, td, tbody, tr)
+~ At the bottom of the page, create a fake survey form that uses the following tags:
+~ form, select, input type="text", input type="checkbox", input type="radio", input type="submit".
+-->
+    <body>
+        <h1>College Football vs. National FootBall League</h1>
+        <div>
+            <img src="images/ncaa.png" alt="College Football" style="display:inline-block"> 
+            <h3 style="display:inline-block">vs.</h3> 
+            <img src="images/nfl.png" alt="National Footall League" style="display:inline-block">
+        </div>
+        
+        <h4>It starts here:</h4>
+        <p>This is an article discussing the best way to watch football.</p>
+
+        <h3>Top Grossing Teams:</h3>
+        <table>
+            <thead>
+                <th>Team Name</th>
+                <th>City</th>
+                <th>Gross Income</th>
+                <th>Ranking</th>
+            </thead>
+            <tbody>
+                <td><a href="https://www.dallascowboys.com/">Dallas Cowboys</a></td>
+                <td>Dallas, Texas</td>
+                <td>$81b</td>
+                <td>1</td>
+            </tbody>
+            <tbody>
+                <td><a href="https://mgoblue.com/schedule.aspx?schedule=472">Michigan Werevorines</a></td>
+                <td>Ann Arbor, Michigan</td>
+                <td>$77b</td>
+                <td>2</td>
+            </tbody>
+            <tbody> 
+                <td><a href="https://ohiostatebuckeyes.com/sports/m-footbl/schedule/">Ohio State Buckeyes</a></td>
+                <td>Dayton, Ohio</td>
+                <td>$60b</td>
+                <td>3</td>
+            </tbody>
+            <tbody> 
+                <td><a href="https://www.jaguars.com/">Jaxonville Jaguars</a></td>
+                <td>Jaxonville, Florida</td>
+                <td>$55b</td>
+                <td>4</td>
+            </tbody>
+        </table>
+        
+        <h3>How to fill out the survey</h3>
+        <ol>
+            <li>Fill Out Your Name</li>
+            <li>Decide How Much You Believe</li>
+            <li>Explain Why You Believe This</li>
+            <li>Submit Your Response</li>
+        </ol>
+
+        <h3>Reasons why you should vote.</h3>
+        <ul>
+            <li>Because I Said</li>
+            <li>We Need To Know</li>
+            <li>This is a Project</li>
+            <li>Or you don't have to</li>
+        </ul>
+        
+        <label>First Name
+            <input type="text">
+        </label>
+        <br>
+        <label>Last Name
+            <input type="text">
+        </label>
+        <br>
+        <br>
+        <div style="display: inline-block">
+                <label>Team Selection <br>
+                    <input type="radio" name="team1" value="Dallas Cowboys">Dallas Cowboys</input><br>
+                    <input type="radio" name="team1" value="Michigan Werevorines">Michigan Werevorines</input><br>
+                    <input type="radio" name="team1" value="Ohio State Buckeyes">Ohio State Buckeyes</input><br>
+                    <input type="radio" name="team1" value="Jaxonville jaguars">Jaxonville jaguars</input>
+                </label>
+        </div>
+        <div style="display: inline-block">
+                <label>Team Selection<br>
+                    <input type="checkbox" name="team1" value="Dallas Cowboys">Dallas Cowboys</input><br>
+                    <input type="checkbox" name="team1" value="Michigan Werevorines">Michigan Werevorines</input><br>
+                    <input type="checkbox" name="team1" value="Ohio State Buckeyes">Ohio State Buckeyes</input><br>
+                    <input type="checkbox" name="team1" value="Jaxonville jaguars">Jaxonville jaguars</input>
+                </label>
+        </div>
+        <br>
+        <label>
+            <input type="submit" value="submit">
+        </label>
+    </body>
+
+    <!--
+        DIV vs. SPAN:
+        The span tag is like the **div** tag. It has no meaning at all and is mostly used for styling by using an id or class. The difference between the two is that div is a block element, It's on a seperate line. span however is an inline element, meaning that it can be on a line with other elements
+    -->
+</html>       

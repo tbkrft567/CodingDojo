@@ -1,0 +1,51 @@
+.jumbotron{
+    padding: 5px;
+}
+
+.page_left{
+    display: inline-block;
+    width: 400px;
+    vertical-align: top;
+    margin: 20px;
+}
+
+.page_right{
+    display: inline-block;
+    width: 400px;
+    vertical-align: top;
+    margin: 20px 20px 20px 60px;
+}
+
+.table{
+    border: 1px solid black;
+}
+
+.page_bottom{
+    /* border-top: 1px black solid; */
+    margin: 0px 0px 0px 400px;
+}
+
+ul{
+    line-height: 110%;
+    font-weight: bold;
+}
+
+li{
+    font-weight: normal;
+}
+
+a{
+    color: white;
+}
+
+.btn-danger{
+    padding: 0px;
+    font-size: 10pt;
+    border: 1px white solid;
+    margin-left: 15px;
+}
+
+span{
+    font-style: italic;
+    font-weight: normal;
+}

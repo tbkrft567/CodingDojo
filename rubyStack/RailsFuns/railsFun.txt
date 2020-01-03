@@ -1,0 +1,53 @@
+
+
+******Models: Data Set
+
+in the project file
+Creating a Rails project {getting started}
+
+rails g model -- generate model 
+      Topkick name:string hero:reference {Relationships}
+      within Hero.rb add has_many :[name], dependent: :destroy 
+rake db:migrate
+
+to create must be in 
+
+orm 
+
+
+*hero* table must be created first
+
+rails c -- to get into rails console
+
+Hirb.enable -- to make pretty
+rails new [projectName]
+validations created in models>[name].db {Validations}
+      validates :name, :superpower, :numPeopleSaved, presence: true
+
+create
+hero1 = Hero.new 
+
+variable.errors.full_message
+
+dependent: :destroy
+
+app > model
+db > migrate
+
+
+******Controllers: Business Logic
+Controller I
+      rails g contoller <ControllerName> **Same Name as the Model, but pural Hero to Heros
+app > views
+new.html.erb??
+
+Controller II
+<%= %>
+<%  %>
+
+
+******Routes
+
+
+
+

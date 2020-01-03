@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Title</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <style>
+    .event {
+      border: 3px solid black;
+      width: 410px;
+    }
+
+    .event1 {
+      display: inline-block;
+      margin: 10px;
+    }
+
+    .event2 {
+      display: inline-block;
+      margin: 10px;
+    }
+
+    .greeting {
+      display: inline-block;
+      width: 500px;
+    }
+
+    .navigate {
+      display: inline-block;
+    }
+
+    .wrapper {
+      margin: 25px;
+    }
+
+    .container_ {
+      width: 750px;
+      Margin-top: 15px;
+      padding: 3px;
+    }
+    .table{
+      border: 1px solid black;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div>
+      <div class="greeting">
+        <h2>Welcome, <%= @user.first_name %>!</h2>
+      </div>
+      <div class="navigate">
+        <a href="/sessions/destroy" data-method="delete">Log Out</a> |
+        <a href="/users/edit">Edit Profile</a>
+      </div>
+    </div>
+    <div class="container_">
+      <h6>Here are some of the events in <span>your</span> state:</h6>
+      <% if flash[:notice]%>
+      <h3>Notifications</h3>
+      <ul>
+        <% flash[:notice].each do |error| %>
+        <li>
+          <%= error %>
+        </li>
+        <% end %>
+      </ul>
+      <% end %>
+      <table class="table">
+        <tr>
+          <th>Name</th>
+          <th>Date</th>
+          <th>Location</th>
+          <th>Host</th>
+          <th>Action/Status</th>
+        </tr>
+        <% @events.each do |event| %>
+        <% if @user.state == event.state %>
+        <tr>
+          <th> <a href="/events/<%= event.id %>"><%= event.name %></a></th>
+          <th><%= event.date %></th>
+          <th><%= event.location %></th>
+          <th><%= event.user.first_name %></th>
+          <% if event.user == @user %>
+          <th> <%= link_to "Edit", edit_event_path(id: event.id) %> | <a href="/events/<%= event.id %>/index">Delete</a>
+          </th>
+          <% else %>
+          <% if Attendance.where(user: @user).exists?(event: event) %>
+          <th>Joining | <a href="/events/index">Cancel</a></th>
+          <% else %>
+          <th><a href="/attendances/<%= event.id%>/create">Join</a></th>
+          <% end %>
+          <% end %>
+        </tr>
+        <% end %>
+        <% end %>
+      </table>
+      <h6>Here are some of the events in <span>other</span> state:</h6>
+      <table class="table">
+        <tr>
+          <th>Name</th>
+          <th>Date</th>
+          <th>Location</th>
+          <th>Host</th>
+          <th>Action/Status</th>
+        </tr>
+        <% @events.each do |event| %>
+        <% if @user.state != event.state %>
+        <tr>
+          <th> <a href="/events/<%= event.id %>"><%= event.name %></a></th>
+          <th><%= event.date %></th>
+          <th><%= event.location %></th>
+          <th><%= event.user.first_name %></th>
+          <% if event.user == @user %>
+          <th><a href="/events/<%= event.id %>/edit">Edit</a> | <a href="/events/<%= event.id %>/index">Delete</a></th>
+          <% else %>
+          <% if Attendance.where(user: @user).exists?(event: event) %>
+          <th>Joining | <a href="/attendance/<%= event.id %>/index">Cancel</a></th>
+          <% else %>
+          <th><a href="/attendances/<%= event.id%>/create">Join</a></th>
+          <% end %>
+          <% end %>
+        </tr>
+        <% end %>
+        <% end %>
+      </table>
+    </div>
+    <h3>Add Event</h3>
+    <form action="/events/create">
+      <div class="event">
+        <div class="event1">
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
+          <p>Name</p>
+          <input type="text" name="event[name]">
+          <p>Date</p>
+          <input type="date" name="event[date]">
+        </div>
+        <div class="event2">
+          <p>Location</p>
+          <input type="text" name="event[location]">
+          <p>State</p>
+          <select name="event[state]">
+            <% @states.each do |state| %>
+            <option value="<%= state %>"><%= state %></option>
+            <% end %>
+          </select>
+          <input type="submit" value="Add Event">
+        </div>
+      </div>
+    </form>
+    <% if flash[:alert]%>
+    <h3>Notifications</h3>
+    <ul>
+      <% flash[:alert].each do |error| %>
+      <li>
+        <%= error %>
+      </li>
+      <% end %>
+    </ul>
+    <% end %>
+  </div>
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

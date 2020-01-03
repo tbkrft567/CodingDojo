@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+      <h6>Welcome, <%= @user.first_name%></h6>
+      <%= link_to 'Edit My Profile', users_edit_path(id: @user.id) %>
+      <%= link_to 'Log Out', sessions_destroy_path, method:"delete" %>
+      <% if flash[:notice] %>
+        <h4>Notification</h4>
+        <ul>
+          <% flash[:notice].each do |error| %>
+                <li>
+                  <%= error %>
+                </li>
+            <% end %>
+        </ul> 
+      <% end %>
+      <p>Here are some of the event at your state:</p>
+      <table class="table">
+        <tr>
+          <th>Name</th>
+          <th>Date</th>
+          <th>Location</th>
+          <th>Host</th>
+          <th>Action/Status</th>
+        </tr>
+        <% if @events %>
+          <% @events.each do |event| %>
+            <% if event.state == @user.state %>
+              <tr>
+                <td><%= link_to event.name, events_show_path(id: event.id) %></td>
+                <td><%= event.date %></td>
+                <td><%= event.location %></td>
+                <td><%= event.user.first_name %></td>
+                  <% if event.user == @user %>
+                    <td>
+                      <%= link_to "Edit", events_edit_path(id: event.id) %> || 
+                      <%= link_to "Delete", events_destroy_path(id: event.id), method:"delete" %>
+                    </td>
+                  <% else %>
+                    <td>
+                      <% unless event.users_attending.include?(@user) %>
+                        <%= link_to "Join", {controller: "attendances", action: "create", id: event.id }, method:"post" %>
+                      <% else %>
+                        <%= link_to "Cancel", attendances_destroy_path(id: event.id), method:"delete" %>
+                      <% end %>
+                    </td>
+                  <% end %>
+              </tr>  
+            <% end %>
+          <% end %>
+        <% end %>
+      </table>
+      <table class="table">
+        <tr>
+          <th>Name</th>
+          <th>Date</th>
+          <th>Location</th>
+          <th>State</th>
+          <th>Host</th>
+          <th>Action/Status</th>
+        </tr>
+        <% if @events %>
+          <% @events.each do |event| %>
+            <% if event.state != @user.state %>
+              <tr>
+                <td><%= link_to event.name, events_show_path(id: event.id) %> </td>
+                <td><%= event.date %></td>
+                <td><%= event.location %></td>
+                <td><%= event.user.first_name %></td>
+                  <% if event.user == @user %>
+                    <td>
+                      <%= link_to "Edit", events_edit_path(id: event.id) %> || 
+                      <%= link_to "Delete", events_destroy_path(id: event.id), method:"delete" %>
+                    </td>
+                  <% else %>
+                    <td>
+                      <% unless event.users_attending.include?(@user) %>
+                        <%= link_to "Join", {controller: "attendances", action: "create", id: event.id }, method:"post" %>
+                      <% else %>
+                        <%= link_to "Cancel", attendances_destroy_path(id: event.id), method:"delete" %>
+                      <% end %>
+                    </td>
+                  <% end %>
+              </tr>  
+            <% end %>
+          <% end %>
+        <% end %>
+      </table>
+<form action="/events/create" method="POST">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
+  <span>Name</span>
+  <input type="text" name="event[name]">
+  <span>Date</span>
+  <input type="date" name="event[date]">
+  <span>Location</span>
+  <input type="text" name="event[location]">
+  <span>State</span>
+  <select name="event[state]">
+    <option value="TX">TX</option>
+    <option value="AK">AK</option>
+  </select>
+  <%= button_to "Add Event", events_create_path, method:"POST" %>
+</form>
+<% if flash[:alert] %>
+<h4>Notification</h4>
+<ul>
+  <% flash[:alert].each do |error| %>
+        <li>
+          <%= error %>
+        </li>
+    <% end %>
+</ul>   
+<% end %>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>

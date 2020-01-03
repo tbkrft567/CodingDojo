@@ -1,0 +1,94 @@
+*{
+    margin: 15px;
+}
+.wrapper{
+    border: 2px solid brown;
+    background-color: rgb(122, 100, 70);
+    width: 975px;
+}
+.overhead{
+    border: 2px solid brown;
+    background-color: tan;
+    width: 935px;
+}
+.carousel~{
+    text-align: center;
+}
+.header{
+    margin-right: 250px;
+    display: inline-block;
+}
+.header h1{
+    width: 400px;
+}
+.header p{
+    display: inline-block;
+    width: 400px;
+}
+img{
+    width: 200px;
+    height: auto;
+    display: inline-block;
+}
+
+#carouselExampleControls{
+    width: 500px;
+    height: auto;   
+    margin-left: 200px; 
+}
+
+.jumbotron{
+    width: 250px;
+    height: 500px;
+    padding: 0px;
+    display: inline-block;
+    vertical-align: top;
+    border: 2px solid brown;
+    background-color: tan;
+    border-radius: 0px;
+    margin-left: 37px;
+}
+.white-box{
+    width: 25px;
+    height: 25px;
+    background-color: white;
+}
+.black-box{
+    width: 25px;
+    height: 25px;
+    margin-left: 10px;
+    background-color: black;
+}
+.red-box{
+    width: 25px;
+    height: 25px;
+    margin-left: 10px;
+    background-color: red;
+}
+
+.futureTexan{
+    margin-left: 250px;
+    font-weight: 800px;
+    font-size: 35px;
+}
+
+
+/* 
+        .click
+        .hide
+        .show
+        .toggle
+        .slideDown
+        .slideUp
+        .slideToggle
+        .fadeIn
+        .fadeOut
+        .addClass
+        .before
+        .after
+        .append
+        .html
+        .attr
+        .val
+        .text 
+*/

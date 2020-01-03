@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="styleSheet.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <title>Document</title>
+</head>
+<body>
+        <!-- <img src="Web Fundamentals/images/ncaa.png" alt="ncaa"> -->
+        <img src="Web Fundamentals/images/nfl.png" alt="nfl">
+</body>
+<script>
+    $('body').mousemove(function(e){
+        var left = e.pageX-150;
+        var top = e.pageY-175;
+        console.log(left, top)
+        $('img:nth-child(1)').css('margin-left',left)
+        $('img:nth-child(1)').css('margin-top',top)
+        // console.log($('img:nth-child(1)').css('left'));
+        // $('img:nth-child(1)').css('left',left);
+        // console.log(e.pageX, e.pageY)
+    });
+
+
+
+</script>
+
+</html>

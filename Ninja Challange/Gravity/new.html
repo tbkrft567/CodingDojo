@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Document</title>
+   <Style>
+      #BlackBox{
+         height: 500px;
+         width: 1000px;
+         /* outline: 2px solid fuchsia; */
+         background-color: black;
+         }
+      #cannon{
+         height: 5px;
+         Width: 5px;
+         background-color: white;
+         position: absolute;
+      }
+      #target{
+         height: 50px;
+         width: 50px;
+         background-color: salmon;
+         position: absolute;
+      }
+      #dashboard{
+         width: 1000px;
+         background-color: gray;
+      }
+      #dashboard h2{
+         display: inline-block;
+         margin-right: 50px;
+         color: white;
+      }
+      span{
+         color: red;
+      }
+   </Style>
+</head>
+<body>
+
+
+   <div id='BlackBox'>
+      <div id='target' style='left:800px; top:150px;'></div>
+      <div id='cannon' style='left:15px; top:490px;'>
+   </div></div>
+   <div id="dashboard"></div>
+   <!-- <form action="">
+      <input type="submit" value="Reset" >
+   </form> -->
+   <form action="">
+      <input type="submit" value="Try Again" onclick="tryAgain()">
+   </form>
+   <div>
+      <h4>Instructions to determine the cannons projectile:</h4>
+      <ol>
+         <li>Enter the angle you want to shot</li>
+         <li>Enter how hard you want to shot</li>
+         <li>Enter how powerful gravity is</li>
+         <li>Aim for the <span>Big Red</span> square</li>
+         <li>Hit F5 to try again</li>
+      </ol>
+   </div>
+
+</body>
+<script>
+   
+
+   function writeVariables(){
+      content = "<h2>Score: 11</h2><h2>Degree of Shot: "+degreeOfShot+"&deg</h2><h2>Power of Shot: "+powerOfShot+" </h2>"
+      document.getElementById("dashboard").innerHTML = content
+   }
+
+   function drawCannon(){
+      player.top -= verticalMovement;
+      player.left += horizontalMovement
+      // <div id='target' style='left:"+targetX+"px; top:"+targetY+"px;'></div>
+      content = " <div id='target' style='left:800px; top:150px;'></div><div id='cannon' style='left:"+player.left+"px; top:"+player.top+"px;'></div>"
+      document.getElementById("BlackBox").innerHTML = content
+
+   }
+
+   function gameloop(){
+      drawCannon()
+      verticalMovement -= gravity
+      if (player.top <= 500){
+         setTimeout(gameloop, 120)
+      } 
+   }
+
+   function runProcess(){
+      var degreeOfShot = prompt("Determine the Angle of the Shot(Between 0 - 90)", "Angle")
+      var powerOfShot = prompt("Determine the Power of the Shot", "Power")
+      var verticalMovement = powerOfShot*(Math.cos(degreeOfShot*Math.PI/180))
+      var horizontalMovement = powerOfShot*(Math.sin(degreeOfShot*Math.PI/180))
+      player.left = 15
+      player.top = 490
+      writeVariables()
+      gameloop()
+      drawCannon()
+      console.log("End2")
+   }
+
+   var gravity = 3.8
+   var degreeOfShot = prompt("Determine the Angle of the Shot(Between 0 - 90)", "Angle")
+   var powerOfShot = prompt("Determine the Power of the Shot", "Power")
+   var verticalMovement = powerOfShot*(Math.cos(degreeOfShot*Math.PI/180))
+   var horizontalMovement = powerOfShot*(Math.sin(degreeOfShot*Math.PI/180))
+   var targetX = Math.random()*950+50
+   var targetY = Math.random()*450
+   player = {
+      left: 15,
+      top: 490
+   }
+   x = 0
+   
+   writeVariables()
+   gameloop()
+   drawCannon()
+</script>
+</html>

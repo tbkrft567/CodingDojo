@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Airplane Challenge</title>
+        <style type="text/css">
+
+            #ocean{
+                background-image: url("ocean.jpg");
+                position: absolute;
+                width: 800px;
+                height: 700px;
+            }
+            .player{
+                background-image: url("player.png");
+                position: absolute;
+                width: 70px;
+                height: 70px;
+            }
+            .explosion{
+                background-image: url("Explosion_new.gif");
+                position: absolute;
+                width: 70px;
+                height: 70px;
+            }
+            .enemy{
+                background-image: url("enemy.png");
+                position: absolute;
+                width: 70px;
+                height: 70px;
+            }
+            .missile{
+                background-color: darkred;
+                position: absolute;
+                width: 3px;
+                height: 7px;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <div id="ocean">
+            <div id="missiles"></div>
+            <div id="players"></div>
+            <div id="enemies"></div>
+        </div>
+    </body>
+    <script type="text/javascript">
+//==============================================
+        //SPEED: ADJUSTABLE; CONTROLS THE DISTANTS TRAVELED BETWEEN EACH LOOP
+        let enemySpeed = 4; 
+        let playerSpeed = 5;
+        let missileSpeed = 20;
+        
+        let missileFireRate = 4; // ADJUSTABLE; HOW OFTEN SHOULD MISSILES BE FIRED // FIRE RATE; FOUND IN GAMELOOP
+        
+        let lastEnemy = 0; //LEAVE AS 0; FOUND IN drawEnemies(); FLAG TO INDICATE WHEN THE LAST ENEMY HAS BEEN ELIMINATED AND ALLOWS THE HTML TO CLEAR TO BLANK
+        let fireCount = 1;//LEAVE AS 1; THIS IN GAMELOOP THIS COUNTS-UP UNTIL missileFireRate TO INDICATE WHEN A MISSILE SHOULD BE RELEASED; FOUND IN GAMELOOP
+        
+        var direction = 0; //LEAVE AS 0; PLAYER STARTS IN A STATIONARY POSITION; 0=STATIONARY
+        let lastMove = 0; //LEAVE AS 0; VARIABLE USED WHEN DETERMINING PLAYER DIRECTIONS determineDirection()
+        var fireMissile = 0; //LEAVE AS 0; VARIABLE USED IN continueFire() AFTER USER HAS FIRE A MISSILE USING THE *SPACEBAR*; THIS RESULTS IN RAPID FIRE 
+        
+        let pauseFeature = 50; //ADJUSTABLE; THIS IS THE RATE OF GAMEPLAY. THE SMALLER THE FASTER THE GAMELOOP PROCEEDS 
+        let pauseStatus = false; //LEAVE AS FALSE; USED IN document.onkeydown = function(e) TO UPDATE THE pauseFeature TO A LARGE NUMBER; MEANT TO ACT AS A PAUSE BUTTON USING *P*
+        
+        
+        
+        var players = { //START POSITION OF PLAYER
+            left: 250, 
+            top: 620
+        };
+        
+        var enemiesPosition = [ //START POSITION OF ENEMIES
+            {left: 350, top: 40},
+            {left: 280, top: 30},
+            {left: 210, top: 20},
+            {left: 140, top: 10}
+        ];
+        
+        var enemyDisplay = [1,1,1,1]; //USING displayType THIS VALUE IS SWITCHED TO 2:explosion FROM destroyEnemies() WHICH drawEnemies() USES TO WRITE HTML OF IMAGE OF AN EXPLOSION
+        
+        var displayType = {
+            1: 'enemy',
+            2: 'explosion'
+        };
+        
+        var enemyDisplayCountdown = [0,0,0,0]; //WHEN VALUE IS CHANGED TO 1 VALUE WILL BEGIN INCREASING BY 1 AND AFTER 100 THIS WILL TRIGGER REMOVAL FOR enemiesPosition, enemyDisplay, and enemyCountdown OF THE SAME IDX
+        
+        var missiles = [ //ARRAY ESTABLISHED FOR MISSILES FIRED
+            
+        ];
+//==============================================
+//==============================================
+        function drawPlayer(){ //DRAW PLAYER OCCURS DURING GAMELOOP
+            var content = "<div class='player' style='left: "+players.left+"px; top: "+players.top+"px'></div>"; //VARIABLE PLAYERS FOR LOCATION
+            document.getElementById("players").innerHTML = content;
+        };
+//==============================================
+        let tester = 0
+        function drawEnemies(){ 
+            if(enemiesPosition.length*enemyDisplay.length*enemyDisplayCountdown.length == 0){
+                console.log('last Enemy')
+                lastEnemy=1
+            }
+            
+            content = ""
+            if(lastEnemy == 0){ //destroyEnemies() SETS lastEnemy TO 1 WHEN THE LAST ENEMY IS KILLED TO JUMP TO THIS STATEMENT AND CLEAR THE CONTENT VARIABLE AND REMOVE THE ENEMY PLANE; lastEnemy IS RESET FOR NEXT ROUND OF ENEMIES
+                for(var idx=0; idx<enemiesPosition.length; idx++){ //VARIABLE ENEMIES FOR EACH ENEMY LOCATION -- LOOP
+                    content += "<div class='"+displayType[enemyDisplay[idx]]+"' style='left: "+enemiesPosition[idx].left+"px; top: "+enemiesPosition[idx].top+"px'></div>";     
+                    document.getElementById("enemies").innerHTML = content;
+                }
+            }
+            else{
+                content = "";
+                document.getElementById("enemies").innerHTML = content;
+                lastEnemy = 0;
+            }
+        }
+        
+//==============================================
+        function drawMissile(){
+            content = "";
+            var missile = {left: players.left+35, top: players.top-5}; //CREATE POSITIONING OF MISSILE COORDINATED WITH THE CURRENT POSITION OF THE PLAYER
+            missiles.push(missile); //ADD MISSILE POSITION TO MISSILES ARRAY
+            if(missiles[0].top == 0){ //REMOVE MISSILE FROM ARRAY WHEN MISSILE REACHES TOP OF THE MAP
+                missiles.shift();
+            }
+            for(var idx=0;idx<missiles.length;idx++){
+                content += "<div class='missile' style='left: "+missiles[idx].left+"px; top: "+missiles[idx].top+"px'></div>";
+                document.getElementById("missiles").innerHTML = content;    
+            }
+        }
+
+//==============================================
+//==============================================
+
+        function moveEnemies(){
+            content = "";
+            var enemyCount = enemiesPosition.length;
+            for(var idx=0; idx<enemyCount; idx++){
+                enemiesPosition[idx].top+=enemySpeed;//ADVANCE ENEMY POSITIONS BY SPEED OF ENEMY MOVEMENT DECLARE ABOVE
+                if(idx==0 && enemiesPosition[0].top>=620){ //ENEMY REACHES BOTTOM OF MAP
+                    enemiesPosition.shift(); //REMOVE IF ENEMY REACHES BOTTOM OF MAP
+                    enemyCount--; //REDUCE ITERATION COUNT
+                    if(enemyCount > 0){
+                        enemiesPosition[idx].top+=enemySpeed; //ACCOUNT FOR SHIFT IN ARRAY AFTER REMOVING ELEMENT 
+                    }
+                }
+                if(enemyCount == 0){ //CLEAR ALL ENEMIES WHEN NO ENEMIES REMAIN
+                    content = "";
+                    document.getElementById("enemies").innerHTML = content;
+                }
+                else{
+                    content += "<div class='enemy' style='left: "+enemiesPosition[idx].left+"px; top: "+enemiesPosition[idx].top+"px'></div>";
+                    document.getElementById("enemies").innerHTML = content;    
+                }
+            }
+            destroyEnemies();
+        }
+//============================================== 
+        function moveMissile(){
+            content = "";
+            var missileCount = missiles.length;
+            for(var idx=0;idx<missileCount;idx++){
+                missiles[idx].top-=missileSpeed;
+                    if(idx==0 && missiles[0].top<=0) //MISSILE REACHES TOP OF MAP
+                    {
+                        missiles.shift(); //REMOVE IF MISSILE REACHES TOP OF MAP
+                        missileCount--;//REDUCE ITERATION COUNT
+                        if(missileCount > 0){ 
+                            missiles[idx].top-=missileSpeed; //ACCOUNT FOR SHIFT IN ARRAY AFTER REMOVING ELEMENT
+                        }
+                    }
+                if(missileCount==0){ //CLEAR ALL ENEMEIES WHEN NO MISSILES REMAIN
+                    content = "";
+                    document.getElementById("missiles").innerHTML = content;       
+                }
+                else{
+                    content += "<div class='missile' style='left: "+missiles[idx].left+"px; top: "+missiles[idx].top+"px'></div>";
+                    document.getElementById("missiles").innerHTML = content;       
+                }
+            }
+        }
+
+//==============================================
+//==============================================
+        function continuedMove(){ //DIRECTION IS SET ON document.onkeydown = function(e) [1:LEFT ,3:UP ,5:RIGHT ,7:DOWN] [2,4,6,8] ALL DIAGONAL
+            //VARIIABLE direction IS STATIC UNLESS CHANGE; THIS ALLOWS FOR GAMELOOP TO REPEAT PLAYER MOVEMENT
+            if(direction == 1 && players.left > 1){//LEFT; CANNOT BREAK LEFT BORDER
+                players.left -= playerSpeed;
+            }
+            if(direction == 2 && players.left > 1 && players.top > (700-(700/2)) && players.left > 0){ //CANNOT BREAK LEFT OR TOP-MIDDLE BORDER
+                    players.left -= playerSpeed-1;
+                    players.top -= playerSpeed-1;
+            }
+            if(direction == 3 && players.top > (700-(700/2))){//UP; CANNOT BREAK TOP-MIDDLE BORDER
+                players.top -= playerSpeed;
+            }
+            if(direction == 4 && players.top > (700-(700/2)) && players.left < 730){ //CANNOT BREAK TOP-MIDDLE OR RIGHT BORDER
+                    players.left += playerSpeed-1;
+                    players.top -= playerSpeed-1;
+            }
+            if(direction == 5 && players.left < 730){//RIGHT; CANNOT BREAK RIGHT BORDER
+                players.left += playerSpeed;
+            }
+            if(direction == 6 && players.top < 620 && players.left < 730){ //CANNOT BREAK RIGHT OR BOTTOM BORDER
+                players.left += playerSpeed-1;
+                players.top += playerSpeed-1;
+            }
+            if(direction == 7 && players.top < 620){//DOWN; CANNOT BREAKBOTTOM BORDER
+                players.top += playerSpeed;
+            }
+            if(direction == 8 && players.top < 620 && players.left > 0){ //CANNOT BREAK BOTTOM OR LEFT BORDER
+                players.left -= playerSpeed-1;
+                players.top += playerSpeed-1;
+            }
+        }
+
+//==============================================        
+/*****Diagonal Movement*/
+function determineDirection(currentMove){//DIRECTION IS SET ON document.onkeydown = function(e) [1:LEFT ,3:UP ,5:RIGHT ,7:DOWN] [2,4,6,8] ALL DIAGONAL
+//THIS ALGORITHM DETERMINES HOW THE AIRPLANE MOVES IN A DIAGONAL DIRECTION BY USING THE VALUE OF THE lastMove AND currMove [1:Left, 2:Left/Up, 3:Up, etc.] 0:Stationary
+        if(currentMove-lastMove == 0){
+            direction = currentMove;
+        }    
+        else if(Math.abs(currentMove-lastMove) == 4){
+            direction = 0;
+        }
+        else if(Math.abs(currentMove-lastMove)==6){
+            direction = 8
+        }
+        else if(currentMove-lastMove<0){
+            direction = currentMove+1;
+        }
+        else if(currentMove-lastMove>0){
+            direction = currentMove-1;
+        }
+        lastMove = currentMove;
+        
+    return direction;
+}
+
+//==============================================        
+/*Destroy Enemies*/
+        function destroyEnemies(){
+            //THIS DETERMINES WHETHER A MISSILE HAS INTERSECTED A ENEMY PLANE BY USING THE AREA OF THE PLANE AND COORDINATES OF THE MISSILE
+            
+            for(var idx=0; idx<enemiesPosition.length; idx++){
+                for(var bullet=0; bullet<missiles.length; bullet++){
+                    lowLeftRange = enemiesPosition[idx].left;
+                    highLeftRange = enemiesPosition[idx].left+70;
+                    lowTopRange = enemiesPosition[idx].top;
+                    highTopRange = enemiesPosition[idx].top+70;
+
+                    if(   lowLeftRange<missiles[bullet].left 
+                       && highLeftRange>missiles[bullet].left 
+                       && lowTopRange<missiles[bullet].top+25 
+                       && highTopRange>missiles[bullet].top+25 //MISSILE INTERACTS WITH ENEMY
+                       && enemyDisplay[idx]!=2){ //ENEMY HAS NOT ALREADY BEEN HIT
+                            
+                        enemyDisplay[idx] = 2;
+                        enemyDisplayCountdown[idx]=1
+                        drawEnemies();
+                    }
+                    
+                }
+            }
+        }
+        
+//==============================================        
+        function removeDestroyedEnemies(){
+            var countdown = enemyDisplayCountdown.length;
+            for(var idx=0; idx<countdown;idx++){
+                if(enemyDisplayCountdown[idx]==10){
+                    enemiesPosition.splice(idx,1);
+                    enemyDisplay.splice(idx,1);
+                    enemyDisplayCountdown.splice(idx,1);
+                    countdown--;
+                    idx--;
+                }
+                else if(enemyDisplayCountdown[idx]>0){
+                    enemyDisplayCountdown[idx]++;
+                }
+            }
+        }
+        
+//==============================================
+//==============================================
+
+        /*Spawn Enemies*/
+        /*Player interactss with Enemies*/
+        
+//======================================================================================================================================================================================================
+//======================================================================================================================================================================================================
+//======================================================================================================================================================================================================
+//======================================================================================================================================================================================================
+        
+        document.onkeydown = function(e){
+            if(e.keyCode == 80) // *P* BUTTON
+            {//*P* BUTTON IS THE PROCESS OF FREEZING(PAUSING) GAMELOOP USING THE pauseFeature VARIABLE 
+                if(pauseFeature == 50){
+                    pauseFeature = 999999999; //PAUSE ALL MOVEMENT
+                    pauseStatus = true
+                }
+                else{
+                    pauseFeature = 50; //RESUME ALL MOVEMENT
+                    pauseStatus = false
+                }
+                gameloop();
+
+            }
+            
+                if(pauseStatus == false){ ////HALT GAME MOVEMENT
+                    if((e.keyCode == 17)){ //**crtl** PLANE STANDS STILL
+                        direction = 0;
+                    }
+                    if(e.keyCode == 32){ //**SPACE BAR** //FIRE MISSILES
+                        if(fireMissile == 0){
+                            fireMissile = 1;
+                        }
+                        else{
+                            fireMissile = 0;
+                        }
+                    }
+                    if(e.keyCode>=37 && e.keyCode <=40){ /*Diagonal Movement*/ //LEFT, UP, RIGHT, DOWN
+                        var currentMove = ((e.keyCode-37)*2)+1  //CONVERT [37, 38, 39, 40] TO [1, 3, 5, 7] TO ALL ROOM FOR DIAGONAL DIRECTIONS 
+                        if(lastMove != 0){
+                            direction = determineDirection(currentMove); 
+                        }
+                        else{
+                            lastMove = currentMove;
+                            direction = currentMove;
+                        }
+                    }
+                    
+                    
+                    drawPlayer();
+            }
+            
+        }
+        
+        function gameloop(){
+            removeDestroyedEnemies();
+            moveMissile();
+            moveEnemies();
+            drawPlayer();
+            drawEnemies();
+            continuedMove();
+            if(fireMissile == 1)
+            {
+                if(fireCount == missileFireRate){ 
+                    fireCount = 1;
+                    drawMissile();
+                }
+                else{
+                    fireCount++;
+                }
+            }
+             setTimeout(gameloop,pauseFeature)
+        }
+        gameloop()
+        
+    </script>
+</html>

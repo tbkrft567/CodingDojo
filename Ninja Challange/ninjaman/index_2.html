@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>NinjaMan</title>
+        <style type="text/css">
+            * {
+                margin: 0;
+                padding: 0;
+            } 
+            .row{
+                line-height: 0;
+            }
+            .wall {
+                    background-color: blue;
+                    height: 40px;
+                    width: 40px;
+                    display: inline-block;
+               }
+            .sushi {
+                    background-color: black;
+                    height: 40px;
+                    width: 40px;
+                    display: inline-block;
+                    background-image: url('sushi.png');
+                    background-size: contain
+               }
+            .onigiri {
+                    background-color: black;
+                    height: 40px;
+                    width: 40px;
+                    display: inline-block;
+                    background-image: url('onigiri.png');
+                    background-size: contain
+               }
+            .blank {
+                    background-color: black;
+                    height: 40px;
+                    width: 40px;
+                    display: inline-block;
+               }
+            #ninjaman {
+                    background-color: black;
+                    height: 40px;
+                    width: 40px;
+                    display: inline-block;
+                    background-image: url('ninja.gif');
+                    background-size: contain;
+                    position: absolute;
+                    left: 80px;
+                    top: 160px;
+               }
+            #bluey {
+                    background-color: black;
+                    height: 40px;
+                    width: 40px;
+                    display: inline-block;
+                    background-image: url('bluey.gif');
+                    background-size: contain;
+                    position: absolute;
+                    left: 80px;
+                    top: 160px;
+               }
+            #pinky {
+                    background-color: black;
+                    height: 40px;
+                    width: 40px;
+                    display: inline-block;
+                    background-image: url('bluey.gif');
+                    background-size: contain;
+                    position: absolute;
+                    left: 80px;
+                    top: 160px;
+               }
+            #pumpky {
+                    background-color: black;
+                    height: 40px;
+                    width: 40px;
+                    display: inline-block;
+                    background-image: url('bluey.gif');
+                    background-size: contain;
+                    position: absolute;
+                    left: 80px;
+                    top: 160px;
+               }
+            #red {
+                    background-color: black;
+                    height: 40px;
+                    width: 40px;
+                    display: inline-block;
+                    background-image: url('red.gif');
+                    background-size: contain;
+                    position: absolute;
+                    left: 80px;
+                    top: 160px;
+               }
+            #scaredy {
+                    background-color: black;
+                    height: 40px;
+                    width: 40px;
+                    display: inline-block;
+                    background-image: url('scaredy.png');
+                    background-size: contain;
+                    position: absolute;
+                    left: 80px;
+                    top: 160px;
+               }
+            
+            
+
+            </style>
+    </head>
+    <body>
+        <div id = 'world'> 
+            
+        </div>
+        <div id="ninjaman"></div>
+        <div id="bluey"></div>
+        <div id="red"></div>
+        <div id="scaredy"></div>
+    </body>
+    <script type="text/javascript">
+    var score = 0;
+    var evilMove = 1;
+        
+    var yValue = Math.round(Math.random()*25);
+    var xValue = Math.round(Math.random()*25);
+        if(xValue < 10){
+            xValue += 10-xValue
+        }
+        if(yValue < 15){
+            yValue += 15-yValue
+        }
+
+    var world =[];
+        for(i=0; i<yValue;i++){
+            var set = [];
+            for(x=0; x<xValue;x++){
+                set.push(Math.round(Math.random()*3));
+            }
+            world.push(set);
+        }
+        
+    
+    var worldDict = {
+        0: 'blank',
+        1: 'wall',
+        2: 'sushi',
+        3: 'onigiri'
+    }
+    
+        
+    function drawWorld(){
+        var score = 0;
+        output = "";
+        
+        for(var row=0; row<world.length; row++)
+        {
+            output+="<div class = 'row'>"
+            
+            for(var x = 0; x<world[row].length; x++){
+                var structure = worldDict[world[row][x]] //iterating through world
+                output+="<div class = "+structure+"></div>"
+            }
+            
+            output+="</div>"
+        }
+
+        
+        document.getElementById('world').innerHTML = output;
+    
+    }
+    
+        drawWorld();
+    
+    var ninjaman = {
+        x: 1,
+        y: 1
+    }
+    var monsters = {
+        x: xValue,
+        y: yValue
+    }
+            
+    function drawMonsters(){
+        if(evilMove == 1){
+                evilMove = 1
+            }
+            else {
+                evilMove = 1
+            }
+        if(evilMove == 1){
+            if(ninjaman.x > monsters.x){
+                monsters.x++;
+            }
+            else{
+                monsters.x--;
+            }
+            if(ninjaman.y > monsters.y){
+                monsters.y++;
+            }
+            else{
+                monsters.y--;
+            }
+        }
+    }
+    
+    function drawNinjaMan(){
+        document.getElementById('ninjaman').style.left = ninjaman.x * 40 +"px";
+        document.getElementById('ninjaman').style.top = ninjaman.y * 40 +"px"
+        document.getElementById('bluey').style.left = (monsters.x-1) * 40 +"px";
+        document.getElementById('bluey').style.top = (monsters.y-1) * 40 +"px"
+        document.getElementById('red').style.left = (xValue-monsters.x) * 40 +"px";
+        document.getElementById('red').style.top = (-1+monsters.y) * 40 +"px"
+        document.getElementById('scaredy').style.left = (-1+monsters.x) * 40 +"px";
+        document.getElementById('scaredy').style.top = (yValue-monsters.y) * 40 +"px"
+
+    }
+        drawNinjaMan();
+    
+        
+        
+    document.onkeydown = function(e){
+        //console.log(e);
+        
+        if(e.keyCode == 37){
+            if(world[ninjaman.y][ninjaman.x-1] != 1 && ninjaman.x != 0){
+                drawMonsters();
+                ninjaman.x--;
+            }
+        }
+        if(e.keyCode == 38){
+            if(world[ninjaman.y-1][ninjaman.x] != 1 && ninjaman.y != 0){
+                drawMonsters();
+                ninjaman.y--;
+            
+            }
+        }
+        if(e.keyCode == 39){
+            if(world[ninjaman.y][ninjaman.x+1] != 1){
+                drawMonsters();
+                ninjaman.x++;
+            }
+        }
+        if(e.keyCode == 40){
+            if(world[ninjaman.y+1][ninjaman.x] != 1){
+                drawMonsters();
+                ninjaman.y++;
+            }
+        }
+                
+        if(world[ninjaman.y][ninjaman.x] == 2){
+            score +=10;
+        }
+        else if (world[ninjaman.y][ninjaman.x] == 3){
+            score +=5
+        }
+        console.log(score);
+        world[ninjaman.y][ninjaman.x] = 0;
+        drawNinjaMan();
+        drawWorld();
+//        console.log("ninja: ",ninjaman.y, ninjaman.x);
+//        console.log("m1: ",monsters.y,monsters.x);
+//        console.log("m2: ",(-1+monsters.y),(xValue-monsters.x));        
+//        
+    }
+    
+    
+    
+        //**going down
+        //**keep score sushi = 10 pt onigiri = 5pts
+        //**random world 
+        // create ghosts that chase ninjaman
+        
+        //
+        
+    </script>
+</html>

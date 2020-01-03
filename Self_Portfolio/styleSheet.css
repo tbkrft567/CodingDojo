@@ -1,0 +1,26 @@
+body{
+    outline: 1px solid fuchsia;
+    background-color: green;
+}
+
+img{
+    width: 300px;
+    height: 350px;
+    
+
+}
+
+/* img:nth-child(1){
+    display: absolute;
+    top: 0px;
+    left: 0px;
+} */
+
+img:nth-child(1){
+    border: 5px solid pink;
+    margin-left: 0px;
+    margin-top: 0px;
+}
+img:hover:nth-child(1){
+    /* opacity: .5; */
+}

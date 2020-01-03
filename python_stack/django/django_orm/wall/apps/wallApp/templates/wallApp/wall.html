@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>The Wall</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <style>
+            .wrapper {
+                margin: 15px;
+            }
+            h1{
+                margin-bottom: 25px;
+            }
+    
+            .makeNote {
+                display: inline-block;
+                vertical-align: top;
+                margin-right: 20px
+            }
+    
+            .submitBtn {
+                display: block;
+                width: 375px;
+            }
+    
+            .messageBoard {
+                padding: 5px;
+                /* border: 4px solid grey; */
+                width: 500px;
+                display: inline-block;
+                border-radius: 3px;
+            }
+    
+            .theMessage {
+                margin-left: 15px;
+                margin-bottom: 25px;
+                font-size: 20px;
+            }
+            .theComment{
+                display: inline-block;
+                margin-right: 25px;
+            }
+            .deleteComment{
+                display: inline-block;
+                font-size: 10px;
+                vertical-align: middle;
+    
+            }
+            .commentBtn{
+                margin-bottom: 15px;
+            }
+            .newComment{
+                margin-top: 30px;
+            }
+            .threadComment {
+                margin-left: 50px;
+            }
+        </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <a href="/logout">Log Out</a>
+        <h1>Welcome to the Wall, {{ user.firstName }}!</h1>
+        <div class="makeNote">
+            <form action="/makeNote" method="POST">
+                {% csrf_token %}
+                <textarea name="note" cols="45" rows="8"></textarea>
+                <input type="submit" class="submitBtn" value="Post">
+            </form>
+        </div>
+        <div class="messageBoard">
+            {% for noteObject in noteObjects %}
+                <h5>{{ noteObject.user_id.firstName }} -- <span class="createDate">{{noteObject.created_at}}</span></h5>
+                <p class="theMessage">{{ noteObject.note }}</p>
+
+            <div class="threadComment">
+
+                {% for commentObject in commentObjects %}
+                {% if commentObject.note_id.id == noteObject.id %}
+                    <form action="/deleteComment/{{ commentObject.id }}">
+                            <h6 class="theComment">{{ commentObject.user_id.firstName }} -- <span
+                                class="createDate">{{commentObject.created_at}}</span></h6>
+                            {% if user.id == commentObject.user_id.id %}
+                                <input class="deleteComment" type="submit" value="Delete">
+                            {% endif %}
+                            <p >{{ commentObject.comment }}</p>
+                    </form>
+                {% endif %}
+                {% endfor %}
+                <p class="newComment">Post a Comment</p>
+                <form action="/makeComment/{{ noteObject.id }}" method="POST">
+                    {% csrf_token %}
+                    <textarea name="comment" cols="45" rows="2"></textarea>
+                    <input type="submit" class="commentBtn" value="Post a Comment">
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

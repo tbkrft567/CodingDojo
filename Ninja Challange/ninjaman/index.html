@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ninja Man Game</title>
+    <style type="text/css">    
+*{
+    padding: 0;
+    margin: 0;
+        }
+.rows{
+    line-height: 0;
+        }
+.walls{
+        height: 40px;
+        width: 40px;
+        background-color: blue;
+        display: inline-block;
+        }
+.blank{
+        height: 40px;
+        width: 40px;
+        background-size: contain;
+        background-color: black;
+        display: inline-block;
+        }
+.sushi{
+        height: 40px;
+        width: 40px;
+        background-image: url('sushi.png');
+        background-size: contain;
+        background-color: black;
+        display: inline-block;
+        }
+.onigiri{
+        height: 40px;
+        width: 40px;
+        background-image: url('onigiri.png');
+        background-size: contain;
+        background-color: black;
+        display: inline-block;
+        }
+#ninjaman{
+        height: 40px;
+        width: 40px;
+        position: absolute;
+        left: 80px;
+        top: 160px;
+        background-image: url('ninja.gif');
+        background-size: contain;
+        background-color: black;
+        display: inline-block;
+        }
+#bluey{
+        height: 40px;
+        width: 40px;
+        position: absolute;
+        left: 0px;
+        top: 160px;
+        background-image: url('bluey.gif');
+        background-size: contain;
+        background-color: black;
+        display: inline-block;
+        }
+#pinky{
+        height: 40px;
+        width: 40px;
+        position: absolute;
+        left: 40px;
+        top: 160px;
+        background-image: url('pinky.gif');
+        background-size: contain;
+        background-color: black;
+        display: inline-block;
+        }
+#pumpky{
+        height: 40px;
+        width: 40px;
+        position: absolute;
+        left: 120px;
+        top: 160px;
+        background-image: url('pumpky.gif');
+        background-size: contain;
+        background-color: black;
+        display: inline-block;
+        }
+#red{
+        height: 40px;
+        width: 40px;
+        position: absolute;
+        left: 160px;
+        top: 160px;
+        background-image: url('red.gif');
+        background-size: contain;
+        background-color: black;
+        display: inline-block;
+        }
+#scaredy{
+        height: 40px;
+        width: 40px;
+        position: absolute;
+        left:200px;
+        top: 160px;
+        background-image: url('scaredy.png');
+        background-size: contain;
+        background-color: black;
+        display: inline-block;
+        }
+
+    </style>
+
+</head>
+    
+<body>
+    <div id="world">
+
+    </div>
+    
+<div id="ninjaman"></div>
+
+<div id="bluey"></div>
+<!--
+<div id="pinky"></div>
+<div id="pumpky"></div>
+<div id="red"></div>
+<div id="scaredy"></div>
+-->
+ </body>
+<script type="text/javascript">
+var score = 0;
+var world = []
+var rows = 5 //Math.round(Math.random()*20);
+var columns = 5 //Math.round(Math.random()*20);
+
+for(var row=0;row<rows+1; row++){
+    set=[]
+        for(var column=0;column<columns+1;column++){
+            var value =Math.round(Math.random()*3);
+            set.push(value);
+        }
+    world.push(set);
+}
+    
+var spotDict={
+    0:'blank',
+    1:'walls',
+    2:'sushi',
+    3:'onigiri'
+}
+
+var ninjaman= {
+    x: 1,
+    y: 1
+}
+
+var monsterDict = {
+    0: 'bluey',
+    1: 'pinky',
+    2: 'pumpky',
+    3: 'red',
+    4: 'scaredy'
+}
+
+var monsters = [
+    [5,5], //monsterDict[0] = 'bluey'
+    //[0,20], //monsterDict[1] = 'pinky'
+    //[20,0], //monsterDict[2] = 'pumpky'
+    //[15,5], //monsterDict[3] = 'red'
+    //[5,15]  //monsterDict[4] = 'scaredy'
+]
+
+/*
+create function to dynamically change ...style.left // style.top rather than if statement
+*/
+
+function drawMonsters(){
+    for(var i=0;i<monsters.length;i++){
+        for(var x=0;x<2;x++){
+            if(x==0){
+                document.getElementById(monsterDict[i]).style.top = monsters[i][x] * 40 + "px";
+            }
+            else{
+                document.getElementById(monsterDict[i]).style.left = monsters[i][x] * 40 + "px";
+            }
+        }
+    }
+}
+drawMonsters()
+
+function drawNinjaman(){
+    document.getElementById('ninjaman').style.left = ninjaman.x * 40 + "px";
+    document.getElementById('ninjaman').style.top = ninjaman.y * 40 + "px";
+}
+drawNinjaman()
+    
+function drawWorld(){
+    output=""
+    for(var i=0; i<world.length; i++){
+        output += "<div class='rows'>"
+        for(var x=0; x<world[i].length; x++){
+            output += "<div class="+ spotDict[world[i][x]] +"></div>"
+        }
+        output += "</div>"
+    }
+     document.getElementById('world').innerHTML = output;
+    world[ninjaman.y][ninjaman.x] = 0;
+}
+    drawWorld();
+    
+function addScore(){
+    if(world[ninjaman.y][ninjaman.x] == 2){
+        score = score+10
+    }
+    if(world[ninjaman.y][ninjaman.x] == 3){
+        score = score+5
+    }
+}
+
+var directionSigns={
+    37: 'Left',
+    38: 'Up',
+    39: 'Right',
+    40: 'Down'
+}
+
+var signMoveDict = {
+    0: -1,
+    1: 1
+}
+
+
+    
+function planMoveMonsters(){
+            var moveSetY = [];
+            var moveSetX = [];
+
+        for(var i=0;i<100;i++){ // 100 ATTEMPTS TO FIND PACMAN
+            var coordMove = 0; //0 = Y  --- 1 = X -------------- Y = UP/DOWN; X = LEFT/RIGHT
+            var signMove = 0; //POSITIVE OR NEGATIVE
+            var directionTry=[];
+            var signTry=[];
+//==========================================================================
+            if(moveSetY.length == 0 && moveSetX.length == 0 ){    //FIRST TRY BEGINS HERE***
+                //determine priority -- coordMove: 0 = Y ;; signMove: 0 = (-)
+                
+                //WHERE IS THE MONSTER IN RELATION TO PACMAN? Y THEN X...
+                //IF STATEMENTS BELOW ARE TO DETERMINE THE MONSTERS MOVE PRIORITY UP/DOWN OR LEFT/RIGHT
+                if(Math.abs(ninjaman.y-monsters[0][0])>=Math.abs(ninjaman.x-monsters[0][1])){ //IF Y-DIFF IS GREATER THAN X-DIFF (DISTANCE BETWEEN PACMAN AND MONSTER)
+                    coordMove = 0; //PRIORITY IS Y (0=Y)
+                    if(ninjaman.y-monsters[0][0]<0){ //DIFF IN THE POSITIVE OR NEGATIVE DIRECTION
+                        signMove = 0;
+                    }
+                    else{
+                        signMove = 1;
+                    }
+                }
+                else{
+                    coordMove = 1;
+                    if(ninjaman.x-monsters[0][1]<0){
+                        signMove = 0;
+                    }
+                    else{
+                        signMove = 1;
+                    }
+                }
+                directionTry.push(coordMove); 
+                signTry.push(signMove);
+
+
+                    //ITERATE THROUGH NEXT POSSIBLE MOVES
+                    for(var x=0;x<3;x++){
+                        if(directionTry[0]==0){ //IF PRIORITY IS IN THE Y DIRECTION
+                            directionTry.push(((x+1)%2)) //F(0)=1; F(1)=0; etc. 
+                            signTry.push((((directionTry[x])+3+(signTry[x]+3)%2)+1)%2) //F(0)=??
+                            }
+
+                        else{
+                            directionTry.push((x%2))//F(0)=0; F(1)=1; etc.
+                            signTry.push((((directionTry[x])+3+(signTry[x]+3)%2)+1)%2)
+                        }
+                    }
+
+                //replace array[0] for direction with X*2
+                    var replaceFirst = [directionTry[0]*2, directionTry[1]*2, directionTry[2]*2, directionTry[3]*2]
+                    directionTry = []
+            directionTry.push(replaceFirst[0],replaceFirst[1],replaceFirst[2],replaceFirst[3])
+
+                //loop through monster's *planned move tries*
+                    for(var x=0;x<4;x++){
+
+                            if(directionTry[x]+signTry[x] == 0){
+                                if(monsters[0][0] != 0){ //Check Border
+                                    console.log(world[monsters[0][0]-1][monsters[0][1]])
+                                    if(world[monsters[0][0]-1][monsters[0][1]] != 1){
+                                        moveSetY.push(monsters[0][0]-1)
+                                        moveSetX.push(monsters[0][1])
+                                        console.log('up')
+                                        break;
+                                    }
+                                }
+                            } 
+                            else if(directionTry[x]+signTry[x] == 1){
+                                if(monsters[0][0] != rows){//Check Border
+                                    if(world[monsters[0][0]+1][monsters[0][1]] != 1){
+                                        moveSetY.push(monsters[0][0]+1)
+                                        moveSetX.push(monsters[0][1])
+                                        console.log('down')
+                                        break;
+                                    }
+                                }
+                            }
+                            else if(directionTry[x]+signTry[x] == 2){
+                                if(monsters[0][1] != 0){//Check Border
+                                    if(world[monsters[0][0]][monsters[0][1]-1] != 1){
+                                        moveSetY.push(monsters[0][0])
+                                        moveSetX.push(monsters[0][1]-1)
+                                        console.log('left')
+                                        break;
+                                    }
+                                }
+                            }
+                            else if(directionTry[x]+signTry[x] == 3){
+                                if(monsters[0][1] != columns){//Check Border
+                                    if(world[monsters[0][0]][monsters[0][1]+1] != 1){
+                                        moveSetY.push(monsters[0][0])
+                                        moveSetX.push(monsters[0][1]+1)
+                                        console.log('right')
+                                        break;
+                                    }
+                                }
+                        }
+                    }
+                }
+//==========================================================================
+            else if(moveSetY.length == 1 && moveSetX.length == 1 ){
+                    //determine priority
+            if(Math.abs(ninjaman.y-moveSetY[0])>=Math.abs(ninjaman.x-moveSetX[0])){
+                coordMove = 0;
+                if(ninjaman.y-moveSetY[0]<0){
+                    signMove = 0;
+                }
+                else{
+                    signMove = 1;
+                }
+            }
+            else{
+                coordMove = 1;
+                if(ninjaman.x-moveSetX[0]<0){
+                    signMove = 0;
+                }
+                else{
+                    signMove = 1;
+                }
+            }
+            directionTry.push(coordMove);
+            signTry.push(signMove);
+
+                for(var x=0;x<3;x++){
+                    if(directionTry[0]==0){
+                        directionTry.push(((x+1)%2))
+                        signTry.push((((directionTry[x])+3+(signTry[x]+3)%2)+1)%2)
+                        }
+                    
+                    else{
+                        directionTry.push((x%2))
+                        signTry.push((((directionTry[x])+3+(signTry[x]+3)%2)+1)%2)
+                    }
+                }
+            
+            //replace array[0] for direction with X*2
+                var replaceFirst = [directionTry[0]*2, directionTry[1]*2, directionTry[2]*2, directionTry[3]*2]
+                directionTry = []
+            directionTry.push(replaceFirst[0],replaceFirst[1],replaceFirst[2],replaceFirst[3])
+            
+            //loop through monoster's moves
+                for(var x=0;x<4;x++){
+
+                        if(directionTry[x]+signTry[x] == 0){
+                            if(moveSetY[0] != 0){ //Check Border
+                                if(world[moveSetY[0]-1][moveSetX[0]] != 1 && moveSetY[0]-1 != monsters[0][0]){
+                                    moveSetY.push(moveSetY[0]-1)
+                                    moveSetX.push(moveSetX[0])
+                                    console.log('up')
+                                    break;
+                                }
+                            }
+                        } 
+                        else if(directionTry[x]+signTry[x] == 1){
+                            if(moveSetY[0] != rows){//Check Border
+                                if(world[moveSetY[0]+1][moveSetX[0]] != 1 && moveSetY[0]+1 != monsters[0][0]){
+                                    moveSetY.push(moveSetY[0]+1)
+                                    moveSetX.push(moveSetX[0])
+                                    console.log('down')
+                                    break;
+                                }
+                            }
+                        }
+                        else if(directionTry[x]+signTry[x] == 2){
+                            if(moveSetX[0] != 0){//Check Border
+                                if(world[moveSetY[0]][moveSetX[0]-1] != 1 && moveSetX[0]-1 != monsters[0][1]){
+                                    moveSetY.push(moveSetY[0])
+                                    moveSetX.push(moveSetX[0]-1)
+                                    console.log('left')
+                                    break;
+                                }
+                            }
+                        }
+                        else if(directionTry[x]+signTry[x] == 3){
+                            if(moveSetX[0] != columns){//Check Border
+                                if(world[moveSetY[0]][moveSetX[0]+1] != 1 && moveSetX[0]+1 != monsters[0][1]){
+                                    moveSetY.push(moveSetY[0])
+                                    moveSetX.push(moveSetX[0]+1)
+                                    console.log('right')
+                                    break;
+                                }
+                            }
+                    }
+                } 
+//==========================================================================
+            }
+            else if(moveSetY.length > 1 && moveSetX.length > 1){
+                    //determine priority
+            if(Math.abs(ninjaman.y-moveSetY[i-1])>=Math.abs(ninjaman.x-moveSetX[i-1])){
+                coordMove = 0;
+                if(ninjaman.y-moveSetY[i-1]<0){
+                    signMove = 0;
+                }
+                else{
+                    signMove = 1;
+                }
+            }
+            else{
+                coordMove = 1;
+                if(ninjaman.x-moveSetX[i-1]<0){
+                    signMove = 0;
+                }
+                else{
+                    signMove = 1;
+                }
+            }
+            directionTry.push(coordMove);
+            signTry.push(signMove);
+
+                for(var x=0;x<3;x++){
+                    if(directionTry[0]==0){
+                        directionTry.push(((x+1)%2))
+                        signTry.push((((directionTry[x])+3+(signTry[x]+3)%2)+1)%2)
+                        }
+                    
+                    else{
+                        directionTry.push((x%2))
+                        signTry.push((((directionTry[x])+3+(signTry[x]+3)%2)+1)%2)
+                    }
+                }
+            
+            //replace array[0] for direction with X*2
+                var replaceFirst = [directionTry[0]*2, directionTry[1]*2, directionTry[2]*2, directionTry[3]*2]
+                directionTry = []
+            directionTry.push(replaceFirst[0],replaceFirst[1],replaceFirst[2],replaceFirst[3])
+            
+            //loop through monoster's moves
+                for(var x=0;x<4;x++){
+
+                        if(directionTry[x]+signTry[x] == 0){
+                            if(moveSetY[i-1] != 0){ //Check Border
+                                if(world[moveSetY[i-1]-1][moveSetX[i-1]] != 1 && moveSetY[i-1]-1 != moveSetY[i-2]){
+                                    moveSetY.push(moveSetY[i-1]-1)
+                                    moveSetX.push(moveSetX[i-1])
+                                    console.log('up')
+                                    break;
+                                }
+                            }
+                        } 
+                        else if(directionTry[x]+signTry[x] == 1){
+                            if(moveSetY[i-1] != rows){//Check Border
+                                if(world[moveSetY[i-1]+1][moveSetX[i-1]] != 1 && moveSetY[i-1]+1 != moveSetY[i-2]){
+                                    moveSetY.push(moveSetY[i-1]+1)
+                                    moveSetX.push(moveSetX[i-1])
+                                    console.log('down')
+                                    break;
+                                }
+                            }
+                        }
+                        else if(directionTry[x]+signTry[x] == 2){
+                            if(moveSetX[i-1] != 0){//Check Border
+                                if(world[moveSetY[i-1]][moveSetX[i-1]-1] != 1 && moveSetX[i-1]-1 != moveSetX[i-2]){
+                                    moveSetY.push(moveSetY[i-1])
+                                    moveSetX.push(moveSetX[i-1]-1)
+                                    console.log('left')
+                                    break;
+                                }
+                            }
+                        }
+                        else if(directionTry[x]+signTry[x] == 3){
+                            if(moveSetX[i-1] != columns){//Check Border
+                                if(world[moveSetY[i-1]][moveSetX[i-1]+1] != 1 && moveSetX[i-1]+1 != moveSetX[i-2]){
+                                    moveSetY.push(moveSetY[i-1])
+                                    moveSetX.push(moveSetX[i-1]+1)
+                                    console.log('right')
+                                    break;
+                                }
+                            }
+                    }
+                }                     
+            
+            }
+            if(ninjaman.y == moveSetY[moveSetY.length-1] && ninjaman.x == moveSetX[moveSetX.length-1]){
+                console.log('Ninja Found')
+                console.log(moveSetX, moveSetY)
+                break;
+            }
+        }
+    drawMonsters()
+}
+    planMoveMonsters();
+    
+    
+    document.onkeydown = function(e){
+    if(e.keyCode == 37 && world[ninjaman.y][ninjaman.x-1] != 1 && ninjaman.x-1 >= 0){
+        ninjaman.x--;
+    }
+    if(e.keyCode == 38 && world[ninjaman.y-1][ninjaman.x] != 1 && ninjaman.y-1 >= 0){
+        ninjaman.y--;
+    }
+    if(e.keyCode == 39 && world[ninjaman.y][ninjaman.x+1] != 1 && ninjaman.x+1 <= columns){
+        ninjaman.x++;
+    }
+    if(e.keyCode == 40 && world[ninjaman.y+1][ninjaman.x] != 1 && ninjaman.y+1 <= rows){
+        ninjaman.y++;
+    }
+    drawNinjaman();
+    addScore();
+    //console.log(score);
+    drawWorld();
+    moveMonsters();
+
+//    console.log(world, ninjaman.y, ninjaman.x)
+//    console.log(world[ninjaman.y][ninjaman.x]);
+//    console.log(spotDict[world[ninjaman.y][ninjaman.x]]);
+    
+    
+    
+}    
+</script>
+    
+    
+</html>
+
+<!--/*
+Map
+Characters
+Movement
+Score
+Lives
+*/-->
+
+

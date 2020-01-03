@@ -1,0 +1,86 @@
+  belongs_to :user
+  belongs_to :secret
+
+  belongs_to :user
+  has_many :likes, dependent: :destroy
+  has_many :liked_by, through: :likes, source: :user
+
+  has_many :secrets
+  has_many :likes, dependent: :destroy
+  has_many :secrets_liked, through: :likes, source: :secret
+<% if Like.where(user: current_user).exists?(secret: secret) %>
+	See if the secret has been liked by the user
+<% if Secrect.liked_by.include?(current_user) %>
+
+link_to && button_to
+   <%= link_to "Edit", courses_edit_path(id: @course.id) %>
+   <%= link_to "Delete", courses_destroy_path(id: @course.id), method:"delete" %>
+   <%= link_to "Log Out", sesssions_destroy_path, method:"delete"%>
+   <%= link_to "Join", {controller: "attendances", action: "create", id: event.id }, method:"post" %>
+~ Course Manager
+<%= link_to "Add", signups_create_path(id: course.id), method:"post" %>
+<%= button_to "Update", courses_update_path, method:"patch", params: {id: @course.id} %>
+
+
+
+
+~~config/environments/development.rb
+  cache_classes = false
+  config.eager_load = false
+  config.consider_all_requests_local       = true
+  config.action_controller.perform_caching = false
+  config.action_mailer.raise_delivery_errors = false
+  config.active_support.deprecation = :log
+  config.active_record.migration_error = :page_load
+  config.assets.debug = true
+  config.assets.digest = true
+  config.assets.raise_runtime_errors = true
+
+~~config/environments/production.rb
+  config.log_level = :debug
+
+
+Questions:
+How to user  
+Private
+    def new_user
+	params.require(:user).permit(:name, :email, :password)
+    end
+
+difference between Register and Logging in
+	3 confusions (private function,params, and validations)
+	
+	Register: Validations, Private Function and Params
+		How to create a new user: 
+			1. Validate Data
+			2. Add User to Database
+			3. Log User in  
+		***How do I do password confirmation with Private Function; Why isn't Password_Confirmation not Permitted?
+	Logging In: Only Private Function or Params
+	     Check email against database
+		true: check password against database
+		    true: LOGIN
+		    false: ERROR && REDIRECT
+		false: ERROR && REDIRECT
+	    
+		When do each of them take place?
+	   **What should the code look like {
+			if 
+		}
+		
+	Logging Out:
+	     Reset Session
+		Do I use sessions/destroy or create new sessions/logout?
+
+Practice Patch/Delete
+
+ERROR: param is missing or the value is empty: user
+	if you have params.require[:user]. ...
+	then you need to wrap HTML input with user[...]	
+
+
+Notes:
+User.destroy_all in rails c
+new params = new_user
+def new_user
+    params.require private function

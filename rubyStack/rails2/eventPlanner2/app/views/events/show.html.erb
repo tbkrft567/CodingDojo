@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+      <h1><%= @event.name %></h1>
+      <%= link_to "Event Dashboard", events_index_path %>
+            <%= link_to 'Log Out', sessions_destroy_path, method:"delete" %>
+      <p>Host: <%= @event.user.first_name %> <%= @event.user.last_name %></p>
+      <p>Date: <%= @event.date %></p>
+      <p>Location:<%= @event.date %></p>
+      <p>People who are joining the event: <%= @event.attendances.count %></p>
+      <table class="table">
+         <tr>
+            <th>Name</th>
+            <th>Location</th>
+            <th>State</th>
+         </tr>
+      <% if @event.users_attending.count > 0 %>
+         <tr>
+            <% @event.users_attending.each do |user|  %>
+            <td><%= user.first_name %> <%= user.last_name %></td>
+            <td><%= user.location %></td>
+            <td><%= user.state %></td>
+            <% end %>
+         </tr>
+      <% end %>
+      </table>
+
+      <% if @comments %>
+      <h5>Event Comments</h5>
+         <% @comments.each do |comment| %>
+         <ul>
+            <%= comment.comment %> | 
+            <%= comment.user.first_name %>
+         </ul>   
+         <% end %>
+      <% end %>
+      <form action="/comments/create" method="post">
+         <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+         <textarea name="comment[comment]" cols="60" rows="2"></textarea>
+         <%= button_to "Submit Comments", comments_create_path, method:"POST", params: {id: @event.id} %>
+      </form>
+      <% if flash[:alert] %>
+      <h4>Notification</h4>
+      <ul>
+      <% flash[:alert].each do |error| %>
+            <li>
+               <%= error %>
+            </li>
+         <% end %>
+      </ul>   
+      <% end %>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>

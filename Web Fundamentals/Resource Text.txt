@@ -1,0 +1,43 @@
+**Jasmine File TDD (Unit Testing)
+C:\Users\Zach's PC\spec
+    Go to this directory on the computer 
+    and rename the file **spec.js
+
+**Changing NodeJs variable file, so I can using the terminal to run Node.Js as a debugger
+    system props
+    envir vari
+    nodejs
+
+
+**Git -- Commands https://github.com/tbkrft567/origin.git
+    git init
+    git remote add origin "url"
+    git add .
+    git commit -m "comment/subject"
+    git push origin master
+
+        git clone "url"
+        git pull origin master
+
+Framework Repository Hosted by google:
+https://developers.google.com/speed/libraries
+
+jQuery Options
+https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js hosted jQuery library
+https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.js Non-Minified
+https://jquery.com/
+
+jQuery Extras:
+
+Cool jQuery Plugins
+    Below are some cool jQuery Plugins you can get familiar with.
+    It's important to only spend up to 30 minutes reviewing the tools below. You can always come back and learn more about these tools when you need them. We basically don't want you to spend too much time looking into these tools as there are lots of things we want to cover next.
+Tablesorter
+    A jQuery Plugin that allows you to sort table data. It's an awesome tool!
+    https://mottie.github.io/tablesorter/docs/
+Tipped
+    Tipped allows you to easily create beautiful tooltips using the jQuery Javascript library.
+    http://projects.nickstakenburg.com/tipped
+Tipsy
+    Another tooltip plugin that imitates the Facebook tooltip using CSS and jQuery.
+    https://github.com/jaz303/tipsy

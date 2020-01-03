@@ -1,0 +1,20 @@
+Building Model
+    password:digest - for passwords
+
+rails g model User first_name:string last_name:string email:string location:string state:string password:digest
+rails g model Event name:string date:date location:string state:string user:references [#CreatedBy]
+rails g model Attendance user:references event:references ##Many to Many table
+rails g model Comment comment:string user:references event:references ##Many to Many table
+
+rails g controller Users [index new create edit update destroy]
+rails g controller Sessions [create destroy]
+rails g controller Events [index new create edit show update destroy]
+rails g controller Comments [create]
+
+Complete relationships [**Need Practice**]
+
+<%= link_to "Edit", events_edit_path(id: event.id) %> <%= link_to "Delete", events_destroy_path(id: event.id), method:delete %>
+<%= link_to "Join", Attendances_Create_path, method:post, params {id: event.id } %><%= link_to "Cancel", Attendances_destroy_path(id: event.id), method:delete %>
+
+
+~~generic create - instance_variable_get; class_variable_get; To build dynamically generating create/destroy functions

@@ -1,0 +1,15 @@
+.header{
+    width: 100%;
+    height: 100px;
+    background-color: grey;
+}
+.content{
+    width: 100%;
+    height: 300px;
+    background-color: beige;
+}
+.properties{
+    width: 100%;
+    height: 100px;
+    background-color: honeydew;
+}

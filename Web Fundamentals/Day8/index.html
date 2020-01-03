@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Pac-Man Demo</title>
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+            background-color: black;
+        }
+        .world{
+            line-height: 0;
+        }
+        div.row div{
+            width: 20px;
+            height: 20px;
+            line-height: 0;
+            /* display:inline-block; */
+        }
+        div.brick{
+            background-color:blue;
+            display: inline-block;
+        }
+        .pacman{
+            /* background-image: url('images/coin.png'); */
+            background-image: url('images/pacman.png');
+            width: 20px;
+            height: 20px;
+            /* display: inline-block; */
+            position: absolute;
+            top: 20px;
+            left:20px;
+        }
+        
+        div .coins{
+            background-image: url('images/coin.png');
+            display: inline-block;
+        }
+        
+    </style>
+</head>
+<body>
+<div id="world"></div>
+<div class="pacman"></div>
+
+
+<script>
+    // // list of features to build
+    // // 1. Have Js display the world of brick/Coins
+
+    var world = [
+        [2,2,2,2,2,2,2,2,2,2],
+        [2,1,2,1,1,1,1,1,1,2],
+        [2,1,2,1,2,2,2,2,1,2],
+        [2,1,1,1,2,1,1,1,1,2],
+        [2,2,2,2,2,1,2,2,2,2],
+        [2,1,1,1,1,1,1,1,1,2],
+        [2,2,2,2,2,2,2,2,2,2]
+    ]
+
+    var terrain = {
+        1: "coins",
+        2: "brick"
+    }
+
+    var pacManPosition = {
+
+    }
+    function drawWorld(){
+        var content = "";
+        for(var y=0;y<world.length;y++){
+            content += "\n<div class='row'>"
+            for(var x=0; x<world[y].length;x++){
+                content+="<div class='"+terrain[world[y][x]]+"'></div>"
+            }  
+            content+="\n</div>";
+        }
+        console.log(content);
+        document.getElementById('world').innerHTML = content;
+    }
+    drawWorld();
+
+</script>
+    
+</body>
+</html>
+
+
+

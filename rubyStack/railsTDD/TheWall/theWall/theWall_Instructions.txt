@@ -1,0 +1,28 @@
+Model Tests
+**User
+Username field: must be required, must be unique, must be longer than 5 characters
+
+**Message
+Message field: must be required, must be longer than 10 characters
+User Reference field: must be required
+
+Feature Tests
+**Register User
+   If created successfully
+      Current path should equal messages_path (messages#index)
+      Current page should contain "Welcome #{testusername}"
+   If not created successfully
+      Current path should equal new_user_path (users#new)
+      Current page should contain error messages (create test for each error)
+**Create Message
+   If created successfully
+      Current path should equal messages_path (messages#index)
+      Current page should contain message you just created
+   If not created successfully
+      Current path should equal messages_path (messages#index)
+      Current page should contain error messages (create a test for each error except user reference required).
+**Log Out
+   messages_path (messages#index) page should contain Log Out button
+   Current path should equal new_user_path (users#new) after clicking log out button
+
+

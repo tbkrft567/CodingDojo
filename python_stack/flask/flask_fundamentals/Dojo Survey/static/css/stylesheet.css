@@ -1,0 +1,20 @@
+.wrapper {
+    width: 600px;
+    display: inline-block;
+}
+
+.p_style {
+    display: inline-block;
+    width: 350px;
+    padding: 0px;
+}
+
+div p {
+    width: 135px;
+    display: inline-block;
+    text-align: right;
+}
+
+input.button {
+    display: block;
+}

@@ -1,0 +1,43 @@
+pip list: list of installed packages, including editables
+
+deactivate: deactivates all the evironment being used
+
+pip3 list: there is not  difference between this and pip list of installed packages
+
+call myEnvironments/py3Env/Scripts/activate: deactivates the environment being used
+
+pip install Django==1.11.9: this installs Django
+
+pip freeze: before you can start deploying your application you first must freeze it's python package dependencies. 
+Freezing is a process where pip reads the versions of all installed packages in a local virtual environment and then produces a text
+file with the package version for each python package specified. By convention, it's named requirements.txt.
+
+pip install Django==1.11.9: installed the REST framework. This was the result.
+Collecting django==1.11.9
+  Downloading https://files.pythonhosted.org/packages/c8/a6/291039f0ce4b9818e0399359866337e6dfe9c0e23d8d94f00e657edbfcd8/Django-1.11.9-py2.py3-none-any.whl (6.9MB)
+     |████████████████████████████████| 7.0MB 1.7MB/s
+Collecting pytz
+  Downloading https://files.pythonhosted.org/packages/e7/f9/f0b53f88060247251bf481fa6ea62cd0d25bf1b11a87888e53ce5b7c8ad2/pytz-2019.3-py2.py3-none-any.whl (509kB)
+     |████████████████████████████████| 512kB 6.4MB/s
+Installing collected packages: pytz, django
+Successfully installed django-1.11.9 pytz-2019.3
+
+pip freeze: freeze my dependencies for deployment: -- I have the following dependencies
+Django==1.11.9
+pytz==2019.3
+
+
+pip uninstall django:
+Uninstalling Django-1.11.9:
+  Would remove:
+    c:\users\zach's pc\documents\important files\personal\computer coding\codingdojo\python_stack\my_environment\py3env\lib\site-packages\django-1.11.9.dist-info\*
+    c:\users\zach's pc\documents\important files\personal\computer coding\codingdojo\python_stack\my_environment\py3env\lib\site-packages\django\*
+    c:\users\zach's pc\documents\important files\personal\computer coding\codingdojo\python_stack\my_environment\py3env\scripts\django-admin.exe
+    c:\users\zach's pc\documents\important files\personal\computer coding\codingdojo\python_stack\my_environment\py3env\scripts\django-admin.py
+Proceed (y/n)? y
+  Successfully uninstalled Django-1.11.9
+
+  pip show django: Packages not found: django
+
+  pip search flask: presented the different packages of flask
+

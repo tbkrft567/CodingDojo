@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+    <body>
+    
+        <div id="ninjaMan" style="position: absolute; left:150px; top:150px; background-image: url('img/down1.png'); width: 59px; height: 86px"></div>    
+        
+    </body>
+    <script>
+            var ninjaManPosition = {
+                left: 150,
+                top: 150
+            }
+
+            let direction = 'down';
+            var directionCount = 1;
+            
+            function drawNinja(){
+                document.getElementById("ninjaMan").style.left = ninjaManPosition.left+"px";
+                document.getElementById("ninjaMan").style.top = ninjaManPosition.top+"px";
+                document.getElementById("ninjaMan").style.backgroundImage = "url('img/"+direction+directionCount+".png'";
+            }
+            
+            document.onkeydown = function(e){
+                if(e.keyCode == 37){
+                    ninjaManPosition.left-=10;
+                    direction = 'left';
+                    directionCount+=(directionCount%2)*1+Math.abs(directionCount%2-1)*-1; //ALTERNATE BETWEEN 1 && 2
+                }
+                if(e.keyCode == 38){
+                    ninjaManPosition.top-=10;
+                    direction = 'top';
+                    directionCount+=(directionCount%2)*1+Math.abs(directionCount%2-1)*-1; //ALTERNATE BETWEEN 1 && 2
+                }
+                if(e.keyCode == 39){
+                    ninjaManPosition.left+=10
+                    direction = 'right'
+                    directionCount+=(directionCount%2)*1+Math.abs(directionCount%2-1)*-1; //ALTERNATE BETWEEN 1 && 2
+                }
+                if(e.keyCode == 40){
+                    ninjaManPosition.top+=10
+                    direction = 'down'
+                    directionCount+=(directionCount%2)*1+Math.abs(directionCount%2-1)*-1; //ALTERNATE BETWEEN 1 && 2
+                }
+                drawNinja();
+            }
+        
+            
+    </script>
+
+<html>

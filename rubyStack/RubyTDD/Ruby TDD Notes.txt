@@ -1,0 +1,12 @@
+
+RSpec Method (Ruby Specs)
+Describe: 
+Context: Organizing Test
+IT: begin of the creation of the test
+Expect: line of code to test your prediction
+Before: Use this functions to prepare the reptitive code before the IT
+
+
+
+Testing the class
+

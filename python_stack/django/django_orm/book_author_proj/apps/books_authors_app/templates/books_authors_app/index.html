@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    {% if section == 'book' %}
+    <h1>Add a Book</h1>
+    <form action="/addbook" method="POST">
+        {% csrf_token %}
+        <p>Title</p>
+        <input type="text" name="bookTitle">
+        <p>Description</p>
+        <textarea name="bookDesc" cols="30" rows="10"></textarea>
+        <input type="submit" name="addBookBtn">
+    </form>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for bk in Book %}
+            <tr>
+                <td>{{ bk.id }} </td>
+                <td>{{ bk.title }}</td>
+                <td><a href="/bookDesc/{{ bk.id }}">View</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <h1>Add a Author</h1>
+    <form action="/addauthor" method="POST">
+        {% csrf_token %}
+        <p>First Name</p>
+        <input type="text" name="authFirst">
+        <p>Last Name</p>
+        <input type="text" name="authLast">
+        <p>Notes</p>
+        <textarea name="authNotes" cols="30" rows="10"></textarea>
+        <input type="submit" name="addAuthBtn">
+    </form>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for Ath in Author %}
+            <tr>
+                <td>{{ Ath.id }} </td>
+                <td>{{ Ath.first_name }} {{ Ath.last_name }}</td>
+                <td><a href="/authorDesc/{{ Ath.id }}">View</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

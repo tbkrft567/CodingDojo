@@ -1,0 +1,36 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+.navButton{
+    height: 100px;
+    /* outline: 2px solid fuchsia; */
+}
+@media only screen and (max-width:700px){
+    .navButton{
+        width: 24%;
+        background-color: green;
+        display: inline-block;
+    }
+}
+@media only screen and (min-width:701px){
+    .navButton{
+        width: 24%;
+        background-color: blue;
+        display: inline-block;
+    }
+}
+
+@media only screen and (min-width:1024px){
+    .navButton{
+        width: 24%;
+        background-color: red;
+        display: inline-block;
+    }
+}
+/* .navButton{
+    width: 300px;
+    height: 300px;
+    background-color: red;
+    display: inline-block;
+} */

@@ -1,0 +1,82 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    /* border: 2px solid yellowgreen; */
+}
+#mainPage{
+    background-color:navy;
+    width: 970px;
+    height: 700px;
+    padding: 15px;
+    margin: 0px auto;
+} 
+
+#heading{
+    background-color: maroon;
+    color: azure;
+    min-height: 100;
+    width: 970px;
+    height: 70px;
+    display: inline-block;
+    border-radius: 10px;
+}
+#headerText{
+    color: cornflowerblue;
+    margin: 15px 0px 0px 15px ;
+
+}
+#navigation{
+    background-color: teal;
+    min-height: 100;
+    width: 200px;
+    height: 200px;
+    margin: 15px 0px;
+    vertical-align: top;
+    display: inline-block;
+    border-radius: 20px;
+}
+#details{
+    background-color: black;
+    min-height: 200;
+    width: 750px;
+    height: 550px;
+    display: inline-block;
+    margin: 15px 0px 0px 15px;
+    border-radius: 25px;
+}
+#contact{
+    background-color: grey;
+    min-height: 100;
+    /* width: 670px; */
+    width: 955px;
+    height: 50px;
+    margin: 15px 0px;
+    border-radius: 15px;
+}
+span{
+    font-weight: bold;
+    color: blueviolet;
+}
+.home{
+    font-size: medium; 
+}
+#contactDetails{
+    padding: 17px 15px;
+    color: white;
+}
+#navigationDetails{
+    padding: 15px 15px;
+}
+
+ul{
+    margin-left: 0px; 
+    padding-left: 25px;
+    font-size: small;
+    color: white;
+}
+#detailHeader, p{
+    margin-left: 0px; 
+    padding-left: 20px;
+
+    color: white;
+}

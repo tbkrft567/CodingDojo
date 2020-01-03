@@ -1,0 +1,25 @@
+in the project file
+
+rails g model -- generate model 
+      Topkick name:string hero:reference {Relationships}
+      within Hero.rb add has_many :[name], dependent: :destroy 
+
+orm 
+
+
+*hero* table must be created first
+
+rails c -- to get into rails console
+
+Hirb.enable -- to make pretty
+rails new [projectName]
+validations created in models>[name].db {Validations}
+      validates :name, :superpower, :numPeopleSaved, presence: true
+
+create
+hero1 = Hero.new 
+
+variable.????.error_message
+
+
+***SELF_JOIN find the "Friendships" project

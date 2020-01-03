@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Dojos and Ninjas</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'dojo_app/css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron">
+        <div class="page_left">
+            <form action="/add_dojo" method="post">
+                {% csrf_token %}
+                <h3>Add A Dojo</h3>
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-2 col-form-label">Name</label>
+                        <div class="col-sm-10">
+                            <input type="" class="form-control" name="name" id="" placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="city" class="col-sm-2 col-form-label">City</label>
+                        <div class="col-sm-10">
+                            <input type="" class="form-control" name="city" id="" placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="state" class="col-sm-2 col-form-label">State</label>
+                        <div class="col-sm-10">
+                            <input type="" class="form-control" name="state" id="" placeholder="">
+                        </div>
+                    </div>
+                <button type="submit" class="btn btn-primary">Add</button>
+            </form>
+        </div>
+        <div class="page_right">
+            <form action="/add_ninja" method="post" >
+                {% csrf_token %}
+                <h3>Add A Ninja</h3>
+                    <div class="form-group row">
+                        <label for="first_name" class="col-md-4 col-form-label">First Name</label>
+                        <div class="col-sm-8">
+                            <input type="" class="form-control" name="first_name" id="" placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="last_name" class="col-md-4 col-form-label">Last Name</label>
+                        <div class="col-sm-8">
+                            <input type="" class="form-control" name="last_name" id="" placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="dojo" class="col-md-4 col-form-label">Dojo</label>
+                        <select name="dojo" class="col-sm-8">
+                            {% for dojo in all_the_dojos %}
+                                <option value="{{dojo.id}}">{{dojo.name}}</option>
+                            {% endfor %}
+                        </select><br><br>
+                    </div>
+                <button type="submit" class="btn btn-primary">Add</button>
+            </form>
+        </div>
+    </div>
+        <div class="page_bottom">
+            <h3>All The Dojos</h3>
+            <table class="table table-striped">
+                {% for dojo in all_the_dojos %}
+                <ul>Ninjas at the {{dojo.name}} <span>- Currently {{dojo.ninjas.count}} ninjas</span>
+                    {% for ninja in dojo.ninjas.all %}
+                    <li>{{ninja.first_name}} {{ninja.last_name}} <button type="button" class="btn btn-danger"><a href="/delete/{{ninja.id}}">Delete</a></button></li>
+                    {% endfor %}
+                </ul>
+                {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

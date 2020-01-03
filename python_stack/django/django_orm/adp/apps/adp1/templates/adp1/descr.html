@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    {% if section == 'athlete' %}
+    
+    <h1>{{ Athlete.first_name }} {{ Athlete.last_name }}</h1>
+    <p>ID {{ Athlete.id }}</p>
+    <p>Years Played: {{ Athlete.years_played }}</p>
+
+    <H3>Awards</H3>
+    
+    <ul>
+        {% for aw in Awards%}
+        <li>{{ aw.title }}</li>
+        {% endfor %}
+    </ul>
+
+    <form action="/awardAppend/{{ Athlete.id }}" method="POST">
+        {% csrf_token %}
+        <select name="addAward">
+            {% for aw in addAwards%}
+            <option value="{{ aw.id }}">{{ aw.title }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Add">
+    </form>
+
+
+    {% else %}
+
+
+    <h1>{{ Award.title }}</h1>
+    <p>ID {{ Award.id }}</p>
+    <p>Description: {{ Award.description }}</p>
+
+    <H3>Athletes</H3>
+    <ul>
+        {% for a in Athletes%}
+        <li>{{ a.first_name }} {{ a.last_name }}</li>
+        {% endfor %}
+    </ul>
+
+    <form action="/athleteAppend/{{ Award.id }}" method='POST'>
+        {% csrf_token %}
+        <select name="addAthlete">
+            {% for a in addAthletes%}
+            <option value="{{ a.id }}">{{ a.first_name }} {{ a.last_name }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Add">
+    </form>
+    {% endif %}
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
