@@ -1,5 +1,0 @@
-var tigger = { character: "Tigger",   // Tigger lives here
-              north: { character: "Winnie the Pooh", // To the north, we have the home object of Winnie the Pooh
-                      south: { character: "Tigger", // To the south of Pooh, we have the home object of Tigger
-                               north: { character: "Winnie the Pooh",  // To the north of Tigger, we have the home of
-                                        ...                            // Winnie the Pooh...  uh oh! We're stuck!    
