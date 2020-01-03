@@ -40,7 +40,7 @@ console.log(brendan);
 //    console.log(food);
 //    var food = 'gone';
 // }
-var food = 'chicken';
+var food = 'chickens';
 console.log("4. "+food);
 function eat() {
    food = 'half-chicken';
