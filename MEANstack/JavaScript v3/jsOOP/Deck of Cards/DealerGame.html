@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Document</title>
+</head>
+
+<body>
+   <script>
+      class Card {
+         constructor(suit, stringValue, numericValue) {
+            this.suit = suit
+            this.stringValue = stringValue
+            this.numericValue = numericValue
+            this.showCard = function () {
+               console.log(`${this.suit}; ${this.stringValue}; ${this.numericValue}`)
+            }
+         }
+      }
+      class Deck {
+         constructor() {
+            this.allCards = []
+            this.suits = ["Clubs", "Spades", "Hearts", "Diamonds"]
+            this.stringValue = ["Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"]
+            this.numericValue = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"]
+            this.addCard = function(){
+               for(var suit = 0; suit < this.suits.length; suit++){
+                  for(var value = 0; value < this.stringValue.length; value++){
+                     const card1 = new Card(this.suits[suit], this.stringValue[value], this.numericValue[value])
+                     this.allCards.push(card1)
+                  }
+               }
+            }
+            this.addCard()
+         }
+         shuffleCards(allCards){
+            for(var currentCardPosition = allCards.length-1; currentCardPosition > 0; currentCardPosition--){
+               var randomCardPosition = Math.floor(Math.random() * (currentCardPosition +1))
+               var temp = allCards[currentCardPosition]
+               allCards[currentCardPosition] = allCards[randomCardPosition]
+               allCards[randomCardPosition] = temp
+            }
+            this.allCards = allCards
+            return this.allCards
+         }
+         reset(){
+            this.allCards = []
+            this.addCard()
+         }
+         dealCards(allCards,numOfCardsDealt){
+            var playersHand = []
+            for(var cardsDealt = 0; cardsDealt < numOfCardsDealt; cardsDealt++){
+               var currentDeck = allCards.length-1
+               var card =  Math.floor(Math.random() * currentDeck)
+               playersHand.push(allCards[card])
+               allCards.splice(card,1)
+            }
+            return playersHand
+         }
+      }
+      class Player{
+         constructor(name, hand){
+            this.name = name
+            this.hand = hand
+         }
+         takeACard(dealersDeck, cardsDealt){
+            this.hand = this.hand.concat(dealersDeck.dealCards(dealersDeck.allCards, cardsDealt))
+         }
+         discardACard(hand){
+            hand.splice(0,1)
+            this.hand = hand
+         }
+
+
+      }
+      const deck1 = new Deck()
+      // console.log(deck1.allCards[0].showCard())
+      deck1.shuffleCards(deck1.allCards)
+      // deck1.reset()
+      const player1 = new Player("Zach", deck1.dealCards(deck1.allCards, 7))
+      player1.takeACard(deck1, 2)
+      player1.discardACard(player1.hand)
+      console.log(player1.hand)
+   </script>
+</body>
+
+</html>
