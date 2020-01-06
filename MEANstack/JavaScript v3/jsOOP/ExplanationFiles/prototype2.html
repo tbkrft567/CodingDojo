@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Document</title>
+</head>
+<body>
+   <script>
+      function Cat(catName){
+         var name = catName;
+         this.getName = function(){
+            return name;
+         };
+      }  
+      Cat.prototype.sayHi = function(){
+         console.log("meow");
+      };
+      Cat.prototype.numLegs = 4;
+      var muffin = new Cat("muffin");
+      var biscuit = new Cat("biscuit");
+      console.log(muffin, biscuit);
+
+      muffin.sayHi();
+      biscuit.sayHi();
+      console.log(muffin.numLegs);
+      muffin.numLegs = 3;
+      console.log(muffin.numLegs);
+      console.log(muffin.numLegs);
+      //poor mutant cats: muffin.__proto__numLegs++;
+      //doing this to muffin will cause all the cats to have 5 legs, but muffin will still have 3 legs 
+   </script>
+</body>
+</html>

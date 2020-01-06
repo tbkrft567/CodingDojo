@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Document</title>
+</head>
+
+<body>
+   <script>
+      //Create object constructor
+      function Car(make, model) {
+         var odometer = 0;
+         this.make = make;
+         this.model = model;
+
+
+         // private function
+         function updateOdometer(distance) {
+            odometer += distance
+         }
+
+         //Getter function help us read private variable
+         this.readOdometer = function () { return odometer }
+
+         this.drive = function (distance) {
+            updateOdometer(distance)
+            //return this will allow us to chain methods
+            return this;
+         }
+      }
+      var myCarInstance = new Car("Chevy", "Camaro");
+
+      myCarInstance.drive(50).drive(90);
+      console.log(myCarInstance.odometer)
+      console.log(myCarInstance.readOdometer())
+   </script>
+</body>
+
+</html>

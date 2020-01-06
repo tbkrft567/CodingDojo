@@ -10,7 +10,7 @@ let students = [
 ];
 newStr = "Challenge 1 \n"
 for (i = 0; i < students.length; i++) {
-   newStr += `   Name: ${students[i]["name"]}, Cohort: ${students[i]["cohort"]}\n`
+   newStr += `   Name: ${students[i].name}, Cohort: ${students[i].cohort}\n`
 }
 console.log(newStr)
 
