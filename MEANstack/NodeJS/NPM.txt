@@ -6,3 +6,8 @@ npm install -g nodemon is a GLOBAL installation
 
 " -g " respresents an option
 
+
+
+To run server with Node:
+navigate to the files home and run the following --:
+                  nodemon [file_name].js
