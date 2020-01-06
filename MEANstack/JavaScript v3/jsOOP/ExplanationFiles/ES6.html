@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Document</title>
+</head>
+
+<body>
+   <script>
+      class Dot {
+         constructor(x, y) {
+            this.x = x;
+            this.y = y;
+            console.log("You created a Dot!")
+         }
+      }
+      // const dot1 = new Dot(10, 10)
+
+      class Circle {
+         constructor(x, y) {
+            this.x = x;
+            this.y = y;
+            console.log("You created a Dot!")
+            //*****instance function
+            this.tellMeTheCoordinates = function () {
+               console.log(`The coordinates are ${this.x} and ${this.y} **ClassName: ${this.constructor.name}**!`)
+            }
+         }
+         //*****protoType Method
+         showLocation() {
+            console.log(`This Dot is at x ${this.x} and y ${this.y}`)
+         }
+         //*****class method
+         static getHelp() {
+            console.log("The class circle is to give you a tiny dot...sorry")
+         }
+      }
+      const circle1 = new Circle(4,2);
+         circle1.showLocation()
+         circle1.tellMeTheCoordinates()
+         // circle1.getHelp()
+         Circle.getHelp()
+
+   </script>
+</body>
+
+</html>
