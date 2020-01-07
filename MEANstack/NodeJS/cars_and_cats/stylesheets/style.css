@@ -1,0 +1,10 @@
+#primary{
+   outline: 2px solid fuchsia
+}
+#secondary{
+   outline: 2px solid blue
+}
+#backup{
+   outline: 2px solid green
+
+}
