@@ -11,6 +11,10 @@
       border: 3px solid black;
       width: 300px;
    }
+   .noLink{
+      text-decoration: none;
+      color: black;
+   }
    p{
       margin: 0px;
       margin-left: 10px;
@@ -23,8 +27,8 @@
 </head>
 
 <body>
-   <a href="/cats"><h1>Cats.ejs</h1></a>
-   <% if(catDetails.id != 0){ %>
+   <a class="noLink" href="/cats"><h1>Cats.ejs</h1></a>
+   <% if(typeof catDetails != "undefined"){ %>
       <% if(catDetails.id == 1){ %>
             <img src="images/cat1.jpg" alt="cat1">
          <div class="details">
@@ -51,10 +55,10 @@
          </div>
       <% } %>
    <% } else{ %>
-      <a href="/cats1">
+      <a class="noLink" href="/cats1">
          <img src="images/cat1.jpg" alt="cat1">
       </a>
-      <a href="/cats2">
+      <a class="noLink" href="/cats2">
          <img src="images/cat2.jpg" alt="cat2">
       </a>
    <% } %>

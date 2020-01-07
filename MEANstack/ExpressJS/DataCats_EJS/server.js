@@ -7,7 +7,7 @@ app.set('views', __dirname+'/views')
 app.use(express.static(__dirname + '/static'))
 
 app.get('/cats', (req, res)=>{
-   var catDetails = {id: 0}
+   var catDetails = undefined
    res.render("cats", {catDetails})
 })
 app.get('/cats1', (req, res)=>{
