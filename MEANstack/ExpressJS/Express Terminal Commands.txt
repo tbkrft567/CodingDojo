@@ -10,5 +10,6 @@ Express.JS installation:
 
 
 [[**************************]]
-Run Project (navigate):
-nodemon [fileName].js
+Run Project (navigate): {these can only handle back-end js operations}
+   - nodemon [fileName].js
+   - node [fileName].js
