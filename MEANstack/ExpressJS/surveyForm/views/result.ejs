@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <style>
+      .formPage{
+         border: 5px solid black;
+         margin: 25px;
+         width: 250px;
+      }
+      h5{
+         margin: 0px;
+         margin-top: 10px;
+      }
+      p{
+         margin: 0px;
+      }
+   </style>
+   <title>Document</title>
+</head>
+
+<body>
+<div class="formPage">
+   <h3>Submitted Information</h3>
+   <h5>Name:</h5>
+      <p><%= session["submission"].name %></p>
+   <h5>Dojo Location:</h5>
+      <p><%= session["submission"].dojo %></p>
+   <h5>Favorite Language:</h5>
+      <p><%= session["submission"].language %></p>
+   <h5>Comment:</h5>
+      <p><%= session["submission"].comment %></p>
+   <form action="/">
+      <input type="submit" value="Go Back">
+   </form>
+</div>
+
+</html>
