@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+   <style>
+   .details{
+      border: 3px solid black;
+      width: 300px;
+   }
+   p{
+      margin: 0px;
+      margin-left: 10px;
+   }
+   h5{
+      margin: 0px;
+   }
+   </style>
+   <title>Document</title>
+</head>
+
+<body>
+   <a href="/cats"><h1>Cats.ejs</h1></a>
+   <% if(catDetails.id != 0){ %>
+      <% if(catDetails.id == 1){ %>
+            <img src="images/cat1.jpg" alt="cat1">
+         <div class="details">
+            <h5>Favorite Food:</h5>
+            <p><%= catDetails.favoriteFood %></p>
+            <h5>Age:</h5>
+            <p><%= catDetails.age %></p>
+            <h5>Sleep Spots:</h5>
+            <% for(i = 0; i < catDetails["sleepSpots"].length; i++) { %>
+            <p><%= catDetails["sleepSpots"][i] %></p>
+            <% } %>
+         </div>
+      <% } else if(catDetails.id == 2){  %>
+            <img src="images/cat2.jpg" alt="cat2">
+         <div class="details">
+            <h5>Favorite Food:</h5>
+            <p><%= catDetails.favoriteFood %></p>
+            <h5>Age:</h5>
+            <p><%= catDetails.age %></p>
+            <h5>Sleep Spots:</h5>
+            <% for(i = 0; i < catDetails["sleepSpots"].length; i++) { %>
+            <p><%= catDetails["sleepSpots"][i] %></p>
+            <% } %>
+         </div>
+      <% } %>
+   <% } else{ %>
+      <a href="/cats1">
+         <img src="images/cat1.jpg" alt="cat1">
+      </a>
+      <a href="/cats2">
+         <img src="images/cat2.jpg" alt="cat2">
+      </a>
+   <% } %>
+
+
+</body>
+
+</html>
