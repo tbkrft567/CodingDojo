@@ -1,0 +1,14 @@
+Create initial package.json File
+   - npm init -y
+
+Express.JS installation:
+   - npm install express --save
+   - npm i express
+
+(EJS) Embedded JavaScript:
+   - npm install ejs
+
+
+[[**************************]]
+Run Project (navigate):
+nodemon [fileName].js
