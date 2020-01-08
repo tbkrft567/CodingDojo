@@ -1,0 +1,33 @@
+Mongo DB notes:
+
+(db = db)
+(collection = table)
+(document = record)
+
+See Databases: show dbs
+See Current DB: db
+Select Database: use new_db
+Delete Database: db.dropDatabase()
+Create DataBase: use test_app
+See Collections: show collections (ARE COLLECTION TABLES)
+Create Collection: db.createCollection('users)
+Drop Collection: db.[collectionName].drop()
+
+Create Document: db.[collectionName].insert 
+show Document(s): db.[collectionName].find() [.pretty()db.]
+remove Document(s): db.[collectionName].remove({__parameter__}, [true: remove 1]) [empty]
+replace Document: db.[collectionName].update({find process}, {update process}, {optional settings: multi, etc..}) 
+update Document: db.[collectionName].update({find process}, {$set: {update process}}) 
+
+Operators:
+$gt   (greater than)
+$gte  (greater than or equal to)
+$lt   (less than)
+$lte  (less than or equal to)
+$in   (in array)
+
+Operators (with Arrays):
+$push
+$pop
+$addToSet (like push, but only adds if does not exist)
+$pull

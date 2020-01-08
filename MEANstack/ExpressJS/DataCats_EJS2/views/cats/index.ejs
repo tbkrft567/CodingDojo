@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Document</title>
+</head>
+
+<body>
+   <!-- <img src="<%= cats[1]["img"] %>" alt=""> -->
+   <% if(cats[0]["master"] == true){ %>
+      <h1>Master</h1>
+      <% for(i = 1; i < cats.length; i++){ %>
+      <a href="/cats/show/<%= i %>"><img src="<%= cats[i]["img"] %>" alt=""></a>
+      <% } %>
+   <% } else { %>
+      <h1>Single</h1>
+      <!-- <a href="/cats"><img src="images/cat2.jpg" alt=""></a> -->
+      <a href="/cats/index"><img src="<%= cats[1]["img"] %>" alt=""></a>
+      <p><%= cats[1]["food"] %></p>
+      <p><%= cats[1]["age"] %></p>
+      <% for(i=0;i < cats[1]["sleepSpots"].length; i++){%>
+         <p><%= cats[1]["sleepSpots"][i] %></p>
+      <% } %>
+   <% } %>
+   <a href="/tigers/new">Tigers New</a>
+
+</body>
+
+</html>

@@ -1,0 +1,7 @@
+Terminal Navigation:
+***Enter cd / Then***
+
+CodingDojo files:
+   cd Users\Zach's PC\Documents\Important Files\Personal\Computer Coding\CodingDojo
+MongoDB file:
+   cd C:\Program Files\MongoDB\Server\4.2\bin>

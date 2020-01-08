@@ -1,0 +1,25 @@
+1.  use my_first_db
+2.  db.createCollection('students')
+3.
+4.  db.students.insert({name: "Lisa", home_state: "sd", lucky_number: 1, birthday: {month: 6, day: 7, year: 1964}})
+5.  db.students.find()
+6.  db.students.find({home_state:"CA"})
+7. 
+    db.students.find({ lucky_number: {$gt: 3}})
+    db.students.find({ lucky_number: {$lte: 10}})
+    db.students.find({ lucky_number: {$gte: 1, $lte: 9 }})
+8.  db.students.update({name:"Alan"}, {$push: {interests:{$each: ["Trucking", "Sleeping"]}}})
+9.  db.students.update({}, {$push: {interests: "surfing"}}, {multi: true})
+10. db.students.update({name:"John"}, {$push: {interests: "Taxes"}})
+11. db.students.update({}, {$pull: {interests: "Taxes"}}, {multi: true})
+12. db.students.remove({home_state:"tx"})
+13. db.students.remove({name:"Lisa"})
+14. db.students.remove({luck_number:{$gt: 5}})
+15. db.students.update({}, {$set: {number_of_belts: 0}}, {multi: true})
+16. db.students.update({home_state:"tx"}, {$inc:{number_of_belts: 1}}, {multi: true})
+17. db.students.update({}, {$rename:{"number_of_belts":"belts_earned"}}, {multi: true})
+18. db.students.update({}, {$set: {update_on:Date()}}, {multi: true})
+
+Extra:
+remove from Array: db.students.update({name:"Alan"}, {$pop: {interests:1}})
+Add Multiple to Array: db.students.update({name:"Alan"}, {$push: {interests:["Trucking", "Sleeping"]}})
