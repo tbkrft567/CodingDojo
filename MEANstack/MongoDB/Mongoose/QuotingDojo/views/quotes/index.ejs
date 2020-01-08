@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <style>
+      .mainData{
+         border: 5px solid blue;
+      }
+      .quote{
+         color: grey
+      }
+      .name{
+         color: blue;
+         text-emphasis: bold;
+         margin: 25px;
+      }
+   </style>
+   <title>Document</title>
+</head>
+
+<body>
+   <div class="mainData">
+      <h3>here are the awesome quotes!</h3>
+      <% for(var i = 0; i < quote.length; i++){%>
+         <p class="quote">"<%= quote[i]["quote"] %>"</p>
+         <p class="name">-<%= quote[i]["name"] %></p>
+      <% } %>
+   </div>
+</body>
+
+</html>
