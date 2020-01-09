@@ -305,41 +305,41 @@ languagesPerUser = userLanguage(users)
 console.log("Users:\n"+languagesPerUser)
 
 // `*********************  Binary Search
-// function binarySearch(arr, num){
-//    remainingElements = arr.length
-//    currentIndex = 0
-//    startIndex = 0
-//    endIndex = arr.length
-//    while(remainingElements >= 3){
-//       // console.log(remainingElements, startIndex, endIndex, currentIndex);
-//       currentIndex = startIndex+Math.ceil(remainingElements/2)
-//       if (arr[currentIndex] == num){
-//          return true
-//       }
-//       if (arr[currentIndex] < num){
-//          remainingElements = Math.abs(endIndex-currentIndex)
-//          startIndex = currentIndex
-//       }
-//       else if (arr[currentIndex] > num){
-//          remainingElements = Math.abs(startIndex-currentIndex)
-//          endIndex = currentIndex
-//       }
-//       console.log(remainingElements)
-//       if(remainingElements == 2){
-//          for(i=startIndex;i<=endIndex-1;i++){
-//             console.log(i)
-//             if (arr[i] == num){
-//                return true
-//             }
-//          }
-//       }
-//    }
-//    console.log(remainingElements, startIndex, endIndex, currentIndex);
-//    return false
-// }
-// array = [1, 3, 8, 10, 12, 15, 17, 20, 22, 34, 38, 40, 50, 52, 78, 87, 90, 91, 92, 94, 200]
-// number = 93  
-// isFound = binarySearch(array, number)
-// console.log(`Binary Search: Whether is num: ${number} is found in the array is "${isFound}"`);
+function binarySearch(arr, num){
+   remainingElements = arr.length
+   currentIndex = 0
+   startIndex = 0
+   endIndex = arr.length
+   while(remainingElements >= 3){
+      // console.log(remainingElements, startIndex, endIndex, currentIndex);
+      currentIndex = startIndex+Math.ceil(remainingElements/2)
+      if (arr[currentIndex] == num){
+         return true
+      }
+      if (arr[currentIndex] < num){
+         remainingElements = Math.abs(endIndex-currentIndex)
+         startIndex = currentIndex
+      }
+      else if (arr[currentIndex] > num){
+         remainingElements = Math.abs(startIndex-currentIndex)
+         endIndex = currentIndex
+      }
+      console.log(remainingElements)
+      if(remainingElements == 2){
+         for(i=startIndex;i<=endIndex-1;i++){
+            console.log(i)
+            if (arr[i] == num){
+               return true
+            }
+         }
+      }
+   }
+   console.log(remainingElements, startIndex, endIndex, currentIndex);
+   return false
+}
+array = [1, 3, 8, 10, 12, 15, 17, 20, 22, 34, 38, 40, 50, 52, 78, 87, 90, 91, 92, 94, 200]
+number = 93  
+isFound = binarySearch(array, number)
+console.log(`Binary Search: Whether is num: ${number} is found in the array is "${isFound}"`);
 
 // console.log('hello')

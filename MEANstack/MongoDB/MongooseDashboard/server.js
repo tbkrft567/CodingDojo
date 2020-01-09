@@ -73,6 +73,10 @@ const express = require('express')
             .then( animal =>{console.log('***Updated***'), res.redirect('/')})
             .catch(err => json(err))
       })
+      
+            app.post('/test', (req, res)=>{
+               res.send("page found")
+            })
 
       app.get('/*', (req, res)=>{
          res.redirect('/')
