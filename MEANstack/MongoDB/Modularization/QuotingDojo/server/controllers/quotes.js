@@ -1,5 +1,5 @@
-const mongoose = require('mongoose'),
-   Quote = mongoose.model('Quote')
+   Quote = require('../models/quote.js')
+   console.log(Quote)
 module.exports = {
    index: (req, res) => {
       Quote.find()
