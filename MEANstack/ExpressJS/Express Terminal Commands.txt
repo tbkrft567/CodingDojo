@@ -1,6 +1,9 @@
 Create initial package.json File
    - npm init -y
 
+Express EJS Mongoose
+   - npm i express ejs mongoose
+
 Express.JS installation:
    - npm install express --save
    - npm i express
@@ -8,9 +11,6 @@ Express.JS installation:
 (EJS) Embedded JavaScript:
    - npm install ejs
    - npm i ejs
-
-Express EJS Mongoose
-   - npm i express ejs mongoose
 
 Express-Session:
    - npm i express-session
@@ -42,7 +42,8 @@ create server.js File
       app.set('view engine', 'ejs');
       app.set('views', __dirname + '/views');
 
-      app.use(express.urlencoded({extended: true})) //Use POST Data
+      //app.use(express.urlencoded({extended: true})) //Use POST Data - rather than json
+      app.use(express.json()); //Change Node server into an API that server JSON data (makes postData available in JSON-form)
       app.use(express.static(__dirname + '/static')) //Use STATIC file
       app.use(session({
          secret: 'keyboardkitteh',
@@ -58,6 +59,7 @@ create server.js File
 CatchAll Route:
    app.get('/*', (req, res) =>{
       res.render("index")
+      //res.json(index)
    })
 
 [[**************************]]
