@@ -5,7 +5,7 @@ const mongoose = require('./server/config/mongoose.js') //Mongo Database
 // const session = require('express-session');
 
 app.set('view engine', 'ejs');
-app.set('views', __dirname + '/views');
+app.set('views', __dirname + '/client/views');
 
 app.use(express.urlencoded({ extended: true })) //Use POST Data
 app.use(express.static(__dirname + '/static')) //Use STATIC file
