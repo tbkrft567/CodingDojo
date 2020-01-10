@@ -15,8 +15,7 @@ const BlogSchema = new mongoose.Schema(
       content: { type: String, require: [true, "Blog must have a content"]},
       posts: [PostSchema]
    })
-const UserSchema = new mongoose.Schema(
-   {
+const UserSchema = new mongoose.Schema({
       name: {type: String, require: [true, "User must have a name"], maxlength: 50},
       blogs: [BlogSchema]
    })
@@ -38,8 +37,8 @@ app.use(session({
 }))
 
 app.get('/', (req, res)=>{
-   // User.remove()
-   //    .then(user => {console.log(user)})
+   User.remove()
+      .then(user => {console.log(user)})
    // req.session.user = {name:"duh"}
    // Blog.remove()
    //    .then(blog => console.log(blog), res.render('index', {session: req.session} ))
@@ -57,10 +56,6 @@ app.post('/blogs/create', (req, res)=>{
    console.log('*****Blog****')
    blogData_req = req.body
    userData = req.session.user
-   // console.log(userData)
-   // User.findOne({_id: userData._id})
-   //    .then(user => {console.log('here')})
-   //    .catch(err => res.json(err))
    Blog.create(blogData_req, function(err, blogData){
       if(err){
          res.json(err)
@@ -76,20 +71,6 @@ app.post('/blogs/create', (req, res)=>{
          })
       }
    })
-   // Blog.create(blogData_req)
-   //    .then(blog => { console.log(blog), 
-   //       User.findOne({_id: userData._id})
-   //          .then(user => {console.log(user)})
-   //          .catch(err => res.json(err))
-   //    })
-         // User.findOne({_id: userData._id})
-         //    .then(user=>{ 
-            //    User.blogs.push(blog)
-            //    .then( user => { res.redirect('/') })
-            //    .catch(err =>  res.json(err)) })})
-            // .catch(err =>  res.json(err))
-   //    .catch(err =>  res.json(err))
-   // res.redirect('/')
 })
 
 app.post('/posts/create', (req, res)=>{

@@ -77,7 +77,7 @@
             <div class="blogs">
                <h3><%= users[i]["blogs"][b]["title"] %></h3>
                <p><%= users[i]["blogs"][b]["content"] %></p>
-               <p><%= users %></p>
+               <p><%= users[i]["blogs"][b]["posts"] %></p>
                <div class="post">
                   <form class="postForm" action="/posts/create" method="POST">
                      <input type="hidden" value="<%=users[i]['blogs'][b]['_id']%>" name="Blog_id">

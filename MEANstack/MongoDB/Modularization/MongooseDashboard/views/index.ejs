@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <style>
+      .dataTable{
+         width: 400px;
+         border: 5px solid black;
+      }
+   </style>
+   <title>Document</title>
+</head>
+<body>
+   <h1>index.ejs</h1>
+   <a href="/new">Create New Animal</a>
+
+   <div class="dataTable">
+      <table>
+         <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Role</th>
+            <th>Action</th>
+         </tr>
+         <% for(i = 0; i < animals.length; i++){ %>
+         <tr>
+            <td><a href="/show/<%= animals[i]['_id']%>"><%= animals[i]["name"] %></a></td>
+            <td><%= animals[i]["age"] %></td>
+            <td><%= animals[i]["role"] %></td>
+            <td>
+               <form action="/destroy/<%= animals[i]['_id'] %>" method="POST">
+                  <input type="submit" value="Delete">
+               </form>
+               <form action="/edit/<%= animals[i]['_id'] %>" method="GET">
+                  <input type="submit" value="Edit">
+               </form>
+         </tr>
+         <% } %>
+      </table>
+   </div>
+</body>
+</html>

@@ -1,6 +1,4 @@
-
-
-   quotes = require('../controllers/quotes.js')
+quotes = require('../controllers/quotes.js')
 module.exports = function(app){
    app.get('/quotes', (req, res) => {
       quotes.index(req, res);
