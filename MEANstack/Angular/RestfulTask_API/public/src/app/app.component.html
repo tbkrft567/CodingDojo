@@ -7,11 +7,14 @@
   <title>Document</title>
 </head>
 <body>
+  <button (click)="getTasksFromService()" >Click Me</button>
   <p *ngFor="let task of tasks">
-    {{ task.title }}
+    {{ task.title }} <button (click)="showTaskFromService(task._id)" >Click Me</button>
     {{ task.description }}
   </p>
   <h3>Show Task</h3>
-  {{ task }}
+  {{ task.title }}<br>
+  {{ task.description }}<br>
+  {{ task.completed }}
 </body>
 </html>
