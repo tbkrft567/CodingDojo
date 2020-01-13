@@ -8,7 +8,7 @@ module.exports = {
       console.log("Here we are!")
       Task.find()
          .then(allTasks => {
-            res.json(allTasks)
+            res.json({tasks: allTasks})
          })
          .catch(err => { res.json(err) })
    },

@@ -7,6 +7,11 @@
   <title>Document</title>
 </head>
 <body>
-  {{ title }}
+  <p *ngFor="let task of tasks">
+    {{ task.title }}
+    {{ task.description }}
+  </p>
+  <h3>Show Task</h3>
+  {{ task }}
 </body>
 </html>
