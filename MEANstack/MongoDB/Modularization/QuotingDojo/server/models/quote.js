@@ -1,3 +1,4 @@
+console.log('****MODEL****')
 // Quote = mongoose.model('Quote')
 const mongoose = require('mongoose')
 const QuoteSchema = new mongoose.Schema(

@@ -35,11 +35,12 @@ app.get('/new/:name', (req, res) => {
    .catch(err => { res.json(err) })
 })
 app.get('/remove/:name', (req, res) => {
-   userConditions = { name: req.params.name }
+   userConditions = req.params
+   console.log(userConditions)
    User.findOne(userConditions).then(removeUser => { 
       User.remove(removeUser).then(removeConfirm => { 
          res.json(removeConfirm)})
-      .catch(err => {res.json(err)}) })
+      .catch(err => {res.redirect('/')}) })
    .catch(err => { res.json(err) })
 })
 app.get('/:name', (req, res) => {

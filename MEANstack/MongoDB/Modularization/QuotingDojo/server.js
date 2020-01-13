@@ -1,3 +1,4 @@
+console.log('****SERVER****')
 const express = require('express')
 const app = express()
 var mongoose = require('./server/config/mongoose.js')

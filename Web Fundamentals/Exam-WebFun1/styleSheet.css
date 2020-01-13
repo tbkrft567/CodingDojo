@@ -70,14 +70,14 @@
     height: 340px;
     /* display: inline-block; */
     background-color: #1a1a1a;
-    outline: 2px solid fuchsia;
+    /* outline: 2px solid fuchsia; */
     /* outline: 2px solid fuchsia; */
 }
     .tasks .taskOptions{
         width: 146.5px;
         height:340px;
         display: inline-block;
-        outline: 2px solid fuchsia;
+        /* outline: 2px solid fuchsia; */
         /* vertical-align: top; */
     }
     .tasks .taskImage{

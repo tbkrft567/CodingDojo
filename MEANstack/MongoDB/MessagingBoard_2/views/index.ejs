@@ -1,0 +1,54 @@
+<!DOCTYh4E html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Document</title>
+   <style>
+      .commentList{
+         margin-left: 25px;
+      }
+   </style>
+</head>
+
+<body>
+   <h1>The Dojo Message Board</h1>
+   <hr>
+   
+   <form action="/messages/create" method="POST">
+      <h4>Name:</h4>
+      <input type="text" name="name">
+      <h4>Message</h4>
+      <textarea name="message" cols="30" rows="3"></textarea>
+      <input type="submit" value="Create Message">
+   </form>
+   <div class="messageBoard">
+      <% for(message = 0; message < allMessages.length; message++ ){ %>
+         <h6>Name:</h6>  
+         <p><%= allMessages[message].name %></p><br>
+         <h6>Message:</h6>
+         <p><%= allMessages[message].message %></p><br>
+         <div class="commentList">
+            <h6 class="condense_C">Comments:</h6>
+            <% for(comment = 0; comment < allMessages[message]["comments"].length; comment++ ){ %>
+            <p>Name:</p>
+            <p><%= allMessages[message]["comments"][comment].name %></p>
+            <p>Comment:</p>
+            <p><%= allMessages[message]["comments"][comment].comment %></p>
+            <% } %>
+         </div>
+         <form action="/comments/create/<%= allMessages[message].id %>" method="POST">
+            <h4>Name:</h4>
+            <input type="text" name="name">
+            <h4>Message</h4>
+            <textarea name="comment" cols="20" rows="2"></textarea>
+            <input type="submit" value="Create Comment">
+         </form>
+      <% } %>
+   </div class="messageBoard">
+
+</body>
+
+</html>

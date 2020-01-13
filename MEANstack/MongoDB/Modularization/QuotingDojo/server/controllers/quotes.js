@@ -1,5 +1,6 @@
-   Quote = require('../models/quote.js')
-   console.log(Quote)
+console.log('****CONTROLLER****')
+Quote = require('../models/quote.js')
+   // console.log(Quote)
 module.exports = {
    index: (req, res) => {
       Quote.find()
