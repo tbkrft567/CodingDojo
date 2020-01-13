@@ -1,0 +1,4 @@
+npm install -g @angular/cli [installs the CLI for angular --  g for globally] 
+
+ng new public
+ng build --watch
