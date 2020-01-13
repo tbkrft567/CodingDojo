@@ -5,6 +5,7 @@ var Task = require('../model/Task.js')
 module.exports = {
    index: (req, res) => {
       //index - all Tasks
+      console.log("Here we are!")
       Task.find()
          .then(allTasks => {
             res.json(allTasks)
