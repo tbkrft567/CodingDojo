@@ -1,13 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <style>
+    *{
+      margin: 0px
+    }
+    h1{
+      margin-bottom: 10px;
+      margin-top: 25px;
+    }
+    .new{
+      width: 100px;
+      border: 1px solid grey;
+      border-radius: 3px;
+      display: inline-block;
+      margin-right: 5px;
+      background-color: silver;
+    }
+    .titleAll{
+      margin:2px;
+    }
+    .descriptionAll{
+      margin:2px;
+    }
+    .col{
+      display: inline-block;
+    }
+    .col button{
+      display: block;
+      margin: 10px;
+    }
+    .allTasks{
+      margin-bottom: 15px;
+      border: 5px solid silver;
+      width: 275px;
+      border-radius: 5px;
+      padding: 3px;
+    }
+    .taskList{
+      display: inline-block;
+    }
+    .editForm{
+      display: inline-block;
+      vertical-align: top;
+      margin-left: 25px;
+    }
+    span{
+      max-width: 100px;
+      outline: 2px solid fuchsia
+    }
+  </style>
 </head>
+
 <body>
-  <button (click)="getTasksFromService()" >Click Me</button>
+  <!-- <button (click)="getTasksFromService()" >Click Me</button>
   <p *ngFor="let task of tasks">
     {{ task.title }} <button (click)="showTaskFromService(task._id)" >Click Me</button>
     {{ task.description }}
@@ -16,5 +67,51 @@
   {{ task.title }}<br>
   {{ task.description }}<br>
   {{ task.completed }}
+  <form (submit)="onSubmit()">
+    <p>{{ newTask | json }}</p>
+    Task Title: <input type="text" name="title" [(ngModel)]="newTask.title">
+    Task Description: <input type="text" name="description" [(ngModel)]="newTask.description">
+    <input type="submit" value="Create Task" /> -->
+
+
+  <h1>New Task</h1>
+  <form (submit)="onSubmit(requestType)">
+    <p class="new">Title</p>
+    <input type="text" name="title" [(ngModel)]="newTask.title">
+    <br>
+    <p class="new">Description</p>
+    <input type="text" name="description" [(ngModel)]="newTask.description">
+    <br>
+    <input type="submit" (click)="onSubmit('create')" value="Create Task">
+  </form>
+
+  <div class="taskList">
+    <h1>Task List</h1>
+    <div *ngFor="let task of tasks" class="allTasks">
+      <div class="col">
+        <h3 class="titleAll">{{ task.title }}</h3>
+        <p class="descriptionAll">{{ task.description }}</p>
+      </div>
+      <div class="col">
+        <button class="EditAll" (click)="TaskFromServiceToEdit(task._id)">Edit</button>
+        <button class="deleteAll" (click)="removeTaskFromService(task._id)">Delete</button>
+      </div>
+    </div>
+  </div>
+
+<div class="editForm" *ngIf="editTask !== undefined">
+  <h1>Edit List</h1>
+  <form (submit)="onSubmit(requestType)">
+    <p class="new">Title</p>
+    <input type="text" name="title" [(ngModel)]="editTask.title">
+    <br>
+    <p class="new">Description</p>
+    <input type="text" name="description" [(ngModel)]="editTask.description">
+    <br>
+    <input type="submit" (click)="onSubmit('update')" value="Update Task">
+  </form>
+
+</div>
 </body>
+
 </html>

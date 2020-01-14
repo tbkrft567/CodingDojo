@@ -13,9 +13,10 @@ module.exports = function(app){
       tasks.create(req, res)
    })
    app.put('/tasks/update', (req, res) => {
+      console.log('***UPDATE-routes***')
       tasks.update(req, res)
    })
    app.delete('/tasks/destroy/:id', (req, res) => {
-      task.delete(req, res)
+      tasks.delete(req, res)
    })
 }
