@@ -1,19 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from './http.service';
+import { AbstractControl, FormGroup, ValidationErrors } from '@angular/forms'
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
-  tasks = [];
-  task = {};
-  title = 'App';
-  newTask=  { title: "", description: "" };
-  editTask= undefined;
 
-  constructor(private _httpService: HttpService) { }
+
+export class AppComponent implements OnInit {
+tasks: [];
+newTask: {};
+selectedTask: any;
+title: any;
+editTask: any;
+
+  constructor(private _httpService: HttpService) { 
+    this.tasks = [];
+    this.selectedTask = undefined;
+    this.title = 'The Root App';
+    this.newTask = { title: "", description: "" };
+    this.editTask = undefined;
+  }
+
+
   ngOnInit() {
     console.log("***onInit***")
     this.newTask = { title: "", description: "" }
@@ -21,26 +32,23 @@ export class AppComponent implements OnInit {
     // this.showTaskFromService();
   }
 
-    CreateOrUpdateTask(requestType) {
-      if (requestType == 'create') {
-        let observable = this._httpService.addTask(this.newTask)
-        observable.subscribe(data => {
-          console.log("*onSubmitCreate*")
-          this.newTask = { title: "", description: "" }
-        })
-      }
-      else if (requestType == 'update') {
-        console.log(this.editTask)
-        let observable = this._httpService.updateTask(this.editTask)
-        observable.subscribe(data => {
-          console.log("*onSubmitUpdate*")
-          this.editTask = undefined
-        })
-      }
+  CreateOrUpdateTask(requestType) {
+    if (requestType == 'create') {
+      let observable = this._httpService.addTask(this.newTask)
+      observable.subscribe(data => {
+        console.log("*onSubmitCreate*")
+        this.newTask = { title: "", description: "" }
+      })
     }
+    else if (requestType == 'update') {
+      let observable = this._httpService.updateTask(this.editTask)
+      observable.subscribe(data => {
+        this.editTask = undefined
+      })
+    }
+  }
 
   onSubmit(requestType) {
-    console.log(requestType)
     this.CreateOrUpdateTask(requestType)
     this.getTasksFromService()
   }
@@ -65,7 +73,7 @@ export class AppComponent implements OnInit {
     observable.subscribe(data => {
       console.log("*showTask-received*")
       // console.log(data)
-      this.task = data
+      this.selectedTask = data["task"]
     })
   }
   TaskFromServiceToEdit(id) {
@@ -75,5 +83,9 @@ export class AppComponent implements OnInit {
       console.log("*editTask-ready*")
       this.editTask = data
     })
+  }
+  taskToShow(task: Object): void{
+    console.log('**Root Variable**')
+    this.selectedTask = task
   }
 }

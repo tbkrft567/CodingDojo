@@ -6,6 +6,9 @@ navigate to Angular App:
    -ng build --watch
    -ng g s http
 
+create new component;
+   -ng generate component [component_nam]
+
 Injecting Service [Navigate to Angular App]:
    - ng g s http (may only need to do once)
    - Register = app.module.ts [providers]

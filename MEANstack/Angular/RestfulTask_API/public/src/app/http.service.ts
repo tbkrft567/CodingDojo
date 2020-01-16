@@ -28,13 +28,14 @@ export class HttpService {
   }
   addTask(newtask){
     return this._http.post('/tasks/create', newtask)
+
   }
   updateTask(editTask){
     console.log('***UPDATE-service***')
     return this._http.put('/tasks/update', editTask)
   }
   removeTask(taskID){
-    console.log(taskID)
+    console.log('***DELETE-service***')
     return this._http.delete('/tasks/destroy/'+taskID)
   }
 }

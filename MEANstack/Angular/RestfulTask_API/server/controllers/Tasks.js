@@ -17,26 +17,27 @@ module.exports = {
       taskCondition = { _id: req.params.id }
       // console.log(taskCondition)
       Task.findOne(taskCondition)
-         .then(showTask => {
-            res.json(showTask)
+         .then(showTask => { 
+            res.json({tasks: showTask})
          })
          .catch(err => { res.json(err) })
    },
    create: (req, res) => {
       //create - create a task
       taskInput = req.body
+      console.log(req.body)
       Task.create(taskInput)
-         .then(taskConfirm => {
+         .then(taskConfirm => { console.log('need errors')
             res.json(taskConfirm)
          })
-         .catch(err => { res.json(err) })
+         .catch(err => { console.log('******'+err.errors.description.message), res.json(err) })
    },
    update: (req, res) => {
       //update - update a task
       console.log('**UPDATE-controller**')
       taskCondition = { _id: req.body._id }
       Task.update(taskCondition, { $set: { title: req.body.title, description: req.body.description, completed: req.body.completed } })
-         .then(taskConfirm => { console.log(taskConfirm), res.json(taskConfirm) })
+         .then(taskConfirm => { console.log(taskConfirm), res.json({taskConfirm: taskConfirm}) })
          .catch(err => {  res.json(err) })
    },
    delete: (req, res) => {
