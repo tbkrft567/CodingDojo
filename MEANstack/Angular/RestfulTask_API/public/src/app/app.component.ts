@@ -33,6 +33,7 @@ editTask: any;
   }
 
   CreateOrUpdateTask(requestType) {
+    console.log(requestType)
     if (requestType == 'create') {
       let observable = this._httpService.addTask(this.newTask)
       observable.subscribe(data => {

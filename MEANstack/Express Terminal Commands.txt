@@ -1,0 +1,87 @@
+Create initial package.json File
+   - npm init -y
+
+Express EJS Mongoose
+   - npm i express ejs mongoose
+
+Express.JS installation:
+   - npm install express --save
+   - npm i express
+
+(EJS) Embedded JavaScript:
+   - npm install ejs
+   - npm i ejs
+
+Express-Session:
+   - npm i express-session
+   
+   server.js --
+   const session = require('express-session')
+   app.use(session({
+      secret: 'keyboardkitteh',
+      resave: false,
+      saveUninitialized: true,
+      cookie: { maxAge: 60000 }
+   }))
+
+create server.js File
+      const express = require('express')
+      const app = express()
+      const session = require('express-session');
+      const mongoose = require('mongoose') //Mongo Database
+      // const mongoose = require('./server/config/mongoose.js')
+
+      mongoose.connect('mongodb://localhost/name_of_your_DB', { useNewUrlParser: true });
+      const UserSchema = new mongoose.Schema(
+         {
+            name: String,
+            age: Number
+         })
+      // create an object that contains methods for mongoose to interface with MongoDB
+      const User = mongoose.model('User', UserSchema);
+
+      app.set('view engine', 'ejs');
+      app.set('views', __dirname + '/views');
+
+      //app.use(express.urlencoded({extended: true})) //Use POST Data - rather than json
+      app.use(express.json()); //Change Node server into an API that server JSON data (makes postData available in JSON-form)
+      //app.use(express.static(__dirname + '/static')) //Use STATIC file
+      app.use(express.static(__dirname + '/public/dist/public')) //Use STATIC file
+      app.use(session({
+         secret: 'keyboardkitteh',
+         resave: false, 
+         saveUninitialized: true,
+         cookie: { maxAge: 60000 }
+      }))
+
+      //.....Enter app.get routes HERE
+
+   const Task = require('./server/config/routes.js')(app)
+
+      app.listen(8000, () => console.log("listening on port 8000"));
+
+CatchAll Route:
+   app.get('/*', (req, res) =>{
+      res.render("index")
+      //res.json(index)
+   })
+
+[[**************************]]
+Run Project (navigate): {these can only handle back-end js operations}
+   - nodemon [fileName].js
+   - node [fileName].js
+
+CRUD 
+
+Create [new]
+Read [show, index]
+Update [edit]
+Destroy
+
+/eels/index [get]
+/eels/show [get]
+/eels/new [get]
+/eels/create [post]
+/eels/edit [get]
+/eels/update [post]
+/eels/destroy [post]

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Document</title>
+</head>
+
+<body>
+   <h1>Chicago, IL</h1>  
+   <div *ngIf="weatherData">
+      <p>Name: {{ weatherData.name }}</p>
+      <p>Humidity: {{ weatherData.main.humidity }}</p>    
+      <p>Temperature (Average): {{ weatherData.main.temp }}</p>    
+      <p>Temperature (High): {{ weatherData.main.temp_max }}</p>    
+      <p>Temperature (Low): {{ weatherData.main.temp_min}}</p>    
+      <p>Status: {{ weatherData.weather[0].main }} | {{ weatherData.weather[0].description }}</p>    
+    </div>
+    <img [src]="imgURL" alt="Chicago">
+</body>
+
+</html>

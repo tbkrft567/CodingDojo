@@ -1,0 +1,16 @@
+npm install -g @angular/cli [installs the CLI for angular --  g for globally] 
+
+ng new public
+
+navigate to Angular App:
+   -ng build --watch
+   -ng g s http
+
+create new component;
+   -ng generate component [component_nam]
+
+Injecting Service [Navigate to Angular App]:
+   - ng g s http
+   - Register = app.module.ts [providers]
+   - Httpclient = app.module.ts [imports]
+   

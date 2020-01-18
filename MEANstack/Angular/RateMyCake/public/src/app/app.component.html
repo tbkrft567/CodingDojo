@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Title</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <style>
+    .createCake {
+      width: 300px;
+      margin: 15px;
+      padding: 8px;
+      border: 3px ridge antiquewhite;
+      display: inline-block
+    }
+
+    .createReview {
+      vertical-align: top;
+      display: inline-block;
+      width: 300px;
+      margin: 15px;
+      padding: 8px;
+      border: 3px ridge antiquewhite
+    }
+
+    .createReview select {
+      display: block;
+      width: 150px;
+      margin-bottom: 5px;
+      text-align: center;
+    }
+
+    .createReview img {
+      display: inline-block;
+      width: 50px;
+    }
+  </style>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+  <h1>Rate My Cake</h1>
+  <div class="createCake">
+    <h6>Submit a cake to be rated</h6>
+    <hr>
+    <form (submit)="sendToServiceCreateCake()">
+      <p>Baker Name:</p>
+      <input type="text" name="name" [(ngModel)]="newCake.name">
+      <p>Image Url:</p>
+      <input type="text" name="imageURL" [(ngModel)]="newCake.imageURL">
+      <p>Description:</p>
+      <input type="text" name="description" [(ngModel)]="newCake.description">
+      <input type="submit" (click)="sendToServiceCreate()" value="Submit Cake">
+    </form>
+  </div>
+  <div *ngIf="allCakes" class="createReview">
+    <div *ngFor="let cake of allCakes">
+      <img [src]="cake.imageURL" [alt]="cake.description" (click)="sendToServiceShow(cake._id)">
+      <form (submit)="sendToServiceCreateReview()">
+        <select name="newReview.rating" [(ngModel)]="newReview.rating">
+          <option value="1">1 Star</option>
+          <option value="2">2 Stars</option>
+          <option value="3">3 Stars</option>
+          <option value="4">4 Stars</option>
+          <option value="5">5 Stars</option>
+        </select>
+        <textarea name="newReview.comment" cols="20" rows="2" [(ngModel)]="newReview.comment"></textarea>
+        <input type="hidden" name="id" [(ngModel)]="newReview.cakeId" [value]="cake._id">
+        <input type="submit" (click)="sendToServiceCreateReview()" value="Rate!">
+      </form>
+    </div>
+  </div>
+  <div *ngIf="allReviews">
+    <div *ngFor="let review of allReviews">
+      <p>{{review | json}}</p>
+    </div>
+  </div>
+
+</body>
+
+</html>
