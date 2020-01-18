@@ -1,0 +1,61 @@
+Connect Server.js to Angular {public = [nameOfAngularFile]}:
+- app.use(express.static(__dirname + '/public/dist/public')) //Use STATIC file
+
+Create Register Service File [navigate to angular page]:
+      - ng g s http
+   http.service.ts
+      - import { HttpClient } from '@angular/common/http'
+      - add to Constructor(private _http: HttpClient)
+   app.module.ts File
+      - import HTTPClientModule
+      - add to imports
+      - import { HttpService } from './http.service'
+      - add HttpService to providers
+   app.component.ts
+      - import HttpService from './http.service'
+      - add to class constructor(private _httpService: HttpService){}
+
+creating OnInit to app.component.ts:
+   - add "implements OnInit" to class definition
+   - add ngOnInit(){} to class methods [note //"ng"//]
+   - confirm OnInit is in the import
+
+In public folder of Angular Project:
+   -Test html page (in terminal)-- ng build --watch
+
+**=========================================
+**=========================================
+Nested Components:
+   -ng generate component [component_name]
+   -place newCompent Selector {app-task} on app.component.html  <app-task></app-task> "<app-[component_name]]></app-[component_name]>"
+
+**=========================================
+**=========================================
+
+Angular Routing:
+   -provide CatchAll to Routes.js: app.all("*", (req,res,next) => { res.sendFile(path.resolve("./public/dist/public/index.html")) });
+   -build newComponent
+   -provide redirect links/button: [routerLink]="['/alpha']" {replace href}
+   -add selector <router-outlet> to app.component.html
+   **app-routing.module.ts
+      -import {AlphaComponent} from './alpha/alpha.component'
+      -add path to "routes: Routes = []
+         - { path: 'alpha', component: AlphaComponent }  
+   **app.module.ts
+      -confirm import {AlphaComponent} from './alpha/alpha.component'
+      -confirm declarations: [AlphaComponent]
+   
+Routing - working with redirect and params   
+   **[alpha].component.ts
+      -add to constructor( 'add here' ) - 
+         - private _route: ActivateRoute,
+         - private _router: Router
+      -confirm import { ActivateRoute, Params, Router } from '@angular/router
+      -add to ngOnInit(){ 'add here' }
+         -this._route.params.subscribe((params: Params)=>{console.log(params["id"])}) 
+      -add below ngOnInit
+         - goHome() { this._router.navigate(['/home']) }
+
+Make Sure the following are running:
+   - nodemon server.js
+   - ng build --watch 

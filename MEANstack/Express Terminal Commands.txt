@@ -1,8 +1,73 @@
+Creating Back-End with AngularFront:
+
 Create initial package.json File
    - npm init -y
 
 Express EJS Mongoose
-   - npm i express ejs mongoose
+   - npm i express mongoose
+
+create server.js File
+console.log('***SERVER***')
+      const express = require('express')
+      const app = express()
+      const mongoose = require('./server/config/mongoose.js')
+
+      app.use(express.json()); //Change Node server into an API that server JSON data (makes postData available in JSON-form)
+      app.use(express.static(__dirname + '/public/dist/public')) //Use STATIC file
+
+      const Task = require('./server/config/routes.js')(app) //CREATE ROUTE FILE
+
+      app.listen(8000, () => console.log("listening on port 8000"));
+
+build folder structure for modularization:
+   - server
+      -config
+         -mongoose.js
+         -routes.js
+      -controllers
+         -users.js
+      -models
+         -user.js
+
+modularization:
+   -mongoose.js*****
+         console.log('****MONGOOSE****')
+         const mongoose = require('mongoose')
+         mongoose.connect('mongodb://localhost/Users', { useNewUrlParser: true });
+   -routes.js*****
+         console.log('****ROUTES****')
+         const users = require('../controllers/Users.js')
+         module.exports = function(app){
+            app.get('/users', (req, res) => {
+               users.index(req, res)
+            })
+         }
+   -users.js*****
+         console.log('****CONTROLLERS****')
+         var User = require('../model/user.js')
+         module.exports = {
+            index: (req, res) => {
+               //index - all Users
+               User.find()
+                  .then(allUsers => {
+                     res.json({users: allUsers})
+                  })
+                  .catch(err => { res.json(err) })
+            },
+   -user.js*****
+         console.log('****MODELS****')
+         var mongoose = require('mongoose')
+         const UserSchema = new mongoose.Schema(
+            {
+               name: String
+            })
+         const User = mongoose.model('User', UserSchema);
+         module.exports = User
+
+=================================================================================================
+=================================================================================================
+=================================================================================================
+=================================================================================================
 
 Express.JS installation:
    - npm install express --save
