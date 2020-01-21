@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+      a{
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+      <h4>Author Quotes</h4>
+      <a [routerLink]="['/authors','dashboard']">Dashboard View</a>
+      <div *ngIf="author">
+        <a [routerLink]="['/authors',author._id,'quotes', 'new']">New Quote</a>
+      </div>
+      <div *ngIf="author">
+        <table class="table">
+          <tr>
+            <th>Quote</th>
+            <th>Votes</th>
+            <th>Actions</th>
+          </tr>
+  
+          <tr *ngFor="let quote of author.quotes">
+            <th>{{quote.content}}</th>
+            <th>{{quote.vote}}</th>
+            <th ><button (click)="Vote({quoteId: quote._id, authorId: author._id, vote: 1})">Up Vote</button> | <button  (click)="Vote({quoteId: quote._id, authorId: author._id, vote: 0})">Down Vote</button> | <button (click)="removeQuote({quoteId: quote._id, authorId: author._id})">Delete</button></th>
+          </tr>
+        </table>
+      </div>
+
+  </body>
+</html>

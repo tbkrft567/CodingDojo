@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+   <title>Title</title>
+   <!-- Required meta tags -->
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+   <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   <style>
+   a{
+      display: block;
+   }
+
+   </style>
+   </head>
+
+<body>
+   <h4>Author New Quote App</h4>
+   <a [routerLink]="['/authors','dashboard']">Dashboard View</a>
+   <a [routerLink]="['/authors', authorId, 'quotes']">All Quotes</a>
+   <form (submit)="createQuote(authorId)">
+      <p>Quote:</p>
+      <input type="text" name="content"  [(ngModel)]="newQuote.content">
+      <input type="submit" value="Create Quote">
+   </form>
+</body>
+
+</html>

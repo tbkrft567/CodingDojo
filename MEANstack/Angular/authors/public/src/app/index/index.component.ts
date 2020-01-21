@@ -7,7 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.css']
 })
-export class IndexComponent implements OnInit {
+export class IndexAuthorsComponent implements OnInit {
   allAuthors: {}
   constructor(
     private _route: ActivatedRoute,
@@ -27,7 +27,7 @@ export class IndexComponent implements OnInit {
   removeAuthor(id){
     let observable = this._httpService.destroyAuthor(id)
     observable.subscribe()
-    this.getAuthors()
+    this.ngOnInit()
   }
   navToEditAuthor(id){
     this._router.navigate(['/authors/edit/'+id])

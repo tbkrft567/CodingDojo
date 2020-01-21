@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service'
 import { ActivatedRoute, Router, Params } from '@angular/router';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.css']
 })
-export class EditComponent implements OnInit {
+export class EditAuthorsComponent implements OnInit {
   showAuthor: {}
   authorId: any
   constructor(

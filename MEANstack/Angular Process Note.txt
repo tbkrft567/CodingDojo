@@ -1,5 +1,8 @@
-Connect Server.js to Angular {public = [nameOfAngularFile]}:
-- app.use(express.static(__dirname + '/public/dist/public')) //Use STATIC file
+ng new public [--routing]
+
+navigate to Angular App:
+   -ng build --watch
+   -ng g s http
 
 Create Register Service File [navigate to angular page]:
       - ng g s http
@@ -7,13 +10,13 @@ Create Register Service File [navigate to angular page]:
       - import { HttpClient } from '@angular/common/http'
       - add to Constructor(private _http: HttpClient)
    app.module.ts File
-      - import HTTPClientModule
-      - add to imports
+      - add to HTTPClientModule import
       - import { HttpService } from './http.service'
       - add HttpService to providers
+      - for ngModel: import { FormsModule } from '@angular/forms
    app.component.ts
-      - import HttpService from './http.service'
       - add to class constructor(private _httpService: HttpService){}
+      - import HttpService from './http.service'
 
 creating OnInit to app.component.ts:
    - add "implements OnInit" to class definition
@@ -40,19 +43,22 @@ Angular Routing:
    **app-routing.module.ts
       -import {AlphaComponent} from './alpha/alpha.component'
       -add path to "routes: Routes = []
-         - { path: 'alpha', component: AlphaComponent }  
+         { path: 'alpha', component: AlphaComponent, children: [
+            { path: 'beta', component: BetaComponent }
+         ]}  
    **app.module.ts
       -confirm import {AlphaComponent} from './alpha/alpha.component'
       -confirm declarations: [AlphaComponent]
    
-Routing - working with redirect and params   
+Routing - working with redirect, params, HttpService   
    **[alpha].component.ts
       -add to constructor( 'add here' ) - 
-         - private _route: ActivateRoute,
-         - private _router: Router
+         private _route: ActivateRoute,
+         private _router: Router,
+         private _httpService: HttpService,
       -confirm import { ActivateRoute, Params, Router } from '@angular/router
       -add to ngOnInit(){ 'add here' }
-         -this._route.params.subscribe((params: Params)=>{console.log(params["id"])}) 
+         this._route.params.subscribe((params: Params)=>{console.log(params["id"])}) 
       -add below ngOnInit
          - goHome() { this._router.navigate(['/home']) }
 

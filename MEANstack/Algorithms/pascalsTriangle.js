@@ -1,31 +1,30 @@
-function pascalsTriangle(rows){
-   if(rows > 0){
+function pascalsTriangle(rows) {
+   if (rows > 0) {
       arr = [1]
-      Si = 0
-      for(Ri = 1; Ri < rows; Ri++){
-         Si += Ri
-         Ei = Si + Ri
-         for(Ti = Si; Ti<=Ei; Ti++){
-            if(Ti == Si || Ti == Ei){
+      start = 0
+      for (row = 1; row < rows; row++) {
+         start += row
+         ending = start + row
+         for (total = start; total <= ending; total++) {
+            if (total == start || total == ending) {
                arr.push(1);
             }
-            else{
-               // console.log("firstIndex: ", Ti-Ri-1, "SecondIndex: ", Ti-Ri, "newTotal", arr[Ti-Ri-1]+arr[Ti-Ri])
-               arr.push(arr[Ti-Ri-1]+arr[Ti-Ri])
+            else {
+               arr.push(arr[total - row - 1] + arr[total - row])
             }
          }
       }
-      content= ""
-      indexValue = 0
-         for(Ri = 1; Ri <= rows; Ri++){
-            content += "\n<div class='row'>\n"
-            for(Ci = 1; Ci <= Ri; Ci++){
-               content += "\n\t<div class='column'>"+arr[indexValue]+"</div>\n"
-               indexValue++
-            }
-            content += "\n</div>\n"
+      content = ""
+      Value = 0
+      for (row = 1; row <= rows; row++) {
+         content += "\n<div class='row'>\n"
+         for (current = 1; current <= row; current++) {
+            content += "\n\t<div class='column'>" + arr[Value] + "</div>\n"
+            Value++
          }
-         document.getElementById("pascalsTriangle").innerHTML = content;
+         content += "\n</div>\n"
+      }
+      document.getElementById("pascalsTriangle").innerHTML = content;
       return arr
    }
 }

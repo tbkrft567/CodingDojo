@@ -7,16 +7,16 @@ import { FormsModule } from '@angular/forms'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { IndexComponent } from './index/index.component';
-import { NewComponent } from './new/new.component';
-import { EditComponent } from './edit/edit.component';
+import { IndexAuthorsComponent } from './index/index.component';
+import { NewAuthorsComponent } from './new/new.component';
+import { EditAuthorsComponent } from './edit/edit.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    IndexComponent,
-    NewComponent,
-    EditComponent
+    IndexAuthorsComponent,
+    NewAuthorsComponent,
+    EditAuthorsComponent
   ],
   imports: [
     BrowserModule,
