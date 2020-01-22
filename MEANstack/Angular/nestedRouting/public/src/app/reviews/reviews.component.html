@@ -13,8 +13,17 @@
 </head>
 
 <body>
-   <a [routerLink]="['/products','details',5]">Go To /products/details/5</a>
-   
+   <h2>review-PARENT</h2>
+   <app-allreviews></app-allreviews> 
+   <button [routerLink]="['details', 5]">allreview</button>
+   <app-author></app-author> 
+   <button [routerLink]="['author', 5]">author</button>
+   <app-review-detail></app-review-detail> 
+   <button [routerLink]="['all', 5]">reviewDetail</button>
+
+
+   ***Child***
+   <router-outlet></router-outlet>
 </body>
 
 </html>

@@ -10,11 +10,31 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-</head>
+<style>
+button{
+  margin-left: 50px;
+}
+</style>
+  </head>
 
 <body>
   <h1>Hello</h1>
+  <!-- {  path: 'products', component: ProductsComponent, children: [
+      { path: 'details/:id', component: ProductsDetailComponent },
+      { path: 'brand/:brand', component: BrandComponent },
+      { path: 'category/:cat', component: CategoryComponent },
+    ]
+  },
+  {
+    path: 'reviews', component: ReviewsComponent, children: [
+      { path: 'details/:id', component: ReviewDetailComponent },
+      { path: 'author/:id', component: AuthorComponent },
+      { path: 'all/:id', component: AllreviewsComponent },
+    ] -->
+    <button [routerLink]="['/products']">products</button>
 
+
+  <button [routerLink]="['/reviews']">reviews</button>
   <router-outlet></router-outlet>
 </body>
 

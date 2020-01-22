@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
-import { observable } from 'rxjs';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-index',
@@ -11,7 +11,11 @@ export class IndexComponent implements OnInit {
   allProducts: {};
   productId: {};
   disableOption: {};
-  constructor(private _httpService: HttpService) { }
+  constructor(
+    private _httpService: HttpService,
+    private _route: ActivatedRoute,
+    private _router: Router
+    ) { }
 
   ngOnInit() {
     this.getAllProducts()
