@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+   <title>Title</title>
+   <!-- Required meta tags -->
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+   <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+   <h4>Create a New Product</h4>
+   <form (submit)="createProduct()">
+      <p>Title</p>
+      <input type="text" name="title" [(ngModel)]="newProduct.title">
+      <p>Price</p>
+      <input type="text" name="price" [(ngModel)]="newProduct.price">
+      <p>Image URL</p>
+      <input type="text" name="imageURL" [(ngModel)]="newProduct.imageURL">
+      <input type="submit" value="Create">
+      <button [routerLink]="['/products','index']">Cancel</button>
+      <div *ngIf="errorMessage">
+         <h5>Error Messages</h5>
+         <p>{{errorMessage.message}}</p>
+      </div>
+   </form>
+</body>
+
+</html>

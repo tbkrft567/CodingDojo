@@ -1,3 +1,6 @@
+// https://www.npmjs.com/package/mongoose-unique-validator
+
+
 Creating Back-End with AngularFront:
 
 Create initial package.json File
@@ -37,11 +40,17 @@ modularization:
    -routes.js*****
          console.log('****ROUTES****')
          const users = require('../controllers/Users.js')
+         const path = require('path')
          module.exports = function(app){
             app.get('/users', (req, res) => {
                users.index(req, res)
             })
+            app.all("*", (req,res,next) => { 
+               res.sendFile(path.resolve("./public/dist/public/index.html")) 
+            })
          }
+      -provide CatchAll to Routes.js wwith require('path'): app.all("*", (req,res,next) => { res.sendFile(path.resolve("./public/dist/public/index.html")) });
+
    -users.js*****
          console.log('****CONTROLLERS****')
          var User = require('../model/user.js')
@@ -54,13 +63,16 @@ modularization:
                   })
                   .catch(err => { res.json(err) })
             },
+         }
    -user.js*****
          console.log('****MODELS****')
          var mongoose = require('mongoose')
+         var uniqueValidator = require('mongoose-unique-validator')
          const UserSchema = new mongoose.Schema(
             {
                name: String
             })
+         UserSchema.plugin(uniqueValidator, { message: "This item must be UNIQUE*/*/*/*/*/" })
          const User = mongoose.model('User', UserSchema);
          module.exports = User
 

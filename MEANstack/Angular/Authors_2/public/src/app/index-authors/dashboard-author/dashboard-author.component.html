@@ -21,7 +21,6 @@
    <h4>Author Dashboard</h4>
    
    <a [routerLink]="['/authors','new']">new Author</a>
-   
    <div *ngIf="authors">
       <table class="table">
          <tr>
@@ -32,7 +31,7 @@
             <td>
                <a [routerLink]="['/authors', author._id,'edit']">Edit Author</a>
                <a [routerLink]="['/authors',author._id,'quotes']">Quotes</a>
-               <button (click)="removeAuthor(author._id)">Delete</button>
+               <button (click)="removeAuthor(author._id)" [disabled]="disableOption" >Delete</button>
             </td>
          </tr>
       </table>

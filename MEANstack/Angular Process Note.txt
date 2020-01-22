@@ -1,19 +1,20 @@
+// https://stackoverflow.com/questions/43978380/disable-button-in-angular-2
+// https://blog.shawnhyde.com/post/2019/02/16/how-to-disable-popup-tips-in-visual-studio-code
+
 ng new public [--routing]
 
-navigate to Angular App:
-   -ng build --watch
-   -ng g s http
+
 
 Create Register Service File [navigate to angular page]:
       - ng g s http
-   http.service.ts
+   http.service.ts ----------------- {[projectName]/public/src/app/...}
       - import { HttpClient } from '@angular/common/http'
       - add to Constructor(private _http: HttpClient)
    app.module.ts File
       - add to HTTPClientModule import
       - import { HttpService } from './http.service'
       - add HttpService to providers
-      - for ngModel: import { FormsModule } from '@angular/forms
+      - for ngModel: import { FormsModule } from '@angular/forms'
    app.component.ts
       - add to class constructor(private _httpService: HttpService){}
       - import HttpService from './http.service'
@@ -45,7 +46,10 @@ Angular Routing:
       -add path to "routes: Routes = []
          { path: 'alpha', component: AlphaComponent, children: [
             { path: 'beta', component: BetaComponent }
-         ]}  
+         ]}
+         { path: '', redirectTo: '/authors/dashboard', pathMatch: 'full'},
+         { path: '**', redirectTo: '/authors/dashboard', pathMatch: 'full'},
+ 
    **app.module.ts
       -confirm import {AlphaComponent} from './alpha/alpha.component'
       -confirm declarations: [AlphaComponent]
@@ -61,6 +65,9 @@ Routing - working with redirect, params, HttpService
          this._route.params.subscribe((params: Params)=>{console.log(params["id"])}) 
       -add below ngOnInit
          - goHome() { this._router.navigate(['/home']) }
+
+navigate to Angular App:
+   -ng build --watch
 
 Make Sure the following are running:
    - nodemon server.js

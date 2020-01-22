@@ -10,6 +10,7 @@ import { HttpService } from '../../http.service';
 export class DashboardAuthorComponent implements OnInit {
 authors: {}
 authorId: string;
+disableOption: boolean;
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
@@ -17,6 +18,7 @@ authorId: string;
   ) { }
 
   ngOnInit() {
+    // this.disableOption = undefined
     this.getAllAuthors()
   }
   getAllAuthors(){
@@ -28,6 +30,7 @@ authorId: string;
   }
   removeAuthor(authorId){
     console.log('**DASHBOARD_AUTHOR-removeAuthor**')
+    // this.disableOption = true
     this.authorId = authorId
     let observable = this._httpService.removeAuthorSRV(this.authorId)
     observable.subscribe(data => {
