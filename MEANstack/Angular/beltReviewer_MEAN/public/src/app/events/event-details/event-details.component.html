@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+   <title>Title</title>
+   <!-- Required meta tags -->
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+   <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+   
+   <h3>Event Name</h3>
+   <p>Host:</p>
+   <p>VALUE</p>
+   <p>Date:</p>
+   <p>VALUE</p>
+   <p>Location:</p>
+   <p>VALUE</p>
+   <p>People who are joing the event:</p>
+   <p>VALUE</p>
+   <div class="indexDetails">
+      <table class="table">
+         <tr>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Location</th>
+            <th>Host</th>
+            <th>HostAction</th>
+         </tr>
+         <tr>
+            <td>dName</td>
+            <td>dDate</td>
+            <td>dLocation</td>
+            <td>dHost</td>
+            <td>
+               <button [routerLink]="['/events',5,'show']">Show</button>
+               <button (click)=removeEvent()>Delete</button>
+               <button *ngIf="!editForm" (click)="exposeEditForm()">Edit</button>
+            </td>
+         </tr>
+      </table>
+   </div>
+   <app-comment-index></app-comment-index>
+</body>
+
+</html>

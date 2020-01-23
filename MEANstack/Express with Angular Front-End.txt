@@ -67,12 +67,12 @@ modularization:
    -user.js*****
          console.log('****MODELS****')
          var mongoose = require('mongoose')
-         var uniqueValidator = require('mongoose-unique-validator')
+         //var uniqueValidator = require('mongoose-unique-validator')
          const UserSchema = new mongoose.Schema(
             {
                name: String
             })
-         UserSchema.plugin(uniqueValidator, { message: "This item must be UNIQUE*/*/*/*/*/" })
+         //UserSchema.plugin(uniqueValidator, { message: "This item must be UNIQUE*/*/*/*/*/" })
          const User = mongoose.model('User', UserSchema);
          module.exports = User
 

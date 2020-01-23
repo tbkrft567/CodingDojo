@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+   <title>Title</title>
+   <!-- Required meta tags -->
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+   <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<style>
+   .indexDetails{
+      width: 600px;
+      border: 3px solid black;
+      margin: 7px;
+   }
+   .iFrame{
+      border: 3px solid black;
+      width: 300px;
+      min-height: 400px;;
+   }
+   button{
+      font-size: 9px;
+   }
+</style>
+   </head>
+
+<body>
+   <p>Here are some of the events at your state:</p>
+   <div class="indexDetails">
+      <table class="table">
+         <tr>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Location</th>
+            <th>State</th>
+            <th>Host</th>
+            <th>HostAction</th>
+         </tr>
+         <tr>
+            <td>dName</td>
+            <td>dDate</td>
+            <td>dLocation</td>
+            <td>dState</td>
+            <td>dHost</td>
+            <td>
+               <button [routerLink]="['/events',5,'show']">Show</button>
+               <button (click)=removeEvent()>Delete</button>
+               <button *ngIf="!editForm" (click)="exposeEditForm()">Edit</button>
+            </td>
+         </tr>
+      </table>
+   </div>
+   <p>Here are some of the events on other states:</p>
+   <div class="indexDetails">
+      <table class="table">
+         <tr>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Location</th>
+            <th>Host</th>
+            <th>HostAction</th>
+         </tr>
+         <tr>
+            <td>dName</td>
+            <td>dDate</td>
+            <td>dLocation</td>
+            <td>dHost</td>
+            <td>
+               <button [routerLink]="['/events',5,'show']">Show</button>
+               <button (click)=removeEvent()>Delete</button>
+               <button *ngIf="!editForm" (click)="exposeEditForm()">Edit</button>
+            </td>
+         </tr>
+      </table>
+
+   </div>
+   {{allEvents | json}}
+   <button (click)="exposeEditForm()">Create New Event</button>
+   <app-event-create *ngIf="!editForm" ></app-event-create>
+   <app-event-edit *ngIf="editForm"></app-event-edit>
+</body>
+
+</html>

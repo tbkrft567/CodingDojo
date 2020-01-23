@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+   <title>Title</title>
+   <!-- Required meta tags -->
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+   <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   <style>
+      .iFrame {
+         border: 3px solid black;
+         width: 300px;
+         min-height: 400px;
+         margin: 15px;
+
+      }
+   </style>
+</head>
+
+<body>
+   <div class="iFrame">
+      <h4>Add Event</h4>
+      <form (submit)="createEvent()" #form="ngForm">
+         <p>Name:</p>
+         <input type="text" name="name" [(ngModel)]="newEvent.name" required minlength="3" max="20" #name="ngModel">
+         <p [hidden]="name.valid || name.pristine">Error</p>
+         <p>Date:</p>
+         <input type="date" name="date" [(ngModel)]="newEvent.date">
+         <p>Location:</p>
+         <input type="text" name="location" [(ngModel)]="newEvent.location">
+         <p>State:</p>
+         <select name="state" [(ngModel)]="newEvent.state">
+            <option value="TX">Texas</option>
+            <option value="AK">Arkansas</option>
+         </select>
+         <p>Host:</p>
+         <input type="text" name="host" [(ngModel)]="newEvent.host">
+         <button [disabled]="!form.valid">Create Event</button>
+
+         <p *ngIf="error">{{error.message}}</p>
+      </form>
+   </div>
+</body>
+
+</html>

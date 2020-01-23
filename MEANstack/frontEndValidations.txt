@@ -1,0 +1,24 @@
+#ZZZZ = "ngForm"
+
+required
+minlength="3"
+maxlength="20"
+ngModel
+#GGGG = "ngModel"
+
+<p [hidden] ="GGGG.valid" || GGGG.prestine> This message is hiddden or not </p>
+
+[disable] = "!ZZZZ.valid"
+
+
+
+
+User.find({name: req.body.name})
+    .then(user => {
+        if (user.length > 0) {
+            return Promise.reject('Error Message Goes Here');  <=======
+        }
+        return User.create(req.body);
+    })
+    .then(saveResult => res.json(saveResult))
+    .catch(err => res.json(err)); <=======
