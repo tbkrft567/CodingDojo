@@ -1,0 +1,36 @@
+Creating a REST API with Node.js
+
+Email and Password
+has Password
+
+Use bcrypt
+
+Done save data -- RESTful are stateless. -- stateless means server does not store any state about the client session on the server side
+
+weturn token -- object/signiture/information - store by our client and sent with future requests 
+attach the token and verify using the signiture
+
+always check if it is valid using the signature
+
+JSON Web Token:
+   JSON Data + Signature + [expire] + [issuer] == JWT
+   Signature can be verified - private key store on the server
+   JSON data not encrypted
+
+Create Users
+   UserSchemas
+   _id: mongoose.Schema.Types.ObjectId
+   email: {type: String, required: true}
+   password: {type: String, required: true}
+
+express.Router() for modulizing Route.js
+
+router.post('/signup')
+use bcrypt -- 
+
+Login:
+   provide User Information - name, email, password
+   validation email is unique 
+   hash password using bcrypt
+   validation email using regEx
+   create user with hashed_password 

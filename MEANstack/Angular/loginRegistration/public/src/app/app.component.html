@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Title</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+
+  <h1>Root Route</h1>
+  <button [routerLink]="['/index']">Index Page</button>  |  
+  <button [routerLink]="['/']">Login Page</button>  |  
+  <button (click)="clearToken()">Log Out</button>  
+  
+
+  <form (submit)="registerUser()">
+    <p>Email</p>
+    <input type="text" name="email" [(ngModel)]="newUser.email">
+    <p>First Name</p>
+    <input type="text" name="first_name" [(ngModel)]="newUser.first_name">
+    <p>Last Name</p>
+    <input type="text" name="last_name" [(ngModel)]="newUser.last_name">
+    <p>Password</p>
+    <input type="password" name="password" [(ngModel)]="newUser.password">
+    <p>Birthday</p>
+    <input type="date" name="birthday" [(ngModel)]="newUser.birthday">
+    <input type="submit" value="Register User">
+  </form>
+  <form (submit)="loginUser()">
+    <p>Email</p>
+    <input type="text" name="email" [(ngModel)]="loggedUser.email">
+    <p>Password</p>
+    <input type="password" name="password" [(ngModel)]="loggedUser.password">
+    <input type="submit" value="Login User">
+  </form>
+  <router-outlet></router-outlet>
+</body>
+
+</html>

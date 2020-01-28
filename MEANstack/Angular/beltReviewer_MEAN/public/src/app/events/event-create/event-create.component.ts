@@ -40,10 +40,8 @@ error:{}
   showUniquenessError(data){
     if("UniquenessError" in data){
       this.error = {message: data.UniquenessError}
-      console.log(this.error)
     }
     else{
-      console.log('here')
       this.newEvent ={name: "", date: "", location: "", state: "", host: ""}
     }
   }

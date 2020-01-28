@@ -16,17 +16,14 @@ module.exports = {
       Event.find({ name: eventName })
          .then(eventsFound => { 
             console.log('**Find One**')
-            if(eventsFound.length == 0){
-               console.log('***Create Event***')
-               Event.create(req.body)
-                  .then(eventConfirm => { res.json(eventConfirm) })
-                  .catch(err => res.json(err))
+            if(eventsFound.length > 0){
+               return Promise.reject('Your item is not unique')
             }
             else{
-               res.json({UniquenessError: "Your item is not unique"})
+               return Event.create(req.body)
             }
-
          })
+         .then(eventConfirm => { res.json(eventConfirm) })
          .catch(err => { res.json(err) })
    }
 }

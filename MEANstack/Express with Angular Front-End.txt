@@ -9,14 +9,28 @@ Create initial package.json File
 Express EJS Mongoose
    - npm i express mongoose
 
+**[FOR LOGIN]**
+   - npm i jsonwebtoken
+   - npm i bcrypt
+   - npm i express-session
+**[FOR LOGIN]**
+
 create server.js File
 console.log('***SERVER***')
       const express = require('express')
       const app = express()
+      //const session = require('express-session'); //[FOR LOGIN]
       const mongoose = require('./server/config/mongoose.js')
 
       app.use(express.json()); //Change Node server into an API that server JSON data (makes postData available in JSON-form)
       app.use(express.static(__dirname + '/public/dist/public')) //Use STATIC file
+      //app.use('trust proxy', 1) //[FOR LOGIN]
+      //app.use(session({
+      //   secret: 'keyboardkitteh',
+      //   resave: false, 
+      //   saveUninitialized: true,
+      //   cookie: { maxAge: 60000 }
+      //}))
 
       const Task = require('./server/config/routes.js')(app) //CREATE ROUTE FILE
 
@@ -42,7 +56,7 @@ modularization:
          const users = require('../controllers/Users.js')
          const path = require('path')
          module.exports = function(app){
-            app.get('/users', (req, res) => {
+            app.get('/app/users', (req, res) => {
                users.index(req, res)
             })
             app.all("*", (req,res,next) => { 
@@ -53,6 +67,7 @@ modularization:
 
    -users.js*****
          console.log('****CONTROLLERS****')
+         //var bcrypt = require('bcrypt') //[FOR LOGIN]
          var User = require('../model/user.js')
          module.exports = {
             index: (req, res) => {
