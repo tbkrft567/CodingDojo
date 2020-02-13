@@ -4,9 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IndexComponent } from './index/index.component';
-// import { HttpModule } from '@angular/http'
-import { HttpClientModule } from '@angular/common/http';
-import { HttpService } from './http.service';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { httpInterceptorProviders } from './barrel.http';
 import { AuthService } from './auth.service'
@@ -19,13 +17,12 @@ import { AuthInterceptor } from './auth-interceptor'
   ],
   imports: [
     BrowserModule,
-    // HttpModule, 
     HttpClientModule,
     FormsModule,
-    // local_storage,
     AppRoutingModule,
   ],
   providers: [
+    HttpClient,
     httpInterceptorProviders,
     AuthService, 
     AuthInterceptor,

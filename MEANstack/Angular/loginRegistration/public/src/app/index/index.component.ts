@@ -25,8 +25,13 @@ export class IndexComponent implements OnInit {
     console.log('***INDEX-getUser***')
     let observable = this._httpService.getAllUsersSRV()
     observable.subscribe(data => {
-      console.log('***INDEX-UserFound***')
-      console.log(data, '******')
+      if('error' in data){
+        this.goToRoot()
+      }
+      else{
+        console.log('***INDEX-UserFound***')
+        console.log(data, '******')
+      }
     })
     
   }

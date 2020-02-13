@@ -3,11 +3,9 @@ var bcrypt = require('bcrypt')
 var User = require('../model/user.js')
 module.exports = {
    index: (req, res) => {
-      console.log('help')
       //index - all Users
       User.find()
          .then(allUsers => {
-            console.log('Allow User')
             res.json({ users: allUsers })
          })
          .catch(err => { res.json(err) })

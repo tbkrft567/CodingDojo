@@ -14,8 +14,8 @@ import { AuthInterceptor } from './auth-interceptor'
   providedIn: 'root',
 })
 export class HttpService {
-token: any
-header: any
+// token: any
+// header: any
   constructor(private _http: HttpClient,
     private _httpInterpretor: AuthInterceptor) {
   }

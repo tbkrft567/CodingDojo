@@ -8,24 +8,35 @@ module.exports = {
       console.log(req.body)
       userEmail = req.body.email
       userPassword = req.body.password
-      console.log('**USER LOGIN**')
+      console.log('**USER LOGIN**', req.body.password)
       User.findOne({ email: userEmail })
          .then(user => {
+            console.log('bcrypt')
             bcrypt.compare(userPassword, user.password) //(formPassword, DB_password)
                .then(result => {
-                  const SECRET = process.env.JWT_KEY
-                  var USERINFO = { email: user.email, userId: user._id }
-                  const token = jwt.sign(USERINFO, SECRET, { expiresIn: '1h' })  //Stored on the client****
-                  console.log(token)
-                  res.json(
-                     { message: "Authentication Successful", token: token }
-                  )
+                  if (result) {
+                     console.log(result)
+                     const SECRET = process.env.JWT_KEY
+                     var USERINFO = { email: user.email, userId: user._id }
+                     const token = jwt.sign(USERINFO, SECRET, { expiresIn: '1h' })  //Stored on the client****
+                     res.json(
+                        { message: "Authentication Successful", token: token }
+                     )
+                  }
+                  else {
+                     res.json(
+                        { error: "Authentication Failed" }
+                     )
+                  }
+               })
+               .catch(err => {
+                  res.json({ error: err })
                })
          })
          .catch(err => {
             res.json(
                console.log('***LOGIN FAILED***'),
-               { errors: err })
+               { error: err })
          })
    },
 

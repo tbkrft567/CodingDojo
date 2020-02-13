@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+   <title>Browse</title>
+   <!-- Required meta tags -->
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+   <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   <style>
+      .form-new {
+         border: 4px solid black;
+         background-color: grey;
+         width: 800px;
+         margin: 15px 50px;
+      }
+
+      .form-new-inset {
+         border: 4px solid black;
+         background-color: white;
+         margin: 15px;
+      }
+
+      .form-new-inset p {
+         margin: 0px;
+      }
+
+      .form-prior {
+         border: 4px solid black;
+         background-color: grey;
+         width: 800px;
+         margin: 15px 50px;
+         height: 600px;
+         overflow: scroll;
+      }
+
+      .form-prior-inset {
+         border: 4px solid black;
+         background-color: white;
+         margin: 15px;
+      }
+
+      .form-prior-inset p {
+         margin: 0px;
+      }
+
+      .bike-titleDesc {
+         display: inline-block;
+         width: 300px;
+         vertical-align: top;
+      }
+
+      .bike-priceLocation {
+         display: inline-block;
+         width: 100px;
+         vertical-align: top;
+      }
+
+      .bike-image {
+         display: inline-block;
+         width: 150px;
+         margin-right: 20px;
+         min-height: 125px;
+         outline: 2px solid fuchsia;
+      }
+   </style>
+</head>
+
+<body>
+   <div>
+      <div>
+         <p>Name: sdkfjklsajdf</p>
+         <p>Email: zach@sdk.fjk</p>
+      </div>
+      <div>
+         <p>Search:</p>
+         <input type="text">
+         <button>Search</button>
+      </div>
+      <div *ngIf="allBikes" class="form-prior">
+         <h3>Edit/Delete Listings</h3>
+         <div *ngFor="let bike of allBikes" class="form-prior-inset">
+            <div class="bike-image">
+               <img src="" alt="">
+            </div>
+            <div class="bike-titleDesc">
+               <h4>{{bike.title}}</h4>
+               <p>{{bike.description}}</p>
+            </div>
+            <div class="bike-priceLocation">
+               <h4>{{bike.price}}</h4>
+               <p>{{bike.city}}, {{bike.state}}</p>
+               <button *ngIf="currentUser._id == bike.userId" (click)=deleteBike(bike._id)>Delete</button>
+               <button *ngIf="currentUser._id != bike.userId">Contact</button>
+            </div>
+         </div>
+      </div>
+   </div>
+
+
+   <!-- Optional JavaScript -->
+   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+  import { Component, OnInit } from '@angular/core';
 import { HttpService } from './http.service';
 import { Router, Params, ActivatedRoute } from '@angular/router';
 
@@ -32,6 +32,8 @@ export class AppComponent implements OnInit {
     let observable = this._httpService.loggedUserSRV(this.loggedUser)
     observable.subscribe(data => {
       if("error" in data){
+        console.log(data)
+        this.ngOnInit()
       }
       else{
         window.localStorage.setItem('token', data['token'])
@@ -51,6 +53,9 @@ export class AppComponent implements OnInit {
   }
   goToIndex(){
     this._router.navigate(['index'])
+  }
+  goToHome(){
+    this._router.navigate([''])
   }
   
 }

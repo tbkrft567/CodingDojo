@@ -10,7 +10,6 @@ module.exports = function (app) {
    })
    app.get('/app/users/index', authorizeUser, (req, res) => {
       console.log('***ROUTES-Users-show***')
-      console.log(req.headers, '****HEADERS****')
       users.index(req, res)
    })
    app.post('/app/users/create', (req, res) => {
