@@ -1,62 +1,46 @@
-﻿using System;
+﻿    using System;
+    using human;
 
-namespace human
-{
-class Program
-{
-    static void Main(string[] args)
+    namespace human
     {
-        Human zach = new Human("Zach");
-        Human shelby = new Human("Shelby");
-        Console.WriteLine(zach.Name);
-        Console.WriteLine(shelby.Name);
-        shelby.Attack(zach);
-        Console.WriteLine(zach.HealthProp);
-    }
-
-    class Human
+    class Program
     {
-        // Fields for Human
-        public string Name;
-        public int Strength;
-        public int Intelligence;
-        public int Dexterity;
-        private int health;
-
-        // add a public "getter" property to access health
-        public int HealthProp
+        static void Main(string[] args)
         {
-            get{
-                return health;
-            }
-        }
+            // Human zach = new Human("Zach");
+            // Human shelby = new Human("Shelby");
+            // Console.WriteLine(zach.Name);
+            // Console.WriteLine(shelby.Name);
+            // shelby.Attack(zach);
+            // Console.WriteLine(zach.HealthProp);
 
+            Human human = new Human("Zach1");
+            Wizard wizard = new Wizard("Zach2");
+            Ninja ninja = new Ninja("Zach3");
+            Samurai samurai = new Samurai("Zach4");
+            Wizard wizard2 = new Wizard("Zach5");
 
-        // Add a constructor that takes a value to set Name, and set the remaining fields to default values
-        public Human(string nameParam)
-        {
-            Name = nameParam;
-            Strength = 3;
-            Intelligence = 3;
-            Dexterity = 3;
-            health = 100;
-        }
+            human.getInfo();
+            wizard.getInfo();
+            ninja.getInfo();
+            samurai.getInfo();
+            wizard2.getInfo();
 
-        // Add a constructor to assign custom values to all fields
-        public Human(string nameParam, int strengthParam, int intelligenceParam, int dexterityParam, int healthParam){
-            Name= nameParam;
-            Strength = strengthParam; 
-            Intelligence = intelligenceParam; 
-            Dexterity = dexterityParam; 
-            health = healthParam;
-        }
-        // Build Attack method
-        public int Attack(Human target)
-        {
-            return  target.health -= (5*this.Strength);
+            wizard.Attack(human);
+            human.Attack(wizard);
+            ninja.Attack(wizard);
+            wizard2.Heal(wizard);
+            wizard.Heal(human);
+            ninja.Meditate();
+            ninja.Steal(samurai);
+            samurai.Attack(ninja);
+               
+            human.getInfo();
+            wizard.getInfo();
+            ninja.getInfo();
+            samurai.getInfo();
+            wizard2.getInfo();
+
         }
     }
-
-
-}
 }
