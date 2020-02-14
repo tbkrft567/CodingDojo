@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace Portfolio
+namespace RazorFun
 {
    public class IndexController : Controller
    {

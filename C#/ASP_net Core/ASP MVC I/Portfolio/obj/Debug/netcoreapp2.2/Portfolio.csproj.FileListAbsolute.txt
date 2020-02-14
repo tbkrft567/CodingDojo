@@ -12,3 +12,13 @@ C:\Users\Zach's PC\Documents\Important Files\Personal\Computer Coding\(1)CodingD
 C:\Users\Zach's PC\Documents\Important Files\Personal\Computer Coding\(1)CodingDojo\C#\ASP_net Core\ASP MVC I\Portfolio\obj\Debug\netcoreapp2.2\Portfolio.RazorTargetAssemblyInfo.cache
 C:\Users\Zach's PC\Documents\Important Files\Personal\Computer Coding\(1)CodingDojo\C#\ASP_net Core\ASP MVC I\Portfolio\obj\Debug\netcoreapp2.2\Portfolio.dll
 C:\Users\Zach's PC\Documents\Important Files\Personal\Computer Coding\(1)CodingDojo\C#\ASP_net Core\ASP MVC I\Portfolio\obj\Debug\netcoreapp2.2\Portfolio.pdb
+C:\Users\Zach's PC\Documents\Important Files\Personal\Computer Coding\(1)CodingDojo\C#\ASP_net Core\ASP MVC I\Portfolio\bin\Debug\netcoreapp2.2\Portfolio.Views.dll
+C:\Users\Zach's PC\Documents\Important Files\Personal\Computer Coding\(1)CodingDojo\C#\ASP_net Core\ASP MVC I\Portfolio\bin\Debug\netcoreapp2.2\Portfolio.Views.pdb
+C:\Users\Zach's PC\Documents\Important Files\Personal\Computer Coding\(1)CodingDojo\C#\ASP_net Core\ASP MVC I\Portfolio\obj\Debug\netcoreapp2.2\Portfolio.TagHelpers.input.cache
+C:\Users\Zach's PC\Documents\Important Files\Personal\Computer Coding\(1)CodingDojo\C#\ASP_net Core\ASP MVC I\Portfolio\obj\Debug\netcoreapp2.2\Portfolio.TagHelpers.output.cache
+C:\Users\Zach's PC\Documents\Important Files\Personal\Computer Coding\(1)CodingDojo\C#\ASP_net Core\ASP MVC I\Portfolio\obj\Debug\netcoreapp2.2\Portfolio.RazorCoreGenerate.cache
+C:\Users\Zach's PC\Documents\Important Files\Personal\Computer Coding\(1)CodingDojo\C#\ASP_net Core\ASP MVC I\Portfolio\obj\Debug\netcoreapp2.2\Razor\Views\Index\index.g.cshtml.cs
+C:\Users\Zach's PC\Documents\Important Files\Personal\Computer Coding\(1)CodingDojo\C#\ASP_net Core\ASP MVC I\Portfolio\obj\Debug\netcoreapp2.2\Portfolio.RazorTargetAssemblyInfo.cs
+C:\Users\Zach's PC\Documents\Important Files\Personal\Computer Coding\(1)CodingDojo\C#\ASP_net Core\ASP MVC I\Portfolio\obj\Debug\netcoreapp2.2\Portfolio.Views.pdb
+C:\Users\Zach's PC\Documents\Important Files\Personal\Computer Coding\(1)CodingDojo\C#\ASP_net Core\ASP MVC I\Portfolio\obj\Debug\netcoreapp2.2\Portfolio.csproj.CopyComplete
+C:\Users\Zach's PC\Documents\Important Files\Personal\Computer Coding\(1)CodingDojo\C#\ASP_net Core\ASP MVC I\Portfolio\obj\Debug\netcoreapp2.2\Razor\Views\Index\contacts.g.cshtml.cs
