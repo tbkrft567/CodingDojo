@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <link rel="stylesheet" href="~/css/index.css">
+
+</head>
+
+<body>
+         @{
+            string name = ViewBag.myName;
+         }
+   <a href="/">Home</a>  |  
+   <a href="/project">Projects</a>  |  
+   <a href="/contact">Contact</a>  |  
+   <h1>About Me</h1>
+   
+   <div class="profile-info">
+      <img src="~/image/kitten.jpg.png" alt="kitten">
+      <p>@name</p>
+      <p>I like stuff!</p>
+   </div>
+
+   <div class="profile-info">
+   <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam quae beatae eius, ad expedita cum illo culpa eligendi ea quas? Cum,
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa, quam sunt adipisci laudantium odio, mollitia praesentium, 
+      dignissimos repellendus inventore sit optio aperiam nisi enim id deserunt tempora ratione asperiores libero. 
+      quam dolores iure modi dolore sed cupiditate dignissimos dolorem?
+   </p>
+   </div>
+
+</body>
+
+</html>

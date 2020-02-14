@@ -1,0 +1,7 @@
+      .profile-info{
+         width: 275px;
+         display: inline-block;
+         vertical-align: top;
+         margin: 25px;
+         border: 5px ridge gray;
+      }
