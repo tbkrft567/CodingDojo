@@ -1,0 +1,14 @@
+C:\Users\Zach's PC\Documents\Important Files\Personal\Computer Coding\(1)CodingDojo\C#\ASP_net Core\ASP MVC I\Portfolio\bin\Debug\netcoreapp2.2\Portfolio.deps.json
+C:\Users\Zach's PC\Documents\Important Files\Personal\Computer Coding\(1)CodingDojo\C#\ASP_net Core\ASP MVC I\Portfolio\bin\Debug\netcoreapp2.2\Portfolio.runtimeconfig.json
+C:\Users\Zach's PC\Documents\Important Files\Personal\Computer Coding\(1)CodingDojo\C#\ASP_net Core\ASP MVC I\Portfolio\bin\Debug\netcoreapp2.2\Portfolio.runtimeconfig.dev.json
+C:\Users\Zach's PC\Documents\Important Files\Personal\Computer Coding\(1)CodingDojo\C#\ASP_net Core\ASP MVC I\Portfolio\bin\Debug\netcoreapp2.2\Portfolio.dll
+C:\Users\Zach's PC\Documents\Important Files\Personal\Computer Coding\(1)CodingDojo\C#\ASP_net Core\ASP MVC I\Portfolio\bin\Debug\netcoreapp2.2\Portfolio.pdb
+C:\Users\Zach's PC\Documents\Important Files\Personal\Computer Coding\(1)CodingDojo\C#\ASP_net Core\ASP MVC I\Portfolio\obj\Debug\netcoreapp2.2\Portfolio.csprojAssemblyReference.cache
+C:\Users\Zach's PC\Documents\Important Files\Personal\Computer Coding\(1)CodingDojo\C#\ASP_net Core\ASP MVC I\Portfolio\obj\Debug\netcoreapp2.2\Portfolio.csproj.CoreCompileInputs.cache
+C:\Users\Zach's PC\Documents\Important Files\Personal\Computer Coding\(1)CodingDojo\C#\ASP_net Core\ASP MVC I\Portfolio\obj\Debug\netcoreapp2.2\Portfolio.RazorAssemblyInfo.cache
+C:\Users\Zach's PC\Documents\Important Files\Personal\Computer Coding\(1)CodingDojo\C#\ASP_net Core\ASP MVC I\Portfolio\obj\Debug\netcoreapp2.2\Portfolio.RazorAssemblyInfo.cs
+C:\Users\Zach's PC\Documents\Important Files\Personal\Computer Coding\(1)CodingDojo\C#\ASP_net Core\ASP MVC I\Portfolio\obj\Debug\netcoreapp2.2\Portfolio.AssemblyInfoInputs.cache
+C:\Users\Zach's PC\Documents\Important Files\Personal\Computer Coding\(1)CodingDojo\C#\ASP_net Core\ASP MVC I\Portfolio\obj\Debug\netcoreapp2.2\Portfolio.AssemblyInfo.cs
+C:\Users\Zach's PC\Documents\Important Files\Personal\Computer Coding\(1)CodingDojo\C#\ASP_net Core\ASP MVC I\Portfolio\obj\Debug\netcoreapp2.2\Portfolio.RazorTargetAssemblyInfo.cache
+C:\Users\Zach's PC\Documents\Important Files\Personal\Computer Coding\(1)CodingDojo\C#\ASP_net Core\ASP MVC I\Portfolio\obj\Debug\netcoreapp2.2\Portfolio.dll
+C:\Users\Zach's PC\Documents\Important Files\Personal\Computer Coding\(1)CodingDojo\C#\ASP_net Core\ASP MVC I\Portfolio\obj\Debug\netcoreapp2.2\Portfolio.pdb

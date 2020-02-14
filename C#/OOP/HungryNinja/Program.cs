@@ -1,5 +1,6 @@
 ﻿    using System;
     using System.Collections.Generic;
+    using HungryNinja;
 
     namespace HungryNinja
     {
@@ -17,21 +18,7 @@
                 ninja1.IsFull = ninja1.CaloriesProp > 1200 ? true : false;
             }
         }
-        class Food
-        {
-            public string Name;
-            public int Calories;
-            public bool IsSpicy;
-            public bool IsSweet;
 
-            public Food(string nameParam, int caloriesParam, bool isSpicyParam, bool isSweetParam)
-            {
-                Name = nameParam;
-                Calories = caloriesParam;
-                IsSpicy = isSpicyParam;
-                IsSweet = isSweetParam;
-            }
-        }
 
         class Buffet
         {
@@ -58,49 +45,5 @@
             }
         }
 
-        class Ninja
-        {
-            private int calorieIntake;
-            private List<Food> foodHistory;
-            private bool isFull;
-
-            public Ninja()
-            {
-                calorieIntake = 0;
-                foodHistory = new List<Food>();
             }
-            public void Eat(Food food)
-            {
-                if (this.IsFull == false)
-                {
-                this.calorieIntake += food.Calories;
-                this.foodHistory.Add(food);
-                Console.WriteLine($"Is food Spicy: {food.IsSpicy}; Is food Sweet: {food.IsSweet}\n*** {this.calorieIntake} {this.IsFull}");
-                }
-                else
-                {
-                Console.WriteLine("Ninja cannot eat anymore!");
-                }
-
-            }
-            public bool IsFull
-            {
-                get
-                {
-                    return this.isFull;
-                }
-                set
-                {
-                    isFull = value;
-                }
-            }
-            public int CaloriesProp
-            {
-                get
-                {
-                    return this.calorieIntake;
-                }
-            }
-        }
-    }
     }
