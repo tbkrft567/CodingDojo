@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        span{
+            display: block;
+            color: red;
+            font-weight: bold;
+        }
+        label{
+            display: block
+        }
+        input{
+            display: block
+        }
+    </style>
+</head>
+<body>
+    @using DojoSurveyValidations
+    @model Survey
+
+    <form asp-action="create" asp-controller="index" method=post>
+        <label asp-for="name"></label>
+        <input asp-for="name">
+        <span asp-validation-for="name"></span>
+        <label asp-for="location"></label>
+        <select asp-for="location">
+            <option value="">Pick One</option>
+            <option value="Dallas">Dallas</option>
+            <option value="Seattle">Seattle</option>
+        </select>
+        <span asp-validation-for="location"></span>
+        <label asp-for="language"></label>
+        <select asp-for="language">
+            <option value="">Pick One</option>
+            <option value="C#">C#</option>
+            <option value="Java">Java</option>
+        </select>
+        <span asp-validation-for="language"></span>
+        <label asp-for="comment"></label>
+        <textarea asp-for="comment"></textarea>
+        <span asp-validation-for="comment"></span>
+        <input type="submit" value="Submit Survey">
+    </form>
+
+</body>
+</html>

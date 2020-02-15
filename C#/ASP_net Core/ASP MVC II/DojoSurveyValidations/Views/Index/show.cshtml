@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        span{
+            display: block
+        }
+        label{
+            display: block
+        }
+        input{
+            display: block
+        }
+    </style>
+</head>
+<body>
+    @using DojoSurveyValidations
+    @model Survey
+    <h1>Successful Submission</h1>
+
+    <p>Name: @Model.name</p>
+    <p>Location: @Model.location</p>
+    <p>Lanague: @Model.language</p>
+    <p>Comment: @Model.comment</p>
+
+</body>
+</html>

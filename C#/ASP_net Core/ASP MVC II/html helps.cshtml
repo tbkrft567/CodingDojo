@@ -1,0 +1,9 @@
+    <span asp-validation-for="location"></span>
+    <label asp-for="location"></label>
+    <select asp-for="location" asp-items="@Model.locations">
+        <option>Please Select One</option>
+    </select>
+    <span asp-validation-for="language"></span>
+    <label asp-for="language"></label>
+    <select asp-for="language" asp-items="@Model.language">
+        <option>Please Select One</option>
