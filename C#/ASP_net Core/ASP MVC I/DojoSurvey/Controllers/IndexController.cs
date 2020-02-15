@@ -10,11 +10,14 @@ namespace DojoSurvey
          return View("Index");
       }
 
-      // [HttpPost("create")]
-      // public IActionResult Create(string name, string location, string language, string comment)
-      // {
-         
-      //    return View("Show", "ShowController", new { name = name, location = location, language = language, comment = comment } );
-      // }
+      [HttpPost("create")]
+      public IActionResult Create(string name, string location, string language, string comment)
+      {
+         System.Diagnostics.Debug.WriteLine("here");
+         return RedirectToAction("Show", "Show", new {name = "zzz", location = "xxx"});
+         //, "ShowController", new { @name = "Zach", @location = "Dallas" }
+      }
+
+
    }
 }
