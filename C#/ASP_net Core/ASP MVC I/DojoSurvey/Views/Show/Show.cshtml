@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+<body>
+   @{
+      string name = ViewBag.name;
+      string location = ViewBag.location;
+      string language = ViewBag.language;
+      string comment = ViewBag.comment;
+   }
+   <h3>Submitted Info</h3>
+   <div>
+      <p>Name:</p>
+      <p>@name</p>
+      <p>Dojo Location:</p>
+      <p>@location:</p>
+      <p>Favorite Language:</p>
+      <p>@language</p>
+      <p>Comment:</p>
+      <p>@comment</p>
+   </div>
+
+   <a href="/">Go Back</a>
+
+
+</body>
+</html>
