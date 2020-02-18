@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    @{
+        string passCode = ViewBag.passCode;
+        int? countValue = ViewBag.countValue;
+    }
+
+    <div>
+        <p>Random passcode (passcode #@countValue)</p>
+   
+        <h1>@passCode</h1>
+    </div>
+    <a href="/">Generate</a>
+    <a href="/clear">Clear</a>
+
+</body>
+</html>

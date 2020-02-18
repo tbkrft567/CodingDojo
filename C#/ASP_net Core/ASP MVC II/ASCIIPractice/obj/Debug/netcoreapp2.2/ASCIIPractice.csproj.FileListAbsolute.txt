@@ -1,0 +1,11 @@
+C:\Users\Zach's PC\Documents\Important Files\Personal\Computer Coding\(1)CodingDojo\C#\ASP_net Core\ASP MVC II\ASCIIPractice\bin\Debug\netcoreapp2.2\ASCIIPractice.deps.json
+C:\Users\Zach's PC\Documents\Important Files\Personal\Computer Coding\(1)CodingDojo\C#\ASP_net Core\ASP MVC II\ASCIIPractice\bin\Debug\netcoreapp2.2\ASCIIPractice.runtimeconfig.json
+C:\Users\Zach's PC\Documents\Important Files\Personal\Computer Coding\(1)CodingDojo\C#\ASP_net Core\ASP MVC II\ASCIIPractice\bin\Debug\netcoreapp2.2\ASCIIPractice.runtimeconfig.dev.json
+C:\Users\Zach's PC\Documents\Important Files\Personal\Computer Coding\(1)CodingDojo\C#\ASP_net Core\ASP MVC II\ASCIIPractice\bin\Debug\netcoreapp2.2\ASCIIPractice.dll
+C:\Users\Zach's PC\Documents\Important Files\Personal\Computer Coding\(1)CodingDojo\C#\ASP_net Core\ASP MVC II\ASCIIPractice\bin\Debug\netcoreapp2.2\ASCIIPractice.pdb
+C:\Users\Zach's PC\Documents\Important Files\Personal\Computer Coding\(1)CodingDojo\C#\ASP_net Core\ASP MVC II\ASCIIPractice\obj\Debug\netcoreapp2.2\ASCIIPractice.csprojAssemblyReference.cache
+C:\Users\Zach's PC\Documents\Important Files\Personal\Computer Coding\(1)CodingDojo\C#\ASP_net Core\ASP MVC II\ASCIIPractice\obj\Debug\netcoreapp2.2\ASCIIPractice.csproj.CoreCompileInputs.cache
+C:\Users\Zach's PC\Documents\Important Files\Personal\Computer Coding\(1)CodingDojo\C#\ASP_net Core\ASP MVC II\ASCIIPractice\obj\Debug\netcoreapp2.2\ASCIIPractice.AssemblyInfoInputs.cache
+C:\Users\Zach's PC\Documents\Important Files\Personal\Computer Coding\(1)CodingDojo\C#\ASP_net Core\ASP MVC II\ASCIIPractice\obj\Debug\netcoreapp2.2\ASCIIPractice.AssemblyInfo.cs
+C:\Users\Zach's PC\Documents\Important Files\Personal\Computer Coding\(1)CodingDojo\C#\ASP_net Core\ASP MVC II\ASCIIPractice\obj\Debug\netcoreapp2.2\ASCIIPractice.dll
+C:\Users\Zach's PC\Documents\Important Files\Personal\Computer Coding\(1)CodingDojo\C#\ASP_net Core\ASP MVC II\ASCIIPractice\obj\Debug\netcoreapp2.2\ASCIIPractice.pdb

@@ -6,15 +6,21 @@
     <title>Document</title>
 </head>
 <body>
-    
-    @model User
+
+      @{
+            string FirstName = ViewBag.FirstName;
+            string LastName = ViewBag.LastName;
+            string Email = ViewBag.Email;
+            string Password = ViewBag.Password;
+            string PasswordConfirmation = ViewBag.PasswordConfirmation;
+         }
     
     <h1>Success!!</h1>
-    <p>@Model.FirstName</p>
-    <p>@Model.LastName</p>
-    <p>@Model.Email</p>
-    <p>@Model.Password</p>
-    <p>@Model.PasswordConfirmation</p>
+    <p>@FirstName</p>
+    <p>@LastName</p>
+    <p>@Email</p>
+    <p>@Password</p>
+    <p>@PasswordConfirmation</p>
 
 </body>
 </html>

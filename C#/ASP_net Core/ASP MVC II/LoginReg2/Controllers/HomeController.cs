@@ -22,15 +22,13 @@ namespace LoginReg2.Controllers
             if(ModelState.IsValid){
                 if(userData.Password == userData.PasswordConfirmation)
                 {
-                    User newUser = new User()
-                    {
-                        FirstName = userData.FirstName,
-                        LastName = userData.LastName,
-                        Email = userData.Email,
-                        Password = userData.Password,
-                        PasswordConfirmation = userData.PasswordConfirmation,
-                    };
-                    return View("success", newUser);
+                        ViewBag.FirstName = userData.FirstName;
+                        ViewBag.LastName = userData.LastName;
+                        ViewBag.Email = userData.Email;
+                        ViewBag.Password = userData.Password;
+                        ViewBag.PasswordConfirmation = userData.PasswordConfirmation;
+                    
+                    return View("success");
                 }
                 return View("Index");
             }
@@ -43,12 +41,9 @@ namespace LoginReg2.Controllers
         public IActionResult CreateLogin(Login userData)
         {
             if(ModelState.IsValid){
-                    Login newLogin = new Login()
-                    {
-                        Email = userData.Email,
-                        Password = userData.Password,
-                    };
-                    return View("success", newLogin);
+                        ViewBag.Email = userData.Email;
+                        ViewBag.Password = userData.Password;
+                    return View("success");
             }
             else
             {
@@ -57,9 +52,9 @@ namespace LoginReg2.Controllers
         }
 
         [HttpGet("success")]
-        public IActionResult Success(User userData)
+        public IActionResult Success()
         {
-            return View("Success", userData);
+            return View("Success");
         }
 
     }
