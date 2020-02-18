@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    
+    @model IndexViewModel
+
+    <form action="/create/user" method="post">
+        <div class="form-group">
+            <label asp-for="NewUser.FirstName"></label>
+            <input asp-for="NewUser.FirstName">
+            <span asp-validation-for="NewUser.FirstName"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="NewUser.LastName"></label>
+            <input asp-for="NewUser.LastName">
+            <span asp-validation-for="NewUser.LastName"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="NewUser.Email"></label>
+            <input asp-for="NewUser.Email">
+            <span asp-validation-for="NewUser.Email"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="NewUser.Password"></label>
+            <input asp-for="NewUser.Password">
+            <span asp-validation-for="NewUser.Password"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="NewUser.PasswordConfirmation"></label>
+            <input asp-for="NewUser.PasswordConfirmation">
+            <span asp-validation-for="NewUser.PasswordConfirmation"></span>
+        </div>
+        <input type="submit">
+    </form>
+    <form action="/Create/Login" method="post">
+        <div class="form-group">
+            <label asp-for="NewLogin.Email"></label>
+            <input asp-for="NewUser.Email">
+            <span asp-validation-for="NewUser.Email"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="NewLogin.Password"></label>
+            <input asp-for="NewLogin.Password">
+            <span asp-validation-for="NewUser.Password"></span>
+        </div>
+        <input type="submit">
+    </form>
+</body>
+
+</html>
