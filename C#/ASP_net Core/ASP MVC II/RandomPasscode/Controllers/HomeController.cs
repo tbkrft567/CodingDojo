@@ -21,18 +21,6 @@ namespace RandomPasscode.Controllers
         [HttpGet("")]
         public IActionResult Index()
         {
-            // string keyExists = HttpContext.Session.TryGetValue("counter") ;
-            // if(keyExists == false)
-            // {
-            //     HttpContext.Session.SetInt32("counter", 1);
-            // }
-            // else
-            // {
-            //     // int? countValue = HttpContext.Session.GetInt32("counter");
-            //     // countValue++;
-            //     // int newCount = (int)countValue;
-            //     // HttpContext.Session.SetInt32("counter", countValue);
-            // }
             int? num;
             int newNum;
             if(string.IsNullOrEmpty(HttpContext.Session.GetString("counter")))

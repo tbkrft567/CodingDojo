@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        p{
+            display: inline-block;
+            margin-right: 20px;
+        }
+        img{
+            min-height: 250px;
+        }
+        .userBox{
+            border: 5px ridge grey;
+            padding: 15px;
+            min-height: 400px;
+        }
+        form{
+            display: inline-block;
+            margin-right: 20px;
+            margin-top: 15px;
+        }
+        input{
+            width: 75px;
+        }
+    </style>
+</head>
+
+<body>
+    @{
+        @model Dojo
+        int energy = @Model.energy;
+        string test = ViewBag.test;
+
+    }
+    <div>
+        <p>Fullness: @Model.fullness</p>
+        <p>Happiness: @Model.happiness</p>
+        <p>Meals: @Model.meals</p>
+        <p>Energy: @Model.energy</p>
+    </div>
+    <div class="userBox">
+        <img src="" alt="">
+        @if(energy == 0){
+            <p>Your Dojoachi has passed away</p>
+        }
+        else if(energy >= 100)
+        {
+            <p>Congratulations! You Won!</p>
+        }
+        else
+        {
+            <p>You Played with your Dojoachi! Happiness +10, Energy -5</p>
+        }
+    </div>
+    @{
+        @if(energy != 0 || energy >= 100 )
+        {
+            <form action="/feed" method="post">
+                <input type="hidden" value="@Model">
+                <input type="submit" value="Feed">
+            </form>
+            <form action="/play" method="post">
+                <input type="submit" value="Play">
+            </form>
+            <form action="/work" method="post">
+                <input type="submit" value="Work">
+            </form>
+            <form action="/sleep" method="post">
+                <input type="submit" value="Sleep">
+            </form>
+
+        }
+        else
+        {
+            <form action="/restart" method="post">
+                <input type="submit" value="Restart">
+            </form>
+        }
+    }
+    <h1>@test</h1>
+
+</body>
+
+</html>
