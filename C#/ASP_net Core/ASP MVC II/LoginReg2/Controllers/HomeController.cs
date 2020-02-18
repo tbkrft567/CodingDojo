@@ -19,13 +19,48 @@ namespace LoginReg2.Controllers
         [HttpPost("create/user")]
         public IActionResult CreateUser(User userData)
         {
-            return ViewModelFun()
+            if(ModelState.IsValid){
+                if(userData.Password == userData.PasswordConfirmation)
+                {
+                    User newUser = new User()
+                    {
+                        FirstName = userData.FirstName,
+                        LastName = userData.LastName,
+                        Email = userData.Email,
+                        Password = userData.Password,
+                        PasswordConfirmation = userData.PasswordConfirmation,
+                    };
+                    return View("success", newUser);
+                }
+                return View("Index");
+            }
+            else
+            {
+                return View("Index");
+            }
+        }
+        [HttpPost("create/login")]
+        public IActionResult CreateLogin(Login userData)
+        {
+            if(ModelState.IsValid){
+                    Login newLogin = new Login()
+                    {
+                        Email = userData.Email,
+                        Password = userData.Password,
+                    };
+                    return View("success", newLogin);
+            }
+            else
+            {
+                return View("Index");
+            }
         }
 
         [HttpGet("success")]
-        public IActionResult Index()
+        public IActionResult Success(User userData)
         {
-            return View("Success");
+            return View("Success", userData);
         }
+
     }
 }

@@ -30,3 +30,4 @@ C:\Users\Zach's PC\Documents\Important Files\Personal\Computer Coding\(1)CodingD
 C:\Users\Zach's PC\Documents\Important Files\Personal\Computer Coding\(1)CodingDojo\C#\ASP_net Core\ASP MVC II\LoginReg2\bin\Debug\netcoreapp2.2\LoginReg2.Views.pdb
 C:\Users\Zach's PC\Documents\Important Files\Personal\Computer Coding\(1)CodingDojo\C#\ASP_net Core\ASP MVC II\LoginReg2\obj\Debug\netcoreapp2.2\LoginReg2.Views.pdb
 C:\Users\Zach's PC\Documents\Important Files\Personal\Computer Coding\(1)CodingDojo\C#\ASP_net Core\ASP MVC II\LoginReg2\obj\Debug\netcoreapp2.2\LoginReg2.csproj.CopyComplete
+C:\Users\Zach's PC\Documents\Important Files\Personal\Computer Coding\(1)CodingDojo\C#\ASP_net Core\ASP MVC II\LoginReg2\obj\Debug\netcoreapp2.2\Razor\Views\Home\success.g.cshtml.cs
