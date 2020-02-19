@@ -17,44 +17,44 @@
             return RedirectToAction("Index", myDojo);
         }
 
-        [HttpGet("/Dojodachi")]
+        [HttpGet("/Dojodachi/")]
         public IActionResult Index(Dojo myDojo)
         {
-            myDojo = forwardDojo(myDojo, 10, 0, -1, -5);
             return View(myDojo);
         }
-        [HttpPost("/Feed")]
+        [HttpPost("Feed")]
         public IActionResult Feed(Dojo myDojo)
         {
+            myDojo = forwardDojo(myDojo, 10, 0, -1, -5);
             return RedirectToAction("Index", myDojo);
         }
         [HttpPost("/Play")]
-        public IActionResult Play()
+        public IActionResult Play(Dojo myDojo)
         {
-            return RedirectToAction("Index");
+            myDojo = forwardDojo(myDojo, 10, 0, -1, -5);
+            return RedirectToAction("Index", myDojo);
         }
         [HttpPost("/Work")]
-        public IActionResult Work()
+        public IActionResult Work(Dojo myDojo)
         {
-            return RedirectToAction("Index");
+            myDojo = forwardDojo(myDojo, 10, 0, -1, -5);
+            return RedirectToAction("Index", myDojo);
         }
         [HttpPost("/Sleep")]
-        public IActionResult Sleep()
+        public IActionResult Sleep(Dojo myDojo)
         {
-            return RedirectToAction("Index");
+            myDojo = forwardDojo(myDojo, 10, 0, -1, -5);
+            return RedirectToAction("Index", myDojo);
         }
 
         public Dojo forwardDojo(Dojo incomingDojo, int chgFullness = 0, int chgHappiness = 0, int chgMeals = 0, int chgEnergy = 0)
         {
-            Dojo myDojo = new Dojo()
-            {
-                fullness = incomingDojo.fullness+chgFullness,
-                happiness = incomingDojo.happiness+chgHappiness,
-                meals = incomingDojo.meals+chgMeals,
-                energy = incomingDojo.energy+chgEnergy,
-                reaction = incomingDojo.reaction,
-            };
-            return myDojo;
+                incomingDojo.fullness+=chgFullness;
+                incomingDojo.happiness+=chgHappiness;
+                incomingDojo.meals+=chgMeals;
+                incomingDojo.energy+=chgEnergy;
+            
+            return incomingDojo;
         }
 
     }
