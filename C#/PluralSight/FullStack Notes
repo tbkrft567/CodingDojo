@@ -1,0 +1,190 @@
+======================================
+****Use File Named: WebApplication1***
+======================================
+
+Attention Needed:
+   ** Connecting jQuery/Bootstrap
+   ** Rendering Error Page rather than Crashing Code
+   ** Front-End Resposive Validations with jquery
+   ** Workaround for NuGet UseNodeModule
+   ** Database Not Recognized
+
+[Turn on CodeLen "N references"]
+https://stackoverflow.com/questions/17847927/how-to-hide-reference-counts-in-vs2013
+Tools > Options > Text Editor > All Languages > CodeLens (un)check CodeLens
+
+
+[***] Build a web app using ASP.Net Core
+
+VS 2019
+APS.Net Core 3
+Entity Framework Core 3
+Bootstrap 4.1
+Angular v8
+
+
+Why Reinvent ASP.NET?
+- The Web Stack is *old*!
+- Weighed down by old, unused code
+- Machine level updgrade is problematic
+- Has Reached a Ceiling of Performance
+
+What is ASP.NET Core
+- rewrite of platform
+- cross-platform and open source
+- single platform for MVC  and WebAPI
+- Everything is a dependency
+- Low memory footprint
+- Multiple deployment support
+      - Cloud, ISS, Self-Hosting
+
+
+Frameworks
+.Net 4.x  :: Always Used
+.Net Core :: Cross-Platform -- support for linux and OSx
+
+Completely Composed: Everything is Optional
+- Frameworks are bootstrap and CLR
+
+Deployement Options:
+- Directly on Hardware 
+- In a VM
+- In a Container
+- Cloud Hosting
+
+Downloaded .Net Core 3.0
+
+Build HelloWorld Console
+- dotnet 
+- dotnet new
+
+Download VS 2019
+
+Download Add-In "Open Command Line"
+
+Serving Your First File
+
+[***] Summary of Getting Started
+- .NET whole new world
+- Power of Full IDE or CLI
+- Open Source top-to-bottom
+
+[***] HTML5 and CSS Basics
+
+[***] Getting Started With JavaScript
+      **Need to practice jQuery!! *!!*NEED REVIEW****
+      **NPM UseNodeModule *!!*NEED REVIEW****
+
+[***] Using ASP.NET MVC (.NET CORE 3.0V)
+      services.AddControllersWithViews();
+      app.UseEndpoints(cfg => {
+            cfg.MapControllerRoute("Fallback",
+            "{controller}/{action}/{id?}",
+            new { controller = "App", Action = "Index" });
+      });
+      Razor Start View _Layout.cshtml
+      
+      Using Tag Helpers: A way to annotate to cahnge razors in some smart way
+            Use _ViewImport.cshtml
+
+      Razor Pages vss Razor Views:
+            Razor Pages require @page
+            **Need to practice rendering error pages *!!*NEED REVIEW****
+
+      Model Binding
+            create Model folder: ModelView or Model
+            Give form data a Named
+            Set Functions data type to DataModel Class (ie ContactViewModel)
+
+      Validations
+            asp-validation-summary="All"
+            Front-End Validations -- "ModelOnly" rather than "All"
+                  - <span asp-validation-for="Name"></span> underneath label/input
+            To have responsive validations: jquery is necessary *!!*NEED REVIEW****
+      
+      Building Null Mail Service!
+
+      What have we learned: Separate logic and views to enable testing
+      Layout can simplify shying loof and feel
+      Model Binding/Validaiton simplifies forms
+
+[***] Bootstrap
+- Open source framework for web apps
+- CSS/SASS
+- JavaScript components
+- Modeular and skinnable
+- Support for 80% of common metaphors
+
+Add BootStrap
+- Include bootstrap in package.json
+
+Grid System
+- 12 columns 
+      .col-12 is the largest
+      .col-2 is the smallest
+      .offset-2 give 2 columns in between
+      div class="col-md-6 col-lg-9"
+- Class="form-group"
+
+ *** Use Font Awesome - for icons [VERY AWESOME!!]
+      glyph icons
+      "font-awesome": "--v"
+      <i class="fa fa-paint-brush></i>
+      <i class="fa fa-envelope></i>
+
+What have we learn in Bootstrap
+- Comprehensive CSS and JS Framework
+- Navigation panels are easy with Bootstrap
+- Use Bootstrap for common metaphors
+- Further skin your app to make it unique
+
+[***] Entity Framework Core
+      Creating Entities
+      Using DbContext
+      Seeding and Creating the Databases
+      Using the Repository Pattern
+      Logging
+
+      Creating Entities
+            - Orders
+            - Products
+            - OrderItems
+      Data Context object SQL Server
+            NuGet Install 
+            - Microsoft.EntityFrameworkCore.Design
+            - Microsoft.EntityFrameworkCore.SqlServer
+            - Micrsofit.TypeScript.MSBuild
+      DB Context
+
+      Entity Framework Core Tooling [CLI commands at Root of project]
+            dotnet --help
+            "ef tools" not install by defaul in .Net Core 3
+            **dotnet new tool-manifest [needed to create the tool-manifest]
+            **dotnet tool install dotnet-ef ([-g] *option for globally*)  [Required to install Entity Framework]
+            dotnet ef --help
+            Add to Startup.cs
+                  services.AddDbContext<DutchContext>(cfg => {
+                cfg.UseSqlServer("");
+            });
+            dotnet ef database update
+            SQL Server Object Explore: View > SQL Server Object Explorer
+
+            dotnet ef database update
+            dotnet ef migrations add [giveName]
+            dotnet ef database update
+
+            Database Not Recognized **!!*********
+
+      SeedingData
+            dotnet ef migrations add SeedData
+
+What did we learn
+- You can lead on EFCore for data storage
+- Use Migrations to build the DB for you
+- Simple Seeding built into Migrations
+- Complex Seeding is still manual
+
+
+
+
+

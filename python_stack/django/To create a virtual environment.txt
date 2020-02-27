@@ -1,0 +1,46 @@
+To create a virtual environment:
+python -m venv [nameEnv]
+[navigate to my_environment] -- run: pip install virtualenv ; ; run: call [envName]\scripts\activate 
+
+Creating a Django/Python Project
+-	Activate your virtual environment~~ call [virtualEnvName]\scripts\activate [or deactivate]
+django-admin startproject projectName
+cd projectName
+-	python manage.py runserver (test_server)
+mkdir apps
+cd apps
+python ../manage.py startapp appName
+cd appName
+WINDOWS: nul>urls.py ;;; BASH touch urls.py
+
+mkdir templates\appName
+cd templates\appName
+(optional) WINDOW: nul>index.html ;;; BASH touch index.html
+
+In text editor:
+Go to settings.py
+-	Add to INSTALLED_APPS: “apps.appName”
+Go to the projectName URLS.py
+-	Add “include to the first import statement Comment out the second import statement
+-	Edit the regex string to just say ‘^’
+-	After the comma, add “include ( ‘apps.appName.urls’)”
+Go to appName views.py
+-	Add redirect to the import line
+-	write a function def index(request):
+-	Add a context dict: context={‘test’: ‘this works’}
+-	Add a return statement: return render(request, ‘appName/index.html’, context) 
+Go to appName urls.py
+-	Write the following import statements:
+o	from django.conf.urls import url
+o	from . import views
+-	write the following view pattern:
+o	urlpatterns=[url(r'^$', views.index)]
+
+To create a django model:
+-	go to Model.py: (as an example:)
+o	type class Person(models.Model):
+o	first_name = models.CharField(max_length=45)
+o	company = models.ForeignKey(Company, related_name=employees)
+o	education_levels = models.ManyToMany(education_levels, related_name=students)
+
+

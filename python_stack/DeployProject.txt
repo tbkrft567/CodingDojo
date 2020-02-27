@@ -1,0 +1,12 @@
+$ sudo apt-get update
+$ sudo pip install virtualenv
+$ pip install --upgrade pip
+$ sudo apt-get update
+$ sudo pip install virtualenv
+$ cd myRepoName
+$ virtualenv venv --python=python3
+
+
+RepoName$ gunicorn --bind 0.0.0.0:8000 FirstProject.wsgi:application
+$ source [environmentName]/bin/activate   ---[To Activate]
+$ deactivate   ---[To Deactivate]
