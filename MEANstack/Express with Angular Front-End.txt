@@ -9,6 +9,10 @@ Create initial package.json File
 Express EJS Mongoose
    - npm i express mongoose
 
+For MongoDb Seeding
+   https://github.com/pkosiec/mongo-seeding/tree/master/cli
+   npm install [-g] mongo-seeding-cli
+
 **[FOR LOGIN]**
    - npm i jsonwebtoken
    - npm i bcrypt

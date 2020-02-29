@@ -54,6 +54,7 @@ modularization:
                   })
                   .catch(err => { res.json(err) })
             },
+         }
    -user.js*****
          console.log('****MODELS****')
          var mongoose = require('mongoose')
